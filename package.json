@@ -5,7 +5,7 @@
   "homepage": "https://github.com/DimaKhUkr/project_13_js",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /project_13_jsтзь ш/"
+    "build": "parcel build src/*.html --public-url /project_13_js/"
   },
   "repository": {
     "type": "git",
