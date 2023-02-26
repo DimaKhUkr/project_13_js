@@ -1,9 +1,5 @@
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
-// const photoUrl = `./images/asia.jpg`;
 
-// const inputSearch = document.getElementById('inputrequest');
-
-// inputSearch.addEventListener('submit', articleSearch(e));
 const mainPage = document.getElementById('main-page');
 
 export async function articleSearch(query) {
