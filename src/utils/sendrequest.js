@@ -24,10 +24,17 @@ export async function articleSearch(query) {
 
 export async function createMainPage(e) {
   e.preventDefault();
-  const query = e.value;
-  const photoUrl = './src/images/asia.png';
+  // console.log(e);
+  const query = e.target.elements.search.value;
+  console.log(query);
+  const photoUrl = '../images/asia.png';
   mainPage.replaceChildren();
   const response = await articleSearch(query);
+  // проверка на пустой ответ не работает
+  if (response.response.docs.length === 0) {
+    console.log(response.response.docs.length);
+    photoUrl = './src/images/empty-page.png';
+  }
   console.dir(response.response.docs);
   const newsCards = response.response.docs.map(news => {
     const title = news.headline.main;
@@ -36,7 +43,7 @@ export async function createMainPage(e) {
       // photoUrl,
       section_name,
       //   title,
-      lead_paragraph,
+      abstract,
       pub_date,
       web_url,
     } = news;
@@ -53,9 +60,9 @@ export async function createMainPage(e) {
               </button>
               <h2 class="news-card__title">${title}</h2>
               <p class="news-card__description">${
-                lead_paragraph.length > 100
-                  ? lead_paragraph.substring(0, 100) + '...'
-                  : lead_paragraph
+                abstract.length > 100
+                  ? abstract.substring(0, 100) + '...'
+                  : abstract
               }</p>
               <div class="news-card__date">${new Date(
                 pub_date
@@ -66,6 +73,7 @@ export async function createMainPage(e) {
         `;
   });
   mainPage.innerHTML = newsCards.join('');
+  e.target.reset();
 }
 
 // docs.headline.main - название статьи
