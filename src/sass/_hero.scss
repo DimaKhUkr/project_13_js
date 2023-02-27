@@ -78,8 +78,23 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.38;
-
   color: $text-color-light;
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+.news-card__title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.news-card__description {
+  font-size: 16px;
+  margin: 10px;
 }
 
 .news-card__date {
@@ -121,4 +136,3 @@
   width: 395px;
   height: 675px;
 }
-

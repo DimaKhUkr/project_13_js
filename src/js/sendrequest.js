@@ -2,6 +2,8 @@ const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
 const mainPage = document.getElementById('main-page');
 
+const photoUrl = 'https://via.placeholder.com/400';
+
 export async function articleSearch(query) {
   //   e.preventDefault();
   //   const query = e.value;
@@ -20,9 +22,9 @@ export async function articleSearch(query) {
 
 export async function createMainPage(e) {
   e.preventDefault();
-  const query = e.target.elements.search.value;
+  const query = e.target.elements.search.value.trim();
   console.log(query);
-  const photoUrl = 'https://via.placeholder.com/400';
+  // const photoUrl = 'https://via.placeholder.com/400';
   mainPage.replaceChildren();
   const response = await articleSearch(query);
   console.dir(response.response.docs);
@@ -52,15 +54,36 @@ export async function createMainPage(e) {
                   ? abstract.substring(0, 100) + '...'
                   : abstract
               }</p>
+              <div class="news-card__date-div">
               <div class="news-card__date">${new Date(
                 pub_date
               ).toLocaleDateString()}</div>
               <a class="news-card__read-more" href="${web_url}" target="_blank">Read more</a>
+              </div>
             </div>
           </div>
         `;
   });
   mainPage.innerHTML = newsCards.join('');
+  const weatherCard = document.createElement('div');
+  weatherCard.classList.add('weather-card');
+  // mainPage.appendChild(weatherCard);
+  weatherCard.innerHTML = `<div class="news-card">
+  <img src="${photoUrl}" alt="Погода" /></div>`;
+  // Проверка размера окна для размещения карточки погоды
+  let position = 0;
+  console.log(window.innerWidth);
+  if (window.innerWidth > 800 && window.innerWidth < 1206) {
+    // weatherCard.style.width = '100%';
+    position = 1;
+  } else if (window.innerWidth > 1206) {
+    position = 2;
+    // weatherCard.style.width = '';
+  }
+  console.log(position);
+  const insertBeforeElement = mainPage.children[`${position}`];
+  mainPage.insertBefore(weatherCard, insertBeforeElement);
+  e.target.reset();
 }
 
 // docs.headline.main - название статьи
