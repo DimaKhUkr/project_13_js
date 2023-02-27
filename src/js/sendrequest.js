@@ -65,12 +65,22 @@ export async function createMainPage(e) {
         `;
   });
   mainPage.innerHTML = newsCards.join('');
-  const insertBeforeElement = mainPage.children[2];
   const weatherCard = document.createElement('div');
   weatherCard.classList.add('weather-card');
   // mainPage.appendChild(weatherCard);
   weatherCard.innerHTML = `<div class="news-card">
-            <img src="${photoUrl}" alt="Погода" /></div>`;
+  <img src="${photoUrl}" alt="Погода" /></div>`;
+  let position = 0;
+  console.log(window.innerWidth);
+  if (window.innerWidth > 800 && window.innerWidth < 1206) {
+    // weatherCard.style.width = '100%';
+    position = 1;
+  } else if (window.innerWidth > 1206) {
+    position = 2;
+    // weatherCard.style.width = '';
+  }
+  console.log(position);
+  const insertBeforeElement = mainPage.children[`${position}`];
   mainPage.insertBefore(weatherCard, insertBeforeElement);
 }
 
