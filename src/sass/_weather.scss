@@ -1,0 +1,192 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body {
+    background-color: rgb(238, 231, 231);
+}
+
+
+li {
+    list-style: none;
+}
+
+.weather__loading{
+    display: flex;
+    justify-content: center;
+    margin-top: 50%;
+}
+
+.wraper__weather {
+    max-width: 288px;
+    height: 469px;
+    background: #4440F7;
+    mix-blend-mode: normal;
+    border-radius: 4px;
+    padding-top: 32px;
+}
+
+.header__weather {
+    display: flex;
+    align-items: center;
+    /* outline: 2px tomato solid; */
+    width: 216px;
+    height: 86px;
+    margin: 0 auto;
+}
+
+.temp__info {
+    padding-right: 20px;
+    border-right: #FFFFFF 1px solid;
+    max-width: 83px;
+    height: 64px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 55px;
+    line-height: 64px;
+    color: #FFFFFF;
+}
+
+.status__location {
+    padding-left: 10px;
+    width: 100%;
+    /* outline: 2px tomato solid; */
+}
+
+.status {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: #FFFFFF; 
+    margin-bottom: 2px;
+}
+
+.location {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 121px;
+    
+    background: rgba(254, 254, 255, 0.3);
+    border-radius: 10px;
+}
+
+.location__name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+
+/* ---------------------------------- */
+
+
+.icon__picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 128px;
+    height: 121px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.weather__picture {
+    width: 128px;
+    height: 121px;
+}
+
+
+
+.date__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    max-width: 155px;
+    height: 66px;
+}
+
+.day {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 33px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.date {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 33px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.weatherForweek {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto 0 auto;
+    width: 151px;
+    height: 34px;
+    background: rgba(254, 254, 255, 0.3);
+    border-radius: 10px;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    }
+
+    /* 7 days weather forecast */
+
+    .forecast__wrapper {
+        margin-left: 5px;
+        margin-right: 5px;
+        height: 70px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: #FFFFFF;
+        margin-top: 8px;
+        background: rgba(254, 254, 255, 0.3);
+        border-radius: 10px;
+        border: none;
+        filter: drop-shadow(0px 4px 8px #B5C7E5);
+    }
+
+    .backBtn {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
+        width: 151px;
+        height: 30px;
+        background: rgba(254, 254, 255, 0.3);
+        border-radius: 10px;
+        border: none;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #FFFFFF;
+    }
