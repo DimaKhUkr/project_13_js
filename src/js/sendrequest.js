@@ -70,6 +70,7 @@ export async function createMainPage(e) {
   // mainPage.appendChild(weatherCard);
   weatherCard.innerHTML = `<div class="news-card">
   <img src="${photoUrl}" alt="Погода" /></div>`;
+  // Проверка размера окна для размещения карточки погоды
   let position = 0;
   console.log(window.innerWidth);
   if (window.innerWidth > 800 && window.innerWidth < 1206) {
