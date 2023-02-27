@@ -24,26 +24,25 @@ export async function articleSearch(query) {
 
 export async function createMainPage(e) {
   e.preventDefault();
-  const query = e.value;
-  const photoUrl = './src/images/asia.png';
+  const query = e.target.elements.search.value;
+  console.log(query);
+  const photoUrl = 'https://via.placeholder.com/400';
   mainPage.replaceChildren();
   const response = await articleSearch(query);
   console.dir(response.response.docs);
+  if (response.response.docs.length === 0) {
+    console.log(response.response.docs.length);
+    mainPage.innerHTML = `<div class="news-card">
+            <img src="${photoUrl}" alt="заглушка" />
+            </div>`;
+  }
   const newsCards = response.response.docs.map(news => {
     const title = news.headline.main;
-    const {
-      _id,
-      // photoUrl,
-      section_name,
-      //   title,
-      lead_paragraph,
-      pub_date,
-      web_url,
-    } = news;
+    const { _id, section_name, abstract, pub_date, web_url } = news;
     const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
     return `
           <div class="news-card">
-            <img src="${photoUrl}">
+            <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
               <div class="news-card__category">${section_name}</div>
               <button class="news-card__favorite-btn ${
@@ -53,9 +52,9 @@ export async function createMainPage(e) {
               </button>
               <h2 class="news-card__title">${title}</h2>
               <p class="news-card__description">${
-                lead_paragraph.length > 100
-                  ? lead_paragraph.substring(0, 100) + '...'
-                  : lead_paragraph
+                abstract.length > 100
+                  ? abstract.substring(0, 100) + '...'
+                  : abstract
               }</p>
               <div class="news-card__date">${new Date(
                 pub_date
