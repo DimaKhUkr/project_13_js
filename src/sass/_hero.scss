@@ -6,6 +6,7 @@
 }
 
 .news-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
@@ -22,6 +23,62 @@
 }
 
 .news-card__category {
+  position: absolute;
+  left: 0;
+  top: 40px;
+
+  min-width: 112px;
+  height: 24px;
+  background: #4440f6b2;
+  border-radius: 0px 4px 4px 0px;
+  padding: 4px 8px;
+
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  color: #ffffff;
+}
+
+.news-card__favorite-btn {
+  position: absolute;
+  left: 257px;
+  top: 355px;
+  width: 126px;
+  height: 28px;
+  background: $bgn-color-light;
+  border-radius: 20px;
+  border: none;
+
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+
+  color: $text-color-light;
+}
+
+.news-card__title {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+
+  color: $text-color-light;
+}
+
+.news-card__description {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.38;
+  color: $text-color-light;
   background-color: #333;
   color: #fff;
   font-size: 14px;

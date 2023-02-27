@@ -1,3 +1,4 @@
+
 a {
   text-decoration: none;
   color: inherit;
@@ -279,8 +280,7 @@ ol {
   justify-content: space-between;
   margin-left: 25px;
 }
-.mobile-menu {
-}
+
 .mobile-menu__item {
   &:not(:last-child) {
     margin-bottom: 32px;
@@ -305,8 +305,7 @@ ol {
 .mobile-contacts {
   margin-bottom: 64px;
 }
-.mobile-contacts__item {
-}
+
 .mobile-contacts__mail {
   font-weight: 500;
   font-size: 24px;
