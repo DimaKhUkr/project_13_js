@@ -22,7 +22,7 @@ export async function articleSearch(query) {
 
 export async function createMainPage(e) {
   e.preventDefault();
-  const query = e.target.elements.search.value;
+  const query = e.target.elements.search.value.trim();
   console.log(query);
   // const photoUrl = 'https://via.placeholder.com/400';
   mainPage.replaceChildren();
@@ -83,6 +83,7 @@ export async function createMainPage(e) {
   console.log(position);
   const insertBeforeElement = mainPage.children[`${position}`];
   mainPage.insertBefore(weatherCard, insertBeforeElement);
+  e.target.reset();
 }
 
 // docs.headline.main - название статьи
