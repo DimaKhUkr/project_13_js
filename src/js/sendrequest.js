@@ -4,10 +4,10 @@ const mainPage = document.getElementById('main-page');
 
 const photoUrl = 'https://via.placeholder.com/400';
 
-export async function articleSearch(query) {
+export async function articleSearch(pageNumber, query) {
   //   e.preventDefault();
   //   const query = e.value;
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&api-key=${API_KEY}`;
+  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${pageNumber}&q=${query}&api-key=${API_KEY}`;
   try {
     return await fetch(url, {
       headers: {
@@ -20,21 +20,26 @@ export async function articleSearch(query) {
   }
 }
 
+// pageNumber = номер страницы для пагинации.
+// Для тестов присваиваем руками номер, дальше в пагинации юзаем.
+const pageNumber = 3;
+
 export async function createMainPage(e) {
   e.preventDefault();
   const query = e.target.elements.search.value.trim();
   console.log(query);
   // const photoUrl = 'https://via.placeholder.com/400';
   mainPage.replaceChildren();
-  const response = await articleSearch(query);
-  console.dir(response.response.docs);
-  if (response.response.docs.length === 0) {
-    console.log(response.response.docs.length);
+  const data = await articleSearch(pageNumber, query);
+  // console.log(data.response.meta.hits);
+  console.dir(data.response);
+  if (data.response.docs.length === 0) {
+    console.log(data.response.docs.length);
     mainPage.innerHTML = `<div class="news-card">
             <img src="${photoUrl}" alt="заглушка" />
             </div>`;
   }
-  const newsCards = response.response.docs.map(news => {
+  const newsCards = data.response.docs.map(news => {
     const title = news.headline.main;
     const { _id, section_name, abstract, pub_date, web_url } = news;
     const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
