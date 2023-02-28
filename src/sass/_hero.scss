@@ -1,7 +1,7 @@
 .main-page {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  grid-gap: 30px;
   flex-wrap: wrap;
   max-width: 1280px;
 }
@@ -12,7 +12,6 @@
   // border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 28px;
   width: 288px;
   height: 630px;
 
@@ -61,7 +60,7 @@
   right: 8px;
   top: 355px;
 
-  min-width: 126px;
+  width: 126px;
   height: 28px;
 
   background: $text-color-dark;
@@ -94,8 +93,10 @@
 
 .news-card__title {
   width: 288px;
-  max-height: 99px;
+  height: 99px;
   margin-top: 20px;
+
+  overflow: hidden;
 
   font-family: 'Manrope';
   font-style: normal;
@@ -108,7 +109,7 @@
 
   @media screen and (min-width: 768px) {
     width: 351px;
-    max-height: 132px;
+    height: 132px;
 
     font-size: 32px;
   }
@@ -119,7 +120,7 @@
 }
 
 .news-card__description {
-  max-width: 288px;
+  width: 288px;
   height: 57px;
   margin-top: 20px;
 
@@ -132,7 +133,7 @@
   color: $text-color-light;
 
   @media screen and (min-width: 768px) {
-    max-width: 351px;
+    width: 351px;
     height: 66px;
 
     font-size: 16px;
@@ -180,6 +181,11 @@
   font-size: 14px;
   line-height: 1.36;
   color: $decoration-color;
+
+  @media screen and (min-width: 768px) {
+    top: 653px;
+    left: 273px;
+  }
 }
 
 .news-card__actions {
