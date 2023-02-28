@@ -192,6 +192,10 @@ ol {
   color: $alt-text-color;
 }
 
+.theme-text.light{
+  color: $decoration-color ;
+}
+
 .theme-switcher {
   position: relative;
 }
@@ -226,6 +230,8 @@ ol {
 
 .theme-switcher input[type='checkbox']:checked + label {
   background-color: $decoration-color-dark;
+  border: 0.604701px solid $bgn-color-light;
+
 }
 
 .theme-switcher input[type='checkbox']:checked + label:after {
@@ -319,3 +325,27 @@ ol {
     color: $decoration-color;
   }
 }
+
+body.dark-theme{
+  background: $bgn-color-dark;
+  color: #f4f4f4;
+}
+
+body.dark-theme header{
+  background: $bgn-color-dark;
+  color: #f4f4f4;
+}
+
+body.dark-theme .theme-text{
+  color: $decoration-color-dark;
+}
+
+.dark-theme .theme-text{
+  color: $decoration-color-dark;
+}
+
+
+.dark-theme .theme-text.light{
+  color: $alt-text-color;
+}
+
