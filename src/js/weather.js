@@ -1,4 +1,6 @@
 "use strict";
+// second req
+
 export const weather = document.getElementById(`weather`);
 export const APP_ID = 'f5984abfd7be02d0f0f71396692dd7ba';
 export const defaultCity = 'Kyiv'
