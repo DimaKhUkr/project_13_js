@@ -4,7 +4,7 @@ const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
 const mainPage = document.getElementById('main-page');
 
-let photoUrl = '';
+// let photoUrl = '';
 
 // Запрос на бекенд по полю поиска
 async function articleSearch(pageNumber, query) {
@@ -95,8 +95,8 @@ export async function createMainPage(e) {
   e.preventDefault();
   const query = e.target.elements.search.value.trim();
   console.log(query);
-  // const photoUrl = 'https://via.placeholder.com/400';
-  // mainPage.replaceChildren();
+  const photoUrl = 'https://via.placeholder.com/400';
+  mainPage.replaceChildren();
   const data = await articleSearch(pageNumber, query);
   // console.log(data.response.meta.hits);
   console.dir(data.response);
