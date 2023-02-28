@@ -1,4 +1,4 @@
-import { getLocation } from './weather';
+import { startWeatherApp } from './weather';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
@@ -83,7 +83,7 @@ export async function createPopularNews() {
           </div>`;
   });
   mainPage.insertAdjacentHTML('beforeend', newsCards.join(''));
-  document.addEventListener('DOMContentLoaded', getLocation);
+  document.addEventListener('DOMContentLoaded', startWeatherApp);
 }
 
 // pageNumber = номер страницы для пагинации.
@@ -154,7 +154,7 @@ export async function createMainPage(e) {
   // console.log(position);
   // const insertBeforeElement = mainPage.children[`${position}`];
   // mainPage.insertBefore(weatherCard, insertBeforeElement);
-  document.addEventListener('DOMContentLoaded', getLocation);
+  document.addEventListener('DOMContentLoaded', startWeatherApp);
   e.target.reset();
 }
 
