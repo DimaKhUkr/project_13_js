@@ -89,7 +89,6 @@ export async function createPopularNews() {
 // pageNumber = номер страницы для пагинации.
 // Для тестов присваиваем руками номер, дальше в пагинации юзаем.
 const pageNumber = 3;
-
 // Рендеринг новостей по полю поиска
 export async function createMainPage(e) {
   e.preventDefault();
