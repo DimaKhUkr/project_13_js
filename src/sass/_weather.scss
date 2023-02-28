@@ -20,7 +20,9 @@ li {
 }
 
 .wraper__weather {
-    max-width: 288px;
+    grid-row: 1;
+    grid-column: 3;
+    width: 288px;
     height: 469px;
     background: #4440F7;
     mix-blend-mode: normal;

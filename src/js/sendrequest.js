@@ -1,3 +1,5 @@
+import { getLocation } from './weather';
+
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
 const mainPage = document.getElementById('main-page');
@@ -29,7 +31,7 @@ export async function createMainPage(e) {
   const query = e.target.elements.search.value.trim();
   console.log(query);
   // const photoUrl = 'https://via.placeholder.com/400';
-  mainPage.replaceChildren();
+  // mainPage.replaceChildren();
   const data = await articleSearch(pageNumber, query);
   // console.log(data.response.meta.hits);
   console.dir(data.response);
@@ -69,25 +71,26 @@ export async function createMainPage(e) {
           </div>
         `;
   });
-  mainPage.innerHTML = newsCards.join('');
-  const weatherCard = document.createElement('div');
-  weatherCard.classList.add('weather-card');
-  // mainPage.appendChild(weatherCard);
-  weatherCard.innerHTML = `<div class="news-card">
-  <img src="${photoUrl}" alt="Погода" /></div>`;
-  // Проверка размера окна для размещения карточки погоды
-  let position = 0;
-  console.log(window.innerWidth);
-  if (window.innerWidth > 800 && window.innerWidth < 1206) {
-    // weatherCard.style.width = '100%';
-    position = 1;
-  } else if (window.innerWidth > 1206) {
-    position = 2;
-    // weatherCard.style.width = '';
-  }
-  console.log(position);
-  const insertBeforeElement = mainPage.children[`${position}`];
-  mainPage.insertBefore(weatherCard, insertBeforeElement);
+  mainPage.insertAdjacentHTML('beforeend', newsCards.join(''))
+  // mainPage.innerHTML = newsCards.join('');
+  // const weatherCard = document.createElement('div');
+  // weatherCard.classList.add('wraper__weather');
+  // // mainPage.appendChild(weatherCard);
+  // weatherCard.innerHTML = `<div id="weather" class="weather"></div>`;
+  // // Проверка размера окна для размещения карточки погоды
+  // let position = 0;
+  // console.log(window.innerWidth);
+  // if (window.innerWidth > 800 && window.innerWidth < 1206) {
+  //   // weatherCard.style.width = '100%';
+  //   position = 1;
+  // } else if (window.innerWidth > 1206) {
+  //   position = 2;
+  //   // weatherCard.style.width = '';
+  // }
+  // console.log(position);
+  // const insertBeforeElement = mainPage.children[`${position}`];
+  // mainPage.insertBefore(weatherCard, insertBeforeElement);
+  document.addEventListener('DOMContentLoaded', getLocation);
   e.target.reset();
 }
 

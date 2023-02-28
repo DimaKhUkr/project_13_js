@@ -1,5 +1,5 @@
-const API_KEY = `u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn`;
-const URL = `https://api.nytimes.com/svc/news/v3/content/section-list.json`;
+const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
+const URL = 'https://api.nytimes.com/svc/news/v3/content/section-list.json';
 
 const categoryBtn = document.getElementById('category-btn');
 
