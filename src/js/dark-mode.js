@@ -1,16 +1,31 @@
-import { save, load} from "./locStoregeDark.js"
+const switcher = document.getElementById('theme-switcher');
 
-const KEY_MODE = 'Mode'
-save(KEY_MODE, { text: "Lorem..."})
+const currentTheme = localStorage.getItem('theme');
 
-console.log(load(KEY_MODE))
+if (currentTheme == 'dark') {
+  document.body.classList.add('dark-theme');
+}
+if(localStorage.getItem('isCheked')) { 
+           switcher.checked = true; 
+        } 
 
-const body= document.querySelector('body')
-const modeSwitch= document.getElementById('theme-switcher')
+switcher.addEventListener('change', function () {
+  document.body.classList.toggle('dark-theme');
 
-modeSwitch.addEventListener('click' , ()=>{
-    body.classList.toggle("dark")
-  
-})
+  let theme = 'light';
 
+  if (document.body.classList.contains('dark-theme')) {
+    theme = 'dark';
+  }
+if(localStorage.getItem('isCheked')) { 
+                localStorage.removeItem('isCheked'); 
+            } else {
+                localStorage.setItem('isCheked',true) 
+            }
 
+  localStorage.setItem('theme', theme);
+});
+
+ 
+
+       
