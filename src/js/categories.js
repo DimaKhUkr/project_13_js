@@ -17,7 +17,7 @@ export async function getCategories() {
         for (const arr of cat.results) {
           arrayOfCategories.push(arr.display_name);
         }
-        console.log(arrayOfCategories);
+        // console.log(arrayOfCategories);
         return arrayOfCategories;
       })
       .then(arrayOfCategories => {
