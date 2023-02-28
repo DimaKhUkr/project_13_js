@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 const form = document.getElementById(`search-form`);
 const weather = document.getElementById(`weather`);
@@ -36,10 +36,18 @@ function getWeather(data) {
   const temp = Math.round(data.main.temp);
   const weatherStatus = data.weather[0].main;
   const weatherIcon = data.weather[0].icon;
-  const currentDayOfWeek = new Date().toLocaleDateString('en-US', { weekday: 'short' });
-  const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' }).toUpperCase();
-  const currentMonth = new Date().toLocaleDateString('en-US', { month: 'short' });
-  const currentYear = new Date().toLocaleDateString('en-US', { year: 'numeric' }).toUpperCase();
+  const currentDayOfWeek = new Date().toLocaleDateString('en-US', {
+    weekday: 'short',
+  });
+  const currentDay = new Date()
+    .toLocaleDateString('en-US', { day: 'numeric' })
+    .toUpperCase();
+  const currentMonth = new Date().toLocaleDateString('en-US', {
+    month: 'short',
+  });
+  const currentYear = new Date()
+    .toLocaleDateString('en-US', { year: 'numeric' })
+    .toUpperCase();
 
   // Разметка HTML
   let template = `<div class="header__weather">
@@ -64,15 +72,15 @@ function getWeather(data) {
   <button class="weatherForweek" id="weatherForweek">Weather for 5 days</button>
   `;
   weather.innerHTML = template;
-//   const weatherForweek = document.getElementById(`weatherForweek`);
-//   weatherForweek.addEventListener(`click`, getWeatherForWeek);
+  //   const weatherForweek = document.getElementById(`weatherForweek`);
+  //   weatherForweek.addEventListener(`click`, getWeatherForWeek);
 }
 
 // Получение геолокации пользователя
-function getLocation() {
+export function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      position => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         loadWeather(lat, lon);
@@ -91,18 +99,7 @@ if (weather) {
   getLocation();
 }
 
-
-
-
-
-
-
-
-
-
-
-// КОД НЕ ТРОГАЙТЕ, завтра буду поправлять 
-
+// КОД НЕ ТРОГАЙТЕ, завтра буду поправлять
 
 // ПОГОДА НА 5 дней
 
@@ -122,7 +119,7 @@ if (weather) {
 //   getWeatherData(APP_ID, lat, lon);
 //   }
 //   );
-  
+
 //   function getWeatherData(APP_ID, lat, lon) {
 //   const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APP_ID}&units=metric`;
 //   fetch(url)
@@ -156,7 +153,7 @@ if (weather) {
 //        tempMax = data.list[i].main.temp;
 //        iconCode = data.list[i].weather[0].icon;
 //        iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
-//      } else { 
+//      } else {
 //       // Обновляем данные для текущего дня
 //        if (data.list[i].main.temp < tempMin) {
 //          tempMin = data.list[i].main.temp;
