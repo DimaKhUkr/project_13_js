@@ -83,7 +83,7 @@ export async function createPopularNews() {
           </div>`;
   });
   mainPage.insertAdjacentHTML('beforeend', newsCards.join(''));
-  document.addEventListener('DOMContentLoaded', getLocation);
+  document.addEventListener('DOMContentLoaded', startWeatherApp);
 }
 
 // pageNumber = номер страницы для пагинации.
