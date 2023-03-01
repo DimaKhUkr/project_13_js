@@ -104,9 +104,10 @@ export async function createMainPage(e) {
   // console.log(data.response.meta.hits);
   console.dir(data.response);
   if (data.response.docs.length === 0) {
+    mainPage.replaceChildren();
     console.log(data.response.docs.length);
     mainPage.innerHTML = `<div class="news-card">
-            <img src="${photoUrl}" alt="заглушка" />
+            <img src="../images/empty-page.jpg" alt="заглушка" />
             </div>`;
   }
   const newsCards = data.response.docs.map(news => {
