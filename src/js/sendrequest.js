@@ -4,8 +4,9 @@ const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
 const mainPage = document.getElementById('main-page');
 const weather = document.querySelector(`.wraper__weather`);
+const empty = document.getElementById('empty');
 
-// let photoUrl = '';
+let photoEmpty = './src/images/empty-page.jpg  ';
 
 // Запрос на бекенд по полю поиска
 async function articleSearch(pageNumber, query) {
@@ -21,6 +22,10 @@ async function articleSearch(pageNumber, query) {
     //   .then(res => console.log(res));
   } catch (error) {
     console.error(error);
+    mainPage.replaceChildren();
+    mainPage.innerHTML = `<div class="news-card">
+            <img src="${photoEmpty}" alt="заглушка" />
+            </div>`;
   }
 }
 
@@ -94,21 +99,25 @@ const pageNumber = 0;
 // Рендеринг новостей по полю поиска
 export async function createMainPage(e) {
   e.preventDefault();
+  empty.setAttribute('hidden', '');
   const query = e.target.elements.search.value.trim();
   console.log(query);
-  // Очищаем страницу от предыдущих новостей оставляя блок с погодой
-  Array.from(mainPage.children).forEach(child => {
-    if (child !== weather) child.remove();
-  });
   const data = await articleSearch(pageNumber, query);
   // console.log(data.response.meta.hits);
   console.dir(data.response);
   if (data.response.docs.length === 0) {
-    mainPage.replaceChildren();
+    // mainPage.replaceChildren();
+    // Очищаем страницу от предыдущих новостей если новых нет
+    Array.from(mainPage.children).forEach(child => {
+      if (child !== empty && child !== weather) child.remove();
+    });
     console.log(data.response.docs.length);
-    mainPage.innerHTML = `<div class="news-card">
-            <img src="../images/empty-page.jpg" alt="заглушка" />
-            </div>`;
+    empty.removeAttribute('hidden');
+  } else {
+    // Очищаем страницу от предыдущих новостей оставляя блок с погодой
+    Array.from(mainPage.children).forEach(child => {
+      if (child !== weather && child !== empty) child.remove();
+    });
   }
   const newsCards = data.response.docs.map(news => {
     const title = news.headline.main;
