@@ -99,7 +99,7 @@ const pageNumber = 0;
 // Рендеринг новостей по полю поиска
 export async function createMainPage(e) {
   e.preventDefault();
-  empty.setAttribute('hidden', "");
+  empty.setAttribute('hidden', '');
   const query = e.target.elements.search.value.trim();
   console.log(query);
   const data = await articleSearch(pageNumber, query);
@@ -107,6 +107,7 @@ export async function createMainPage(e) {
   console.dir(data.response);
   if (data.response.docs.length === 0) {
     // mainPage.replaceChildren();
+    // Очищаем страницу от предыдущих новостей если новых нет
     Array.from(mainPage.children).forEach(child => {
       if (child !== empty && child !== weather) child.remove();
     });
