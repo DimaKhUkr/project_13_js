@@ -3,6 +3,7 @@ import { startWeatherApp } from './weather';
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
 const mainPage = document.getElementById('main-page');
+const weather = document.querySelector(`.wraper__weather`);
 
 // let photoUrl = '';
 
@@ -88,15 +89,17 @@ export async function createPopularNews() {
 
 // pageNumber = номер страницы для пагинации.
 // Для тестов присваиваем руками номер, дальше в пагинации юзаем.
-const pageNumber = 3;
+const pageNumber = 0;
 
 // Рендеринг новостей по полю поиска
 export async function createMainPage(e) {
   e.preventDefault();
   const query = e.target.elements.search.value.trim();
   console.log(query);
-  const photoUrl = 'https://via.placeholder.com/400';
-  mainPage.replaceChildren();
+  // Очищаем страницу от предыдущих новостей оставляя блок с погодой
+  Array.from(mainPage.children).forEach(child => {
+    if (child !== weather) child.remove();
+  });
   const data = await articleSearch(pageNumber, query);
   // console.log(data.response.meta.hits);
   console.dir(data.response);
@@ -108,6 +111,10 @@ export async function createMainPage(e) {
   }
   const newsCards = data.response.docs.map(news => {
     const title = news.headline.main;
+    const photoUrl =
+      news.multimedia !== 0
+        ? `https://static01.nyt.com/${news.multimedia[0].url}`
+        : 'https://via.placeholder.com/400';
     const { _id, section_name, abstract, pub_date, web_url } = news;
     const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
     return `
