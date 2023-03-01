@@ -58,15 +58,15 @@ export async function createPopularNews() {
       news.media.length !== 0
         ? news.media[0]['media-metadata'][2].url
         : '/images/asia.png';
-    const { title, abstract, published_date, url, section, id } = news;
-    const isFavorite = localStorage.getItem(`favorite_${id}`) !== null;
+    const { title, abstract, published_date, url, section, uri } = news;
+    const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
     return `<div class="news-card">
             <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
               <div class="news-card__category">${section}</div>
               <button class="news-card__favorite-btn ${
                 isFavorite ? 'active' : ''
-              }" data-news-id="${id}">
+              }" data-news-id="${uri}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
               <h2 class="news-card__title">${title}</h2>
