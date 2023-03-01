@@ -1,0 +1,8 @@
+.footer{
+    height: 120px;
+    background-color: $footer-rect;
+    @include tablet {
+            height: 148px;
+        }
+
+}
