@@ -1,6 +1,4 @@
 "use strict";
-// second req
-
 export const weather = document.getElementById(`weather`);
 export const APP_ID = 'f5984abfd7be02d0f0f71396692dd7ba';
 export const defaultCity = 'Kyiv'
@@ -15,8 +13,7 @@ export const defaultCity = 'Kyiv'
 
 
 export function startWeatherApp() {
-      weather.innerHTML = `<div class="weather__loading">Wait a second plz...</div>`;
-      // weather.innerHTML = `<div class="weather__loading"><img src="./src/images/1492.gif" alt="Loading..."></div>`;
+  weather.innerHTML = `<div class="weather__loading"><img src="https://github.com/AlexMakhony/Final_project_js/blob/main/chost.gif?raw=true" alt="Loading..."></div>`;
       navigator.geolocation.getCurrentPosition(
         (position) => {
           let lat = position.coords.latitude;
@@ -27,6 +24,7 @@ export function startWeatherApp() {
         (error) => {
           // обрабатываем ошибку получения геолокации
           console.error(error);
+          getWeatherForOneDay();
         }
       );
     }
@@ -37,12 +35,13 @@ export async function getWeatherForOneDay(lat, lon) {
   // Вставляем условие, что если не работает геолокация на Браузере, то мы определяем погоду для Киева //
   let weatherForToday;
   if (lat && lon) {
-    weatherForToday = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APP_ID}&units=metric`;
-  } else {
-    weatherForToday = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${defaultCity}&appid=${APP_ID}`;
+    weatherForToday = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APP_ID}&units=metric`;
+  } 
+  else {
+    weatherForToday = `https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${defaultCity}&appid=${APP_ID}`;
   }
   // Вставляем гифку пока ожидаем ответ от АПИ
-  // weather.innerHTML = `<div class="weather__loading"><img src="loading.gif" alt="Loading..."></div>`;
+  
   try {
     const response = await fetch(weatherForToday);
     const responseResult = await response.json();
@@ -61,20 +60,20 @@ export async function getWeatherForOneDay(lat, lon) {
 
 export function dataForOneDay(data) {
     //  Обрабатывем и выводим данные
-    const lat = data.coord.lat;
-    const lon = data.coord.lon;
+    const lat = data.city.coord.lat;
+    const lon = data.city.coord.lon;
     console.log(data);
-    const location = data.name;
-    const temp = Math.round(data.main.temp);
-    const weatherStatus = data.weather[0].main;
-    const weatherIcon = data.weather[0].icon;
+    const weatherIconUrl = "https://openweathermap.org/img/wn/";
+    const todayWeather = data.list[0];
+    const temp = Math.round(todayWeather.main.temp);
+    const weatherStatus = todayWeather.weather[0].description;
+    const location = data.city.name;
+    const iconUrl = `${weatherIconUrl}${todayWeather.weather[0].icon}@4x.png`;
     const currentDayOfWeek = new Date().toLocaleDateString('en-US', { weekday: 'short' });
     const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' }).toUpperCase();
     const currentMonth = new Date().toLocaleDateString('en-US', { month: 'short' });
     const currentYear = new Date().toLocaleDateString('en-US', { year: 'numeric' }).toUpperCase();
     // Разметка HTML
-    // !!!!!!! НУЖНО РАЗОБРАТЬСЯ С СВГ и вставить 
-              // <img src="Vector.svg" alt="checkpoint">
         let template = `<div class="header__weather">
           <div class="temp__info">${temp}°</div>
           <div class="status__location">
@@ -82,12 +81,13 @@ export function dataForOneDay(data) {
               <p class="status__name">${weatherStatus}</p>
             </div>
             <div class="location">
+              <img src="https://raw.githubusercontent.com/AlexMakhony/Final_project_js/6cf166ba0d110ff0a2ce6b8f26f2dd802ee28f35/Vector.svg" alt="checkpoint">
               <p class="location__name">${location}</p>
               </div>
             </div>
           </div>
           <div class="icon__picture">
-            <img class="weather__picture" src="https://openweathermap.org/img/w/${weatherIcon}.png" alt="Clouds">
+            <img class="weather__picture" src="${iconUrl}" alt="Clouds">
           </div>
           <div class="date__wrapper">
             <div class="day">${currentDayOfWeek}</div>
@@ -129,7 +129,7 @@ export function dataForWeek(data) {
    let tempMin = data.list[0].main.temp;
    let tempMax = data.list[0].main.temp;
    let iconCode = data.list[0].weather[0].icon;
-   let iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+   let iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
    for (let i = 1; i < data.list.length; i++) {
      const dt = new Date(data.list[i].dt_txt);
      const date = dt.getDate();
@@ -149,7 +149,7 @@ export function dataForWeek(data) {
        tempMin = data.list[i].main.temp;
        tempMax = data.list[i].main.temp;
        iconCode = data.list[i].weather[0].icon;
-       iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+       iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
      } else { 
       // Обновляем данные для текущего дня
        if (data.list[i].main.temp < tempMin) {
@@ -162,6 +162,7 @@ export function dataForWeek(data) {
    }
 
   //  Разметка HTML!!!
+  
     weather.innerHTML = '';
   //  Кнопка BACK
     const backBtn = document.createElement("button");
