@@ -6,6 +6,8 @@ import { startWeatherApp } from './js/weather';
 
 import { getCategories } from './js/categories';
 
+import { pagination } from './js/paginatoin';
+
 const inputSearch = document.getElementById('searchForm');
 
 getCategories();
@@ -14,5 +16,6 @@ startWeatherApp();
 
 createPopularNews();
 
-
 inputSearch.addEventListener('submit', createMainPage);
+
+pagination();
