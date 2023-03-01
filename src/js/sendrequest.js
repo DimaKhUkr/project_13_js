@@ -57,7 +57,7 @@ export async function createPopularNews() {
     const photoUrl =
       news.media.length !== 0
         ? news.media[0]['media-metadata'][2].url
-        : 'https://via.placeholder.com/400';
+        : '/images/asia.png';
     const { title, abstract, published_date, url, section, id } = news;
     const isFavorite = localStorage.getItem(`favorite_${id}`) !== null;
     return `<div class="news-card">
