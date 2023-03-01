@@ -1,5 +1,5 @@
-const API_KEY = `u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn`;
-const URL = `https://api.nytimes.com/svc/news/v3/content/section-list.json`;
+const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
+const URL = 'https://api.nytimes.com/svc/news/v3/content/section-list.json';
 
 const categoryBtn = document.getElementById('category-btn');
 
@@ -17,7 +17,7 @@ export async function getCategories() {
         for (const arr of cat.results) {
           arrayOfCategories.push(arr.display_name);
         }
-        console.log(arrayOfCategories);
+        // console.log(arrayOfCategories);
         return arrayOfCategories;
       })
       .then(arrayOfCategories => {
