@@ -6,7 +6,7 @@ const mainPage = document.getElementById('main-page');
 const weather = document.querySelector(`.wraper__weather`);
 const empty = document.getElementById('empty');
 
-let photoEmpty = './src/images/empty-page.jpg  ';
+// let photoEmpty = './src/images/empty-page.jpg  ';
 
 // Запрос на бекенд по полю поиска
 async function articleSearch(pageNumber, query) {
@@ -22,10 +22,6 @@ async function articleSearch(pageNumber, query) {
     //   .then(res => console.log(res));
   } catch (error) {
     console.error(error);
-    mainPage.replaceChildren();
-    mainPage.innerHTML = `<div class="news-card">
-            <img src="${photoEmpty}" alt="заглушка" />
-            </div>`;
   }
 }
 
