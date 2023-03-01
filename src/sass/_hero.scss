@@ -28,6 +28,7 @@
 .news-card img {
   width: 288px;
   height: 395px;
+  object-fit: cover;
 
   @media screen and (min-width: 768px) {
     width: 353px;
