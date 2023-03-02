@@ -19,6 +19,18 @@
   }
 }
 
+.read-item:not(:last-child) {
+  margin-bottom: 40px;
+  // position: relative;
+  @include tablet {
+    margin-bottom: 48px;
+  }
+
+  @include desktop {
+    margin-bottom: 60px;
+  }
+}
+
 .read-title {
   display: flex;
   padding-bottom: 12px;
@@ -34,7 +46,6 @@
   line-height: 1.71;
   letter-spacing: 0.02em;
   color: $text-color-light;
-
   margin-right: 10px;
 }
 
@@ -44,34 +55,51 @@
   border: 2px solid #111321;
   border-width: 2px 2px 0 0;
   transform: rotate(135deg);
-  transition: transform 300ms;
+  transform: translate(0, 0);
+  transition: transform 500ms ease, transform 500ms ease;
 }
 
-.read-arrow__active {
+.read-active .read-arrow {
   transform: rotate(-45deg);
-  // transform: translate(-50%, 50%);
-  // transform-origin: bottom;
+  transform: translate(50%, 50%);
 }
 
 .read-gallery {
+  height: 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 28px;
-  padding-top: 28px;
-  margin-bottom: 40px;
+
+  visibility: hidden;
+  opacity: 0;
+  padding-top: 0;
+
+  transition-property: padding, opacity, visibility, height;
+  transition-duration: 700ms;
+  transition-timing-function: ease;
+
   @include tablet {
+    justify-self: center;
+    justify-content: flex-start;
     gap: 30px;
-    padding-top: 30px;
-    margin-bottom: 48px;
   }
+
   @include desktop {
     gap: 32px;
-    padding-top: 40px;
-    margin-bottom: 60px;
   }
 }
 
-.active {
-  display: flex;
+.read-active .read-gallery {
+  visibility: visible;
+  opacity: 1;
+  padding-top: 28px;
+
+  @include tablet {
+    padding-top: 30px;
+  }
+
+  @include desktop {
+    padding-top: 40px;
+  }
 }

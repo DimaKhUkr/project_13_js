@@ -1,0 +1,50 @@
+.news-card__favorite-btn {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  position: absolute;
+  right: 8px;
+  top: 355px;
+
+  width: 126px;
+  height: 28px;
+
+  // background-color: $bgn-color-light;
+  border-radius: 20px;
+  border: none;
+
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  // color: $text-color-light;
+
+  @include tablet {
+    right: 12px;
+  }
+
+  @include desktop {
+    // width: 126px;
+  }
+}
+
+.news-card__favorite-btn::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background-image: url("/src/images/heart-contur.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.news-card__favorite-btn.active_btn {
+  width: 168px;
+
+&::after {
+  background-image: url("/src/images/heart-filled.png");
+}
+}
