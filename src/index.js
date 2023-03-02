@@ -1,4 +1,4 @@
-import { createMainPage, createPopularNews } from './js/sendrequest';
+import { createPopularNews } from './js/sendrequest';
 
 import { mobileMenu } from './js/mobileMenu';
 
@@ -11,7 +11,3 @@ getCategories();
 createPopularNews();
 
 startWeatherApp();
-
-// const inputSearch = document.getElementById('searchForm');
-
-

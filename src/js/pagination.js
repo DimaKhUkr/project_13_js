@@ -1,31 +1,8 @@
 import { createMainPage } from './sendrequest';
-// const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
-// // const mainPage = document.getElementById('main-page');
-// // const apiUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${API_KEY}`;
 
-// // =========================================
-
-// const apiUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${API_KEY}`;
-
-// let totalItems = 0;
 let totalPage = 0;
 let currentPage = 0;
 let itemsPerPage = 10;
-
-// async function fetchNews(offset) {
-//   const url = `${apiUrl}&sort=newest&page=${currentPage}&fq=news_desk:("Sports")&type_of_material:("News")&begin_date=20220101&end_date=20220301`;
-
-//   try {
-//     const response = await fetch(url + `&offset=${offset}`);
-//     const data = await response.json();
-//     totalItems = data.response.meta.hits;
-//     console.log(data.response.docs);
-//     return data.response.docs;
-//   } catch (error) {
-//     console.error('Error:', error);
-//     return [];
-//   }
-// }
 
 export function updatePagination(totalItems) {
   const pagination = document.querySelector('.pagination');
