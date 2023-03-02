@@ -1,9 +1,11 @@
 .main-page {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  // grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
-  flex-wrap: wrap;
-  max-width: 1280px;
+  // flex-wrap: wrap;
+  grid-auto-flow: row;
+  justify-content: center;
+  // max-width: 1280px;
 }
 .news-card {
   position: relative;
@@ -11,16 +13,16 @@
   flex-direction: column;
   // border: 1px solid #ccc;
   border-radius: 4px;
-  overflow: hidden;
+  // overflow: hidden;
   width: 288px;
   height: 630px;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 353px;
     height: 675px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 395px;
   }
 }
@@ -30,11 +32,11 @@
   height: 395px;
   object-fit: cover;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 353px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 394px;
   }
 }
@@ -56,42 +58,6 @@
   color: $bgn-color-light;
 }
 
-.news-card__favorite-btn {
-  position: absolute;
-  right: 8px;
-  top: 355px;
-
-  width: 126px;
-  height: 28px;
-
-  background: $text-color-dark;
-  border-radius: 20px;
-  border: none;
-
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-  text-align: center;
-
-  color: $text-color-light;
-
-  @media screen and (min-width: 768px) {
-    right: 8px;
-  }
-
-  @media screen and (min-width: 1200px) {
-    width: 126px;
-  }
-}
-
-.news-card__favorite-btn.active {
-  @media screen and (min-width: 1200px) {
-    width: 168px;
-  }
-}
-
 .news-card__title {
   width: 288px;
   height: 99px;
@@ -108,14 +74,14 @@
 
   color: $text-color-light;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 351px;
     height: 132px;
 
     font-size: 32px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 394px;
   }
 }
@@ -133,7 +99,7 @@
 
   color: $text-color-light;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 351px;
     height: 66px;
 
@@ -141,7 +107,7 @@
     line-height: 1.38;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 394px;
   }
 }
@@ -158,7 +124,7 @@
   line-height: 1.36;
   color: $alt-text-color;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     top: 653px;
     left: 0px;
 
@@ -166,7 +132,7 @@
     line-height: 1.38;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
   }
 }
 
@@ -183,9 +149,13 @@
   line-height: 1.36;
   color: $decoration-color;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     top: 653px;
     left: 273px;
+  }
+
+  @include desktop {
+    left: 290px;
   }
 }
 
@@ -220,3 +190,83 @@
 //   width: 395px;
 //   height: 675px;
 // }
+
+//  Стилі для пагінатора
+.pagination {
+  font-family: 'Manrope';
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 40px 16px 60px;
+  gap: 10px;
+
+  @include tablet {
+    padding: 48px 16px 100px;
+    gap: 8px;
+  }
+
+  @include desktop {
+    padding: 60px 16px 150px;
+    gap: 8px;
+  }
+}
+
+.dot {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.357;
+  text-align: center;
+  color: $text-color-light;
+  width: 28px;
+  height: 28px;
+  background: $bgn-color-light;
+  border: 1px solid $decoration-color;
+  border-radius: 2px;
+
+  @include tablet {
+    font-size: 16px;
+    line-height: 1.375;
+    width: 33px;
+    height: 31px;
+  }
+}
+
+.dot-active {
+  color: $bgn-color-light;
+  background: $decoration-color;
+  align-items: center;
+  justify-content: center;
+}
+
+.prev {
+  width: 72px;
+
+  @include tablet {
+    width: 82px;
+  }
+}
+
+.prev:disabled,
+.next:disabled {
+  background: #c2c2c4;
+}
+
+.next {
+  width: 72px;
+
+  @include tablet {
+    width: 78px;
+  }
+}
+
+.dots {
+  border: none;
+  font-size: 14px;
+  line-height: 1.143;
+  color: $text-color-light;
+
+  @include tablet {
+    font-size: 16px;
+    line-height: 1.188;
+  }
+}

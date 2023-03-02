@@ -6,48 +6,12 @@ import { startWeatherApp } from './js/weather';
 
 import { getCategories } from './js/categories';
 
-const inputSearch = document.getElementById('searchForm');
-
 getCategories();
-
-startWeatherApp();
 
 createPopularNews();
 
+startWeatherApp();
+
+// const inputSearch = document.getElementById('searchForm');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-inputSearch.addEventListener('submit', createMainPage);
-
-
-
-
-
-
-
-
-
-
-
-
-import './js/read-show-hide';

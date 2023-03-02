@@ -1,25 +1,41 @@
 import { startWeatherApp } from './weather';
+import { updatePagination } from './pagination';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
 const mainPage = document.getElementById('main-page');
 const weather = document.querySelector(`.wraper__weather`);
 const empty = document.getElementById('empty');
+const paginationContainer = document.getElementById('pagination');
 
-// let photoEmpty = './src/images/empty-page.jpg  ';
+const inputSearch = document.getElementById('searchForm');
+
+let query = '';
+let totalItems = 0;
+let currentPage = 0;
+let url = '';
+
+inputSearch.addEventListener('submit', e => {
+  e.preventDefault();
+  currentPage = 0;
+  query = e.target.elements.search.value.trim();
+  console.log(currentPage, query);
+  url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&api-key=${API_KEY}`;
+  createMainPage(currentPage);
+});
 
 // Запрос на бекенд по полю поиска
-async function articleSearch(pageNumber, query) {
+async function articleSearch(currentPage) {
   //   e.preventDefault();
   //   const query = e.value;
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${pageNumber}&q=${query}&api-key=${API_KEY}`;
+  const urlFetch = url + `&page=${currentPage}`;
+  console.log(urlFetch);
   try {
-    return await fetch(url, {
+    return await fetch(urlFetch, {
       headers: {
         'Content-Type': 'application/json',
       },
     }).then(resp => resp.json());
-    //   .then(res => console.log(res));
   } catch (error) {
     console.error(error);
   }
@@ -34,22 +50,13 @@ async function fetchMostPopularNews() {
         'Content-Type': 'application/json',
       },
     }).then(resp => resp.json());
-    // .then(data => console.log(data))
   } catch (error) {
     console.error(error);
   }
 }
-// results.title - название статьи
-// results.abstract - начало статьи
-// results.published_date - дата статьи
-// results.url - ссылка на статью
-// results.section - категория
-// results.id - идентификатор статьи
-// results.media[0].media-metadata[2].url - ссылка на фото статьи
 
 // Рендеринг новостей по популярным новостям при первой загрузке страницы
 export async function createPopularNews() {
-  // e.preventDefault();
   const data = await fetchMostPopularNews();
   console.log(data.results);
   const newsCards = data.results.map(news => {
@@ -57,7 +64,7 @@ export async function createPopularNews() {
     const photoUrl =
       news.media.length !== 0
         ? news.media[0]['media-metadata'][2].url
-        : '/images/asia.png';
+        : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { title, abstract, published_date, url, section, uri } = news;
     const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
     return `<div class="news-card">
@@ -65,7 +72,7 @@ export async function createPopularNews() {
             <div class="news-card__info">
               <div class="news-card__category">${section}</div>
               <button class="news-card__favorite-btn ${
-                isFavorite ? 'active' : ''
+                isFavorite ? 'active_btn' : ''
               }" data-news-id="${uri}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
@@ -88,18 +95,12 @@ export async function createPopularNews() {
   document.addEventListener('DOMContentLoaded', startWeatherApp);
 }
 
-// pageNumber = номер страницы для пагинации.
-// Для тестов присваиваем руками номер, дальше в пагинации юзаем.
-const pageNumber = 0;
-
 // Рендеринг новостей по полю поиска
-export async function createMainPage(e) {
-  e.preventDefault();
+export async function createMainPage(pageNumber) {
   empty.setAttribute('hidden', '');
-  const query = e.target.elements.search.value.trim();
-  console.log(query);
-  const data = await articleSearch(pageNumber, query);
-  // console.log(data.response.meta.hits);
+  // const query = e.target.elements.search.value.trim();
+  // console.log(query);
+  const data = await articleSearch(pageNumber);
   console.dir(data.response);
   if (data.response.docs.length === 0) {
     // mainPage.replaceChildren();
@@ -120,7 +121,7 @@ export async function createMainPage(e) {
     const photoUrl =
       news.multimedia !== 0
         ? `https://static01.nyt.com/${news.multimedia[0].url}`
-        : 'https://via.placeholder.com/400';
+        : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { _id, section_name, abstract, pub_date, web_url } = news;
     const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
     return `
@@ -129,7 +130,7 @@ export async function createMainPage(e) {
             <div class="news-card__info">
               <div class="news-card__category">${section_name}</div>
               <button class="news-card__favorite-btn ${
-                isFavorite ? 'active' : ''
+                isFavorite ? 'active_btn' : ''
               }" data-news-id="${_id}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
@@ -150,34 +151,12 @@ export async function createMainPage(e) {
         `;
   });
   mainPage.insertAdjacentHTML('beforeend', newsCards.join(''));
-  // mainPage.innerHTML = newsCards.join('');
-  // const weatherCard = document.createElement('div');
-  // weatherCard.classList.add('wraper__weather');
-  // // mainPage.appendChild(weatherCard);
-  // weatherCard.innerHTML = `<div id="weather" class="weather"></div>`;
-  // // Проверка размера окна для размещения карточки погоды
-  // let position = 0;
-  // console.log(window.innerWidth);
-  // if (window.innerWidth > 800 && window.innerWidth < 1206) {
-  //   // weatherCard.style.width = '100%';
-  //   position = 1;
-  // } else if (window.innerWidth > 1206) {
-  //   position = 2;
-  //   // weatherCard.style.width = '';
-  // }
-  // console.log(position);
-  // const insertBeforeElement = mainPage.children[`${position}`];
-  // mainPage.insertBefore(weatherCard, insertBeforeElement);
   document.addEventListener('DOMContentLoaded', startWeatherApp);
-  e.target.reset();
+  // e.target.reset();
+  totalItems = data.response.meta.hits;
+  console.log(totalItems);
+  updatePagination(totalItems);
 }
-
-// docs.headline.main - название статьи
-// docs.abstract - начало статьи
-// docs.pub_date - дата статьи
-// docs.web_url - ссылка на статью
-// docs.section_name - категория
-// docs._id - идентификатор статьи
 
 // Добавление/удаление новости из избранного
 function toggleFavorite(event) {
