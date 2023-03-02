@@ -5,8 +5,22 @@ const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 const mainPage = document.getElementById('main-page');
 const weather = document.querySelector(`.wraper__weather`);
 const empty = document.getElementById('empty');
+const paginationContainer = document.getElementById('pagination');
+
+const inputSearch = document.getElementById('searchForm');
 
 // let photoEmpty = './src/images/empty-page.jpg  ';
+// pageNumber = номер страницы для пагинации.
+// Для тестов присваиваем руками номер, дальше в пагинации юзаем.
+let pageNumber = 0;
+let query = '';
+
+inputSearch.addEventListener('submit', e => {
+  e.preventDefault();
+  query = e.target.elements.search.value.trim();
+  console.log(pageNumber, query);
+  createMainPage(pageNumber, query);
+});
 
 // Запрос на бекенд по полю поиска
 async function articleSearch(pageNumber, query) {
@@ -88,16 +102,12 @@ export async function createPopularNews() {
   document.addEventListener('DOMContentLoaded', startWeatherApp);
 }
 
-// pageNumber = номер страницы для пагинации.
-// Для тестов присваиваем руками номер, дальше в пагинации юзаем.
-const pageNumber = 0;
-
 // Рендеринг новостей по полю поиска
-export async function createMainPage(e) {
-  e.preventDefault();
+export async function createMainPage(pageNumber, query) {
+  // e.preventDefault();
   empty.setAttribute('hidden', '');
-  const query = e.target.elements.search.value.trim();
-  console.log(query);
+  // const query = e.target.elements.search.value.trim();
+  // console.log(query);
   const data = await articleSearch(pageNumber, query);
   // console.log(data.response.meta.hits);
   console.dir(data.response);
@@ -150,26 +160,11 @@ export async function createMainPage(e) {
         `;
   });
   mainPage.insertAdjacentHTML('beforeend', newsCards.join(''));
-  // mainPage.innerHTML = newsCards.join('');
-  // const weatherCard = document.createElement('div');
-  // weatherCard.classList.add('wraper__weather');
-  // // mainPage.appendChild(weatherCard);
-  // weatherCard.innerHTML = `<div id="weather" class="weather"></div>`;
-  // // Проверка размера окна для размещения карточки погоды
-  // let position = 0;
-  // console.log(window.innerWidth);
-  // if (window.innerWidth > 800 && window.innerWidth < 1206) {
-  //   // weatherCard.style.width = '100%';
-  //   position = 1;
-  // } else if (window.innerWidth > 1206) {
-  //   position = 2;
-  //   // weatherCard.style.width = '';
-  // }
-  // console.log(position);
-  // const insertBeforeElement = mainPage.children[`${position}`];
-  // mainPage.insertBefore(weatherCard, insertBeforeElement);
   document.addEventListener('DOMContentLoaded', startWeatherApp);
-  e.target.reset();
+  // e.target.reset();
+  const totalHits = data.response.meta.hits;
+  console.log(totalHits);
+  initPagination(totalHits);
 }
 
 // docs.headline.main - название статьи
@@ -178,6 +173,25 @@ export async function createMainPage(e) {
 // docs.web_url - ссылка на статью
 // docs.section_name - категория
 // docs._id - идентификатор статьи
+
+function initPagination(totalHits) {
+  paginationContainer.innerHTML = '';
+  totalPages = Math.ceil(totalHits / 10);
+  console.log(totalPages);
+  for (let i = 1; i <= 100; i++) {
+    paginationContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button type="button" class="category_btn">${i}</button>`
+    );
+  }
+}
+paginationContainer.addEventListener('click', event => {
+  event.preventDefault();
+  pageNumber = Number(event.target.textContent);
+  console.log(pageNumber, query);
+
+  createMainPage(pageNumber, query);
+});
 
 // Добавление/удаление новости из избранного
 function toggleFavorite(event) {
