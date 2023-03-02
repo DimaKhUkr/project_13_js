@@ -57,7 +57,7 @@ export async function createPopularNews() {
     const photoUrl =
       news.media.length !== 0
         ? news.media[0]['media-metadata'][2].url
-        : '/images/asia.png';
+        : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { title, abstract, published_date, url, section, uri } = news;
     const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
     return `<div class="news-card">
@@ -120,7 +120,7 @@ export async function createMainPage(e) {
     const photoUrl =
       news.multimedia !== 0
         ? `https://static01.nyt.com/${news.multimedia[0].url}`
-        : 'https://via.placeholder.com/400';
+        : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { _id, section_name, abstract, pub_date, web_url } = news;
     const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
     return `
