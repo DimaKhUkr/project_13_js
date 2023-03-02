@@ -1,2 +1,0 @@
-document.querySelectorAll(".read-title").forEach((function(e){return e.addEventListener("click",(function(){parent=e.parentNode,gallery=e.nextElementSibling;var t=gallery.scrollHeight;parent.classList.contains("read-active")?(parent.classList.remove("read-active"),gallery.style.height="0px"):(document.querySelectorAll(".read-item").forEach((function(e){return e.classList.remove("read-active")})),parent.classList.toggle("read-active"),gallery.style.height=t+"px"),gallery=e.nextElementSibling}))}));
-//# sourceMappingURL=read.1645d5e6.js.map
