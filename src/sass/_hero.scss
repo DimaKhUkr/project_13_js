@@ -13,7 +13,7 @@
   flex-direction: column;
   // border: 1px solid #ccc;
   border-radius: 4px;
-  overflow: hidden;
+  // overflow: hidden;
   width: 288px;
   height: 630px;
 
@@ -58,41 +58,43 @@
   color: $bgn-color-light;
 }
 
-.news-card__favorite-btn {
-  position: absolute;
-  right: 8px;
-  top: 355px;
+// !!!!!! Забрала стилі кнопок add/remove в _favorite-box.scss !!!!!!
 
-  width: 126px;
-  height: 28px;
+// .news-card__favorite-btn {
+//   position: absolute;
+//   right: 8px;
+//   top: 355px;
 
-  background: $text-color-dark;
-  border-radius: 20px;
-  border: none;
+//   width: 126px;
+//   height: 28px;
 
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-  text-align: center;
+//   background: $text-color-dark;
+//   border-radius: 20px;
+//   border: none;
 
-  color: $text-color-light;
+//   font-family: 'Manrope';
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 12px;
+//   line-height: 1.33;
+//   text-align: center;
 
-  @include tablet {
-    right: 8px;
-  }
+//   color: $text-color-light;
 
-  @include desktop {
-    width: 126px;
-  }
-}
+//   @include tablet {
+//     right: 8px;
+//   }
 
-.news-card__favorite-btn.active {
-  @include desktop {
-    width: 168px;
-  }
-}
+//   @include desktop {
+//     width: 126px;
+//   }
+// }
+
+// .news-card__favorite-btn.active {
+//   @include desktop {
+//     width: 168px;
+//   }
+// }
 
 .news-card__title {
   width: 288px;
