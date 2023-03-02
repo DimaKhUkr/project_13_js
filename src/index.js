@@ -6,13 +6,15 @@ import { startWeatherApp } from './js/weather';
 
 import { getCategories } from './js/categories';
 
-const inputSearch = document.getElementById('searchForm');
-
 getCategories();
-
-startWeatherApp();
 
 createPopularNews();
 
+startWeatherApp();
 
-inputSearch.addEventListener('submit', createMainPage);
+// const inputSearch = document.getElementById('searchForm');
+
+// inputSearch.addEventListener('submit', (e) => {
+//  const query = e.target.elements.search.value.trim();
+//     createMainPage()
+// });
