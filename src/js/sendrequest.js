@@ -1,4 +1,5 @@
 import { startWeatherApp } from './weather';
+import { updatePagination } from './pagination'
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
@@ -10,23 +11,28 @@ const paginationContainer = document.getElementById('pagination');
 const inputSearch = document.getElementById('searchForm');
 
 // let photoEmpty = './src/images/empty-page.jpg  ';
-// pageNumber = номер страницы для пагинации.
+// currentPage = номер страницы для пагинации.
 // Для тестов присваиваем руками номер, дальше в пагинации юзаем.
-let pageNumber = 0;
 let query = '';
+let totalItems = 0;
+let currentPage = 0;
+let url = "";
 
 inputSearch.addEventListener('submit', e => {
   e.preventDefault();
+  currentPage = 0;
   query = e.target.elements.search.value.trim();
-  console.log(pageNumber, query);
-  createMainPage(pageNumber, query);
+  console.log(currentPage, query);
+  url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&api-key=${API_KEY}`;
+  createMainPage(currentPage);
 });
 
 // Запрос на бекенд по полю поиска
-async function articleSearch(pageNumber, query) {
+async function articleSearch(currentPage) {
   //   e.preventDefault();
   //   const query = e.value;
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${pageNumber}&q=${query}&api-key=${API_KEY}`;
+  url = url + `&page=${currentPage}`;
+  console.log(url);
   try {
     return await fetch(url, {
       headers: {
@@ -103,12 +109,12 @@ export async function createPopularNews() {
 }
 
 // Рендеринг новостей по полю поиска
-export async function createMainPage(pageNumber, query) {
+export async function createMainPage(pageNumber) {
   // e.preventDefault();
   empty.setAttribute('hidden', '');
   // const query = e.target.elements.search.value.trim();
   // console.log(query);
-  const data = await articleSearch(pageNumber, query);
+  const data = await articleSearch(pageNumber);
   // console.log(data.response.meta.hits);
   console.dir(data.response);
   if (data.response.docs.length === 0) {
@@ -162,9 +168,9 @@ export async function createMainPage(pageNumber, query) {
   mainPage.insertAdjacentHTML('beforeend', newsCards.join(''));
   document.addEventListener('DOMContentLoaded', startWeatherApp);
   // e.target.reset();
-  const totalHits = data.response.meta.hits;
-  console.log(totalHits);
-  initPagination(totalHits);
+  totalItems = data.response.meta.hits;
+  console.log(totalItems);
+  updatePagination(totalItems);
 }
 
 // docs.headline.main - название статьи
@@ -174,24 +180,24 @@ export async function createMainPage(pageNumber, query) {
 // docs.section_name - категория
 // docs._id - идентификатор статьи
 
-function initPagination(totalHits) {
-  paginationContainer.innerHTML = '';
-  totalPages = Math.ceil(totalHits / 10);
-  console.log(totalPages);
-  for (let i = 1; i <= 100; i++) {
-    paginationContainer.insertAdjacentHTML(
-      'beforeend',
-      `<button type="button" class="category_btn">${i}</button>`
-    );
-  }
-}
-paginationContainer.addEventListener('click', event => {
-  event.preventDefault();
-  pageNumber = Number(event.target.textContent);
-  console.log(pageNumber, query);
+// function initPagination(totalHits) {
+//   paginationContainer.innerHTML = '';
+//   totalPages = Math.ceil(totalHits / 10);
+//   console.log(totalPages);
+//   for (let i = 1; i <= 100; i++) {
+//     paginationContainer.insertAdjacentHTML(
+//       'beforeend',
+//       `<button type="button" class="category_btn">${i}</button>`
+//     );
+//   }
+// }
+// paginationContainer.addEventListener('click', event => {
+//   event.preventDefault();
+//   pageNumber = Number(event.target.textContent);
+//   console.log(pageNumber, query);
 
-  createMainPage(pageNumber, query);
-});
+//   createMainPage(pageNumber, query);
+// });
 
 // Добавление/удаление новости из избранного
 function toggleFavorite(event) {

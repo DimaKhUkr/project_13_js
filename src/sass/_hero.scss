@@ -220,3 +220,48 @@
 //   width: 395px;
 //   height: 675px;
 // }
+
+//  Стилі для пагінатора
+.pagination {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.dot {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.375;
+  text-align: center;
+  color: #111321;
+
+  width: 33px;
+  height: 31px;
+  background: #f4f4f4;
+  border: 1px solid #4440f6;
+  border-radius: 2px;
+}
+
+.active {
+  color: #f4f4f4;
+  background: #4440f6;
+  align-items: center;
+  justify-content: center;
+}
+
+.prev {
+  width: 82px;
+}
+
+.prev:disabled,
+.next:disabled {
+  background: #c2c2c4;
+}
+
+.next {
+  width: 78px;
+}
+
+.dots {
+  border: none;
+}
