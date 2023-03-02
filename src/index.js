@@ -16,3 +16,5 @@ createPopularNews();
 
 
 inputSearch.addEventListener('submit', createMainPage);
+
+import './js/read-show-hide';
