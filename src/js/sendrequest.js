@@ -65,7 +65,7 @@ export async function createPopularNews() {
             <div class="news-card__info">
               <div class="news-card__category">${section}</div>
               <button class="news-card__favorite-btn ${
-                isFavorite ? 'active_btn' : ''
+                isFavorite ? 'active' : ''
               }" data-news-id="${uri}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
@@ -129,7 +129,7 @@ export async function createMainPage(e) {
             <div class="news-card__info">
               <div class="news-card__category">${section_name}</div>
               <button class="news-card__favorite-btn ${
-                isFavorite ? 'active_btn' : ''
+                isFavorite ? 'active' : ''
               }" data-news-id="${_id}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
@@ -187,11 +187,11 @@ function toggleFavorite(event) {
   if (localStorage.getItem(`favorite_${newsId}`) !== null) {
     localStorage.removeItem(`favorite_${newsId}`);
     button.textContent = 'Add to Favorite';
-    button.classList.remove('active_btn');
+    button.classList.remove('active');
   } else {
     localStorage.setItem(`favorite_${newsId}`, true);
     button.textContent = 'Remove from Favorite';
-    button.classList.add('active_btn');
+    button.classList.add('active');
   }
 }
 
