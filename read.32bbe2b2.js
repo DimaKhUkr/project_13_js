@@ -1,0 +1,2 @@
+document.querySelectorAll(".read-title").forEach((e=>e.addEventListener("click",(()=>{parent=e.parentNode,gallery=e.nextElementSibling;const t=gallery.scrollHeight;parent.classList.contains("read-active")?(parent.classList.remove("read-active"),gallery.style.height="0px"):(document.querySelectorAll(".read-item").forEach((e=>e.classList.remove("read-active"))),parent.classList.toggle("read-active"),gallery.style.height=t+"px"),gallery=e.nextElementSibling}))));
+//# sourceMappingURL=read.32bbe2b2.js.map
