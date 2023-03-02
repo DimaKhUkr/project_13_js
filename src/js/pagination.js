@@ -1,4 +1,4 @@
-import { createMainPage } from "./sendrequest";
+import { createMainPage } from './sendrequest';
 // const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 // // const mainPage = document.getElementById('main-page');
 // // const apiUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${API_KEY}`;
@@ -32,13 +32,16 @@ export function updatePagination(totalItems) {
   pagination.innerHTML = '';
 
   totalPage = Math.ceil(totalItems / itemsPerPage);
+  if (totalPage > 100) {
+    totalPage = 100;
+  }
 
   // Додаю кнопку першої сторінки
   const firstBtn = document.createElement('button');
   firstBtn.textContent = '1';
   firstBtn.classList = 'dot';
   if (currentPage === 0) {
-    firstBtn.classList.add('active');
+    firstBtn.classList.add('dot-active');
   }
   firstBtn.addEventListener('click', () => {
     currentPage = 0;
@@ -60,10 +63,16 @@ export function updatePagination(totalItems) {
     updatePagination();
   });
   pagination.insertBefore(prevBtn, pagination.firstChild);
+  let startPage = Math.max(1, currentPage);
+  let endPage = Math.min(totalPage - 1, currentPage + 1);
 
-  // Додаю кнопку "..."
-  let startPage = Math.max(1, currentPage - 1);
-  let endPage = Math.min(totalPage - 1, currentPage + 2);
+  if (window.innerWidth > 767) {
+    startPage = Math.max(1, currentPage - 1);
+    endPage = Math.min(totalPage - 1, currentPage + 2);
+  }
+  // Додаю першу кнопку "..."
+  startPage = Math.max(1, currentPage - 1);
+  endPage = Math.min(totalPage - 1, currentPage + 2);
 
   if (startPage > 1) {
     const dotsBtn = document.createElement('button');
@@ -72,13 +81,13 @@ export function updatePagination(totalItems) {
     dotsBtn.classList = 'dots';
     pagination.appendChild(dotsBtn);
   }
-
+  // Додаю інші кнопки
   for (let i = startPage; i < endPage; i++) {
     const btn = document.createElement('button');
     btn.textContent = i + 1;
     btn.classList = 'dot';
     if (i === currentPage) {
-      btn.classList.add('active');
+      btn.classList.add('dot-active');
     }
     btn.addEventListener('click', () => {
       currentPage = i;
@@ -87,7 +96,7 @@ export function updatePagination(totalItems) {
     });
     pagination.appendChild(btn);
   }
-
+  // Додаю другу кнопку "..."
   if (endPage < totalPage - 1) {
     const dotsBtn = document.createElement('button');
     dotsBtn.textContent = '...';
@@ -102,7 +111,7 @@ export function updatePagination(totalItems) {
     lastBtn.textContent = totalPage;
     lastBtn.classList = 'dot';
     if (currentPage === totalPage - 1) {
-      lastBtn.classList.add('active');
+      lastBtn.classList.add('dot-active');
     }
     lastBtn.addEventListener('click', () => {
       currentPage = totalPage - 1;
