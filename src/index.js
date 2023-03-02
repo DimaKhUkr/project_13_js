@@ -15,6 +15,28 @@ startWeatherApp();
 createPopularNews();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 inputSearch.addEventListener('submit', createMainPage);
 
 
