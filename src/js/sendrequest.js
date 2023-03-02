@@ -1,5 +1,5 @@
 import { startWeatherApp } from './weather';
-import { updatePagination } from './pagination'
+import { updatePagination } from './pagination';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
@@ -10,13 +10,10 @@ const paginationContainer = document.getElementById('pagination');
 
 const inputSearch = document.getElementById('searchForm');
 
-// let photoEmpty = './src/images/empty-page.jpg  ';
-// currentPage = номер страницы для пагинации.
-// Для тестов присваиваем руками номер, дальше в пагинации юзаем.
 let query = '';
 let totalItems = 0;
 let currentPage = 0;
-let url = "";
+let url = '';
 
 inputSearch.addEventListener('submit', e => {
   e.preventDefault();
@@ -31,15 +28,14 @@ inputSearch.addEventListener('submit', e => {
 async function articleSearch(currentPage) {
   //   e.preventDefault();
   //   const query = e.value;
-  url = url + `&page=${currentPage}`;
-  console.log(url);
+  const urlFetch = url + `&page=${currentPage}`;
+  console.log(urlFetch);
   try {
-    return await fetch(url, {
+    return await fetch(urlFetch, {
       headers: {
         'Content-Type': 'application/json',
       },
     }).then(resp => resp.json());
-    //   .then(res => console.log(res));
   } catch (error) {
     console.error(error);
   }
@@ -54,22 +50,13 @@ async function fetchMostPopularNews() {
         'Content-Type': 'application/json',
       },
     }).then(resp => resp.json());
-    // .then(data => console.log(data))
   } catch (error) {
     console.error(error);
   }
 }
-// results.title - название статьи
-// results.abstract - начало статьи
-// results.published_date - дата статьи
-// results.url - ссылка на статью
-// results.section - категория
-// results.id - идентификатор статьи
-// results.media[0].media-metadata[2].url - ссылка на фото статьи
 
 // Рендеринг новостей по популярным новостям при первой загрузке страницы
 export async function createPopularNews() {
-  // e.preventDefault();
   const data = await fetchMostPopularNews();
   console.log(data.results);
   const newsCards = data.results.map(news => {
@@ -85,7 +72,7 @@ export async function createPopularNews() {
             <div class="news-card__info">
               <div class="news-card__category">${section}</div>
               <button class="news-card__favorite-btn ${
-                isFavorite ? 'active' : ''
+                isFavorite ? 'active_btn' : ''
               }" data-news-id="${uri}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
@@ -110,12 +97,10 @@ export async function createPopularNews() {
 
 // Рендеринг новостей по полю поиска
 export async function createMainPage(pageNumber) {
-  // e.preventDefault();
   empty.setAttribute('hidden', '');
   // const query = e.target.elements.search.value.trim();
   // console.log(query);
   const data = await articleSearch(pageNumber);
-  // console.log(data.response.meta.hits);
   console.dir(data.response);
   if (data.response.docs.length === 0) {
     // mainPage.replaceChildren();
@@ -145,7 +130,7 @@ export async function createMainPage(pageNumber) {
             <div class="news-card__info">
               <div class="news-card__category">${section_name}</div>
               <button class="news-card__favorite-btn ${
-                isFavorite ? 'active' : ''
+                isFavorite ? 'active_btn' : ''
               }" data-news-id="${_id}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
@@ -172,32 +157,6 @@ export async function createMainPage(pageNumber) {
   console.log(totalItems);
   updatePagination(totalItems);
 }
-
-// docs.headline.main - название статьи
-// docs.abstract - начало статьи
-// docs.pub_date - дата статьи
-// docs.web_url - ссылка на статью
-// docs.section_name - категория
-// docs._id - идентификатор статьи
-
-// function initPagination(totalHits) {
-//   paginationContainer.innerHTML = '';
-//   totalPages = Math.ceil(totalHits / 10);
-//   console.log(totalPages);
-//   for (let i = 1; i <= 100; i++) {
-//     paginationContainer.insertAdjacentHTML(
-//       'beforeend',
-//       `<button type="button" class="category_btn">${i}</button>`
-//     );
-//   }
-// }
-// paginationContainer.addEventListener('click', event => {
-//   event.preventDefault();
-//   pageNumber = Number(event.target.textContent);
-//   console.log(pageNumber, query);
-
-//   createMainPage(pageNumber, query);
-// });
 
 // Добавление/удаление новости из избранного
 function toggleFavorite(event) {

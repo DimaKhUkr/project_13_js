@@ -56,41 +56,41 @@
   color: $bgn-color-light;
 }
 
-.news-card__favorite-btn {
-  position: absolute;
-  right: 8px;
-  top: 355px;
+// .news-card__favorite-btn {
+//   position: absolute;
+//   right: 8px;
+//   top: 355px;
 
-  width: 126px;
-  height: 28px;
+//   width: 126px;
+//   height: 28px;
 
-  background: $text-color-dark;
-  border-radius: 20px;
-  border: none;
+//   background: $text-color-dark;
+//   border-radius: 20px;
+//   border: none;
 
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-  text-align: center;
+//   font-family: 'Manrope';
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 12px;
+//   line-height: 1.33;
+//   text-align: center;
 
-  color: $text-color-light;
+//   color: $text-color-light;
 
-  @media screen and (min-width: 768px) {
-    right: 8px;
-  }
+//   @media screen and (min-width: 768px) {
+//     right: 8px;
+//   }
 
-  @media screen and (min-width: 1200px) {
-    width: 126px;
-  }
-}
+//   @media screen and (min-width: 1200px) {
+//     width: 126px;
+//   }
+// }
 
-.news-card__favorite-btn.active {
-  @media screen and (min-width: 1200px) {
-    width: 168px;
-  }
-}
+// .news-card__favorite-btn.active {
+//   @media screen and (min-width: 1200px) {
+//     width: 168px;
+//   }
+// }
 
 .news-card__title {
   width: 288px;
