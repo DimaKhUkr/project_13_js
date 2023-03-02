@@ -1,9 +1,11 @@
 .main-page {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  // grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
-  flex-wrap: wrap;
-  max-width: 1280px;
+  // flex-wrap: wrap;
+  grid-auto-flow: row;
+  justify-content: center;
+  // max-width: 1280px;
 }
 .news-card {
   position: relative;
@@ -15,12 +17,12 @@
   width: 288px;
   height: 630px;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 353px;
     height: 675px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 395px;
   }
 }
@@ -30,11 +32,11 @@
   height: 395px;
   object-fit: cover;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 353px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 394px;
   }
 }
@@ -77,17 +79,17 @@
 
   color: $text-color-light;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     right: 8px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 126px;
   }
 }
 
 .news-card__favorite-btn.active {
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 168px;
   }
 }
@@ -108,14 +110,14 @@
 
   color: $text-color-light;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 351px;
     height: 132px;
 
     font-size: 32px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 394px;
   }
 }
@@ -133,7 +135,7 @@
 
   color: $text-color-light;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 351px;
     height: 66px;
 
@@ -141,7 +143,7 @@
     line-height: 1.38;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     width: 394px;
   }
 }
@@ -158,7 +160,7 @@
   line-height: 1.36;
   color: $alt-text-color;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     top: 653px;
     left: 0px;
 
@@ -166,7 +168,7 @@
     line-height: 1.38;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include desktop {
   }
 }
 
@@ -183,9 +185,13 @@
   line-height: 1.36;
   color: $decoration-color;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     top: 653px;
     left: 273px;
+  }
+
+  @include desktop {
+    left: 290px;
   }
 }
 
