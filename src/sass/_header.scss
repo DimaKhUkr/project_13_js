@@ -126,79 +126,99 @@ ol {
 
 /* -----search---- */
 .search-box {
-  margin-right: 24px;
-  width: 0px;
-  transition: all 0.3s ease;
-  @include tablet {
-    width: 213px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
     margin-right: 24px;
-  }
-  @include desktop {
-    width: 288px;
-  }
-  @media screen and (min-width: 320px) and (max-width: 767px) {
-    &:focus .search-input,
-    &:hover .search-input {
-      width: 120px;
-    }
-    &:focus,
-    &:hover {
-      width: 173px;
-    }
   }
 }
 .search-form {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 31px;
-  border-radius: 20px;
-  border: 1px solid #111321;
-  // box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  // transform: translate(-50%, -50%);
-  background: #fff;
-  transition: all 0.3s ease;
+  background-color: #0000;
+  margin-left: auto;
+  display: flex;
+}
 
-  &:focus,
-  &:hover {
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+@include tablet {
+  .search-form {
+    border: 1px solid $bgn-color-dark;
+    width: 213px;
+    border-radius: 20px;
   }
 }
 
-.search-input {
-  position: absolute;
-  top: 5px;
-  left: 38px;
-  font-size: 14px;
-  background: none;
-  color: #5a6674;
+@include desktop {
+  .search-form {
+    width: 288px;
+  }
+}
 
-  height: 20px;
+.search-form input {
+  letter-spacing: 0.02em;
+  color: $bgn-color-dark;
+  background: none;
   border: none;
-  appearance: none;
   outline: none;
-  @media screen and (min-width: 320px) and (max-width: 767px) {
-    width: 0px;
+  font-family: "Poppins";
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.search-form input:focus {
+  color: $bgn-color-dark;
+}
+
+@media screen and (max-width: 767px) {
+  .search-form input {
+    width: 0;
+    padding: 0;
+    transition: all 0.3s;
+  }
+
+  .search-form:hover {
+    border: 1px solid $bgn-color-dark;
+    border-radius: 20px;
+    margin-top: 1px;
+  }
+
+  .search-form:hover input {
+    width: 123px;
+    padding: 8px 0;
+  }
+
+  .search-form:hover .search-button {
+    padding: 6px 16px 5px 12px;
+  }
+
+  .search-button {
+    cursor: pointer;
+    background-color: inherit;
+    box-shadow: none;
+    border: none;
+    color: $bgn-color-dark;
+    transition: all 0.3s;
+  }
+}
+.search-button {
+  cursor: pointer;
+  background-color: inherit;
+  box-shadow: none;
+  border: none;
+}
+
+@include tablet {
+  .search-form input {
+    width: 70%;
+    padding: 5px 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .search-button {
+    padding: 8px 19px 8px 14px;
   }
 }
 
-.search-button {
-  position: absolute;
-  top: 7px;
-  left: 10px;
-  height: 20px;
-  width: 20px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  background: none;
-  outline: none !important;
-  cursor: pointer;
-
-  & svg {
-    fill: $bgn-color-dark;
-  }
+.submit-button {
+  fill: $bgn-color-dark;
 }
 
 /* ------theme--- */
@@ -209,11 +229,12 @@ ol {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 7px;
   }
 }
 
-.theme-text.light{
-  color: $decoration-color ;
+.theme-text.light {
+  color: $decoration-color;
 }
 
 .theme-switcher {
@@ -251,7 +272,6 @@ ol {
 .theme-switcher input[type="checkbox"]:checked + label {
   background-color: $decoration-color-dark;
   border: 0.604701px solid $bgn-color-light;
-
 }
 
 .theme-switcher input[type="checkbox"]:checked + label:after {
@@ -341,9 +361,10 @@ ol {
   transform: translateX(0) rotate(0) translateY(0);
 }
 .mobile-menu-wrap {
-  height: 100%;
+  height: 100vw;
   display: flex;
   flex-direction: column;
+
   justify-content: space-between;
 }
 
@@ -421,26 +442,24 @@ svg {
   left: 10px;
 }
 
-body.dark-theme{
+body.dark-theme {
   background: $bgn-color-dark;
   color: #f4f4f4;
 }
 
-body.dark-theme header{
+body.dark-theme header {
   background: $bgn-color-dark;
   color: #f4f4f4;
 }
 
-body.dark-theme .theme-text{
+body.dark-theme .theme-text {
   color: $decoration-color-dark;
 }
 
-.dark-theme .theme-text{
+.dark-theme .theme-text {
   color: $decoration-color-dark;
 }
 
-
-.dark-theme .theme-text.light{
+.dark-theme .theme-text.light {
   color: $alt-text-color;
 }
-
