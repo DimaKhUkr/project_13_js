@@ -1,7 +1,7 @@
 .categories {
   display: flex;
   // width: 742px;
-  height: 31px;
+  // height: 31px;
   gap: 16px;
   margin-bottom: 40px;
 
@@ -14,14 +14,36 @@
 }
 
 .category_btn {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  color: #4b48db;
+  padding: 8px 21px;
+  font-size: 12px;
+  min-width: 83px;
   height: 31px;
   border-radius: 20px;
-  padding: 0 21px;
-  font-size: 12px;
+  border: 1px solid #4440f7;
+  cursor: pointer;
 }
+
 .select_btn {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  color: #4b48db;
+  padding: 8px 21px;
+  min-width: 112px;
   height: 31px;
   border-radius: 20px;
-  padding: 0 21px;
-  font-size: 12px;
+  border: 1px solid #4440f7;
+  cursor: pointer;
+
+  @include tablet {
+    width: 112px;
+  }
 }
