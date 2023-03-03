@@ -40,6 +40,7 @@ export function updatePagination(totalItems) {
     updatePagination();
   });
   pagination.insertBefore(prevBtn, pagination.firstChild);
+
   let startPage = Math.max(1, currentPage);
   let endPage = Math.min(totalPage - 1, currentPage + 1);
 
@@ -47,10 +48,8 @@ export function updatePagination(totalItems) {
     startPage = Math.max(1, currentPage - 1);
     endPage = Math.min(totalPage - 1, currentPage + 2);
   }
-  // Додаю першу кнопку "..."
-  startPage = Math.max(1, currentPage - 1);
-  endPage = Math.min(totalPage - 1, currentPage + 2);
 
+  // Додаю першу кнопку "..."
   if (startPage > 1) {
     const dotsBtn = document.createElement('button');
     dotsBtn.textContent = '...';
@@ -58,6 +57,7 @@ export function updatePagination(totalItems) {
     dotsBtn.classList = 'dots';
     pagination.appendChild(dotsBtn);
   }
+
   // Додаю інші кнопки
   for (let i = startPage; i < endPage; i++) {
     const btn = document.createElement('button');
@@ -73,6 +73,7 @@ export function updatePagination(totalItems) {
     });
     pagination.appendChild(btn);
   }
+
   // Додаю другу кнопку "..."
   if (endPage < totalPage - 1) {
     const dotsBtn = document.createElement('button');
