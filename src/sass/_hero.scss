@@ -86,8 +86,8 @@
   }
 }
 
-body.dark-theme .news-card__title{
-  color: $text-color-dark
+body.dark-theme .news-card__title {
+  color: $text-color-dark;
 }
 
 .news-card__description {
@@ -116,8 +116,8 @@ body.dark-theme .news-card__title{
   }
 }
 
-body.dark-theme .news-card__description{
-  color: $text-color-dark 
+body.dark-theme .news-card__description {
+  color: $text-color-dark;
 }
 
 .news-card__date {
@@ -257,6 +257,7 @@ body.dark-theme .news-card__description{
 }
 
 .dots {
+  background: transparent;
   border: none;
   font-size: 14px;
   line-height: 1.143;
@@ -266,4 +267,8 @@ body.dark-theme .news-card__description{
     font-size: 16px;
     line-height: 1.188;
   }
+}
+
+.dark-theme .dots {
+  color: $bgn-color-light;
 }
