@@ -170,11 +170,11 @@ function toggleFavorite(event) {
   if (localStorage.getItem(`favorite_${newsId}`) !== null) {
     localStorage.removeItem(`favorite_${newsId}`);
     button.textContent = 'Add to Favorite';
-    button.classList.remove('active');
+    button.classList.remove('active_btn');
   } else {
     localStorage.setItem(`favorite_${newsId}`, true);
     button.textContent = 'Remove from Favorite';
-    button.classList.add('active');
+    button.classList.add('active_btn');
   }
 }
 
