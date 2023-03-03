@@ -85,7 +85,7 @@ ol {
   }
 }
 .nav__link-current {
-  color: $decoration-color;
+  // color: $decoration-color;
   position: relative;
 
   &::before {
@@ -454,9 +454,13 @@ body.dark-theme .theme__svg.sun{
 }
 
 .current-page__icon {
+  display: none;
   position: absolute;
   right: -1px;
   transform: rotate(270deg);
+}
+.add-icon{
+  display: block;
 }
 
 .navbar-mobile__icon {

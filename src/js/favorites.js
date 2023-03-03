@@ -22,7 +22,7 @@ function removeFromFavorite(event) {
 
 async function createFavoritePage() {
   let markup = '';
-  placeForFavNews.innerHTML = "";
+  placeForFavNews.innerHTML = '';
 
   for (let i = 0; i < localStorage.length; i++) {
     let storageKey = localStorage.key(i);
@@ -48,13 +48,15 @@ function createFavoriteNews(news) {
 
   const { _id, section_name, abstract, pub_date, web_url } = news;
 
+
+
   return `
           <div class="news-card">
             <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
               <div class="news-card__category">${section_name}</div>
               <button class="news-card__favorite-btn ${
-                isFavorite ? 'active' : ''
+                isFavorite ? 'active_btn' : ''
               }" data-news-id="${_id}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
@@ -78,8 +80,8 @@ function createFavoriteNews(news) {
 async function getFavoriteNews(query) {
   try {
     return await fetch(
-      `${URL_SEARCH}?fq=_id:("${query}")&api-key=${API_KEY}`)
-      .then(resp => resp.json());
+      `${URL_SEARCH}?fq=_id:("${query}")&api-key=${API_KEY}`
+    ).then(resp => resp.json());
   } catch (error) {
     console.error(error);
   }
