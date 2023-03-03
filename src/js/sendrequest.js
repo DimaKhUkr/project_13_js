@@ -6,14 +6,13 @@ const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 const mainPage = document.getElementById('main-page');
 const weather = document.querySelector(`.wraper__weather`);
 const empty = document.getElementById('empty');
-const paginationContainer = document.getElementById('pagination');
-
 const inputSearch = document.getElementById('searchForm');
 
 let query = '';
 let totalItems = 0;
 let currentPage = 0;
 let url = '';
+let arr = [];
 
 inputSearch.addEventListener('submit', e => {
   e.preventDefault();
@@ -66,9 +65,9 @@ export async function createPopularNews() {
       news.media.length !== 0
         ? news.media[0]['media-metadata'][2].url
         : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
-    const { title, abstract, published_date, url, section, uri } = news;
+    const { id, title, abstract, published_date, url, section, uri } = news;
     const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
-    return `<div class="news-card">
+    return `<div class="news-card" id="${id}">
             <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
               <div class="news-card__category">${section}</div>
@@ -87,7 +86,9 @@ export async function createPopularNews() {
               <div class="news-card__date">${new Date(
                 published_date
               ).toLocaleDateString()}</div>
+              <button class="btn-read-more">
               <a class="news-card__read-more" href="${url}" target="_blank">Read more</a>
+              </button>
               </div>
             </div>
           </div>`;
@@ -125,10 +126,10 @@ export async function createMainPage(pageNumber) {
       news.multimedia.length !== 0
         ? `https://static01.nyt.com/${news.multimedia[0].url}`
         : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
-    const { _id, section_name, abstract, pub_date, web_url } = news;
+    const { _id, section_name, abstract, pub_date, web_url, id } = news;
     const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
     return `
-          <div class="news-card">
+          <div class="news-card" id="${id}">
             <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
               <div class="news-card__category">${section_name}</div>
@@ -147,7 +148,9 @@ export async function createMainPage(pageNumber) {
               <div class="news-card__date">${new Date(
                 pub_date
               ).toLocaleDateString()}</div>
+              <button class="btn-read-more">
               <a class="news-card__read-more" href="${web_url}" target="_blank">Read more</a>
+              </button>
               </div>
             </div>
           </div>
