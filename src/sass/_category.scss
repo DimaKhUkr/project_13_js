@@ -4,9 +4,17 @@
   height: 31px;
   gap: 16px;
 }
+
 .category_btn {
   height: 31px;
   border-radius: 20px;
   padding: 0 21px;
   font-size: 12px;
+}
+
+.list-cards {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 1280px;
 }
