@@ -3,6 +3,14 @@
   // width: 742px;
   height: 31px;
   gap: 16px;
+  margin-bottom: 40px;
+
+  @include tablet {
+    margin-bottom: 48px;
+  }
+  @include desktop {
+    margin-bottom: 60px;
+  }
 }
 
 .category_btn {
@@ -16,11 +24,4 @@
   border-radius: 20px;
   padding: 0 21px;
   font-size: 12px;
-}
-
-.list-cards {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  max-width: 1280px;
 }
