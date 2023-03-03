@@ -157,9 +157,20 @@ ol {
 
 .dark-theme .search-form{
   background:$bgn-color-dark ;
+  // border: 1px solid $text-color-dark;
+@include tablet{
+  border: 1px solid $text-color-dark
+}
+
+}
+
+.dark-theme .search-form:hover{
+  background:$bgn-color-dark ;
   border: 1px solid $text-color-dark;
 
 }
+
+
 
 .search-form input {
   letter-spacing: 0.02em;
