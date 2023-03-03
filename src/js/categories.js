@@ -80,7 +80,7 @@ async function getNewsByCategory(category) {
       },
     });
     const data = await response.json();
-    const news = data.articles;
+    const news = data.results;
     console.log(news);
     renderResult(news);
   } catch (error) {
