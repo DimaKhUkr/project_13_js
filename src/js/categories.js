@@ -71,7 +71,7 @@ export async function getCategories() {
 }
 
 async function getNewsByCategory(category) {
-  const urlCategory = `https://api.nytimes.com/svc/news/v3/content/inyt/${category}.json?api-key=${API_KEY}`;
+  const urlCategory = `https://api.nytimes.com/svc/news/v3/content/nyt/${category}.json?api-key=${API_KEY}`;
   try {
     const response = await fetch(urlCategory, {
       headers: {
