@@ -57,6 +57,7 @@ async function fetchMostPopularNews() {
 
 // Рендеринг новостей по популярным новостям при первой загрузке страницы
 export async function createPopularNews() {
+  weather.removeAttribute('hidden');
   const data = await fetchMostPopularNews();
   console.log(data.results);
   const newsCards = data.results.map(news => {
@@ -103,23 +104,25 @@ export async function createMainPage(pageNumber) {
   const data = await articleSearch(pageNumber);
   console.dir(data.response);
   if (data.response.docs.length === 0) {
-    // mainPage.replaceChildren();
     // Очищаем страницу от предыдущих новостей если новых нет
     Array.from(mainPage.children).forEach(child => {
       if (child !== empty && child !== weather) child.remove();
     });
     console.log(data.response.docs.length);
     empty.removeAttribute('hidden');
+    weather.setAttribute('hidden', '');
+    inputSearch.elements.search.value = '';
   } else {
     // Очищаем страницу от предыдущих новостей оставляя блок с погодой
     Array.from(mainPage.children).forEach(child => {
       if (child !== weather && child !== empty) child.remove();
     });
+    weather.removeAttribute('hidden');
   }
   const newsCards = data.response.docs.map(news => {
     const title = news.headline.main;
     const photoUrl =
-      news.multimedia !== 0
+      news.multimedia.length !== 0
         ? `https://static01.nyt.com/${news.multimedia[0].url}`
         : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { _id, section_name, abstract, pub_date, web_url } = news;
@@ -155,7 +158,8 @@ export async function createMainPage(pageNumber) {
   // e.target.reset();
   totalItems = data.response.meta.hits;
   console.log(totalItems);
-  updatePagination(totalItems);
+  inputSearch.elements.search.value = '';
+  if (data.response.docs.length !== 0) updatePagination(totalItems);
 }
 
 // Добавление/удаление новости из избранного
