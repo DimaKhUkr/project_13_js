@@ -76,7 +76,6 @@ async function getNewsByCategory(category) {
     const response = await fetch(urlCategory, {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
     });
     const data = await response.json();
