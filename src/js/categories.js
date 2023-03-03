@@ -2,6 +2,7 @@ const API_KEY = 't8X9JXlP7JTQb4JOFaZ7soveQbwr46sH';
 const URL = 'https://api.nytimes.com/svc/news/v3/content/section-list.json';
 
 const categoryBtn = document.getElementById('category-btn');
+// const mainPage = document.getElementById('main-page');
 
 // getCategories();
 
@@ -90,41 +91,65 @@ async function getNewsByCategory(category) {
 const listCards = document.querySelector('.list-cards');
 
 function renderResult(news) {
-  if (news === null) {
-    return (listCards.innerHTML = '<h1>No news</h1>');
-  }
-  const isFavorite =
-    localStorage.getItem(`favorite_${resultsSearch.uri}`) !== null;
+  // if (news === '') {
+  //   return (listCards.innerHTML = '<h1>No news</h1>');
+  // }
   const markup = news
-    .map(
-      resultSearch =>
-        `<div class ="news-card">
-        <img src="${resultSearch.multimedia[3].url}" alt="${
-          resultSearch.multimedia[3].caption
-        }"/>
+    .map(resultSearch => {
+      const photo =
+        resultSearch.multimedia !== null
+          ? resultSearch.multimedia[2].url
+          : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
+      const { section, abstract, title, url, uri, published_date } =
+        resultSearch;
+      const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
+      return `<div class ="news-card">
+        <img src="${photo}" alt="photo"/>
         <div class="news-card__info">
-        <div class="news-card__category">${resultSearch.section}</div>
+        <div class="news-card__category">${section}</div>
         <button class="news-card__favorite-btn ${
-          isFavorite ? 'active' : ''
-        }" data-news-id="${resultSearch.uri}">
+          isFavorite ? 'active_btn' : ''
+        }" data-news-id="${uri}">
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
-              <h2 class="news-card__title">${resultSearch.title}</h2>
+              <h2 class="news-card__title">${title}</h2>
               <p class="news-card__description">${
-                resultSearch.abstract.length > 100
-                  ? resultSearch.abstract.substring(0, 100) + '...'
-                  : resultSearch.abstract
+                abstract.length > 100
+                  ? abstract.substring(0, 100) + '...'
+                  : abstract
               }</p>
+              <div class="news-card__date-div">
               <div class="news-card__date">${new Date(
-                resultSearch.published_date
+                published_date
               ).toLocaleDateString()}</div>
-              <a class="news-card__read-more" href="${
-                resultSearch.url
-              }" target="_blank">Read more</a>
+              <a class="news-card__read-more" href="${url}" target="_blank">Read more</a>
             </div>
           </div>
-        `
-    )
+          </div>`;
+    })
     .join('');
-  listCards.insertAdjacentHTML('beforeend', markup);
+  listCards.innerHTML = markup;
 }
+
+// Добавление/удаление новости из избранного
+// function toggleFavorite(event) {
+//   const button = event.target;
+//   const newsId = button.dataset.newsId;
+
+//   if (localStorage.getItem(`favorite_${newsId}`) !== null) {
+//     localStorage.removeItem(`favorite_${newsId}`);
+//     button.textContent = 'Add to Favorite';
+//     button.classList.remove('active');
+//   } else {
+//     localStorage.setItem(`favorite_${newsId}`, true);
+//     button.textContent = 'Remove from Favorite';
+//     button.classList.add('active');
+//   }
+// }
+
+// mainPage.addEventListener('click', event => {
+//   const button = event.target.closest('.news-card__favorite-btn');
+//   if (button !== null) {
+//     toggleFavorite(event);
+//   }
+// });
