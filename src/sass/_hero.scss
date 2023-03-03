@@ -86,6 +86,10 @@
   }
 }
 
+body.dark-theme .news-card__title{
+  color: $text-color-dark
+}
+
 .news-card__description {
   width: 288px;
   height: 57px;
@@ -110,6 +114,10 @@
   @include desktop {
     width: 394px;
   }
+}
+
+body.dark-theme .news-card__description{
+  color: $text-color-dark 
 }
 
 .news-card__date {
