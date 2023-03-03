@@ -1,2 +1,0 @@
-const e=document.getElementById("theme-switcher");"dark"==localStorage.getItem("theme")&&document.body.classList.add("dark-theme"),localStorage.getItem("isCheked")&&(e.checked=!0),e.addEventListener("change",(function(){document.body.classList.toggle("dark-theme");let e="light";document.body.classList.contains("dark-theme")&&(e="dark"),localStorage.getItem("isCheked")?localStorage.removeItem("isCheked"):localStorage.setItem("isCheked",!0),localStorage.setItem("theme",e)}));
-//# sourceMappingURL=index.750c510e.js.map
