@@ -1,3 +1,5 @@
+const arr = [];
+
 export function onReadCard(e) {
   let card = null;
   const today = new Date();
