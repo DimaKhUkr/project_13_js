@@ -1,3 +1,24 @@
+.favorite-container {
+  width: 100%;
+  max-width: 320px;
+  padding: 40px 16px 0 16px;
+  margin: 0 auto;
+
+  @include tablet {
+    max-width: 768px;
+    padding-top: 48px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  @include desktop {
+    max-width: 1280px;
+    padding-top: 60px;
+  }
+}
+
+// ----add/remove button
 .news-card__favorite-btn {
   display: flex;
   gap: 4px;
@@ -36,7 +57,7 @@
   content: '';
   width: 16px;
   height: 16px;
-  background-image: url("/src/images/heart-contur.png");
+  background-image: url('/src/images/heart-contur.png');
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -44,7 +65,7 @@
 .news-card__favorite-btn.active_btn {
   width: 168px;
 
-&::after {
-  background-image: url("/src/images/heart-filled.png");
-}
+  &::after {
+    background-image: url('/src/images/heart-filled.png');
+  }
 }
