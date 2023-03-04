@@ -1,5 +1,6 @@
 import { startWeatherApp } from './weather';
 import { updatePagination } from './pagination';
+import { onReadCard } from './alredy-read';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
@@ -187,3 +188,5 @@ mainPage.addEventListener('click', event => {
     toggleFavorite(event);
   }
 });
+
+mainPage.addEventListener('click', onReadCard);
