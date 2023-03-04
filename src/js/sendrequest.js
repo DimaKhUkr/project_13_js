@@ -86,8 +86,8 @@ export async function createPopularNews() {
               <div class="news-card__date">${new Date(
                 published_date
               ).toLocaleDateString()}</div>
-              <button class="btn-read-more">
-              <a class="news-card__read-more" href="${url}" target="_blank">Read more</a>
+              <button class="btn-read-more news-card__read-more">
+              <a href="${url}" target="_blank">Read more</a>
               </button>
               </div>
             </div>
@@ -148,8 +148,8 @@ export async function createMainPage(pageNumber) {
               <div class="news-card__date">${new Date(
                 pub_date
               ).toLocaleDateString()}</div>
-              <button class="btn-read-more">
-              <a class="news-card__read-more" href="${web_url}" target="_blank">Read more</a>
+              <button class="btn-read-more news-card__read-more">
+              <ahref="${web_url}" target="_blank">Read more</ahref=>
               </button>
               </div>
             </div>
