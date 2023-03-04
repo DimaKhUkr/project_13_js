@@ -1,2 +1,26 @@
-<div id="calendar-container">
-</div>
+<div class="header">
+        <button id="prev-year">Предыдущий год</button>
+        <button id="next-year">Следующий год</button>
+        <h2 id="current-month"></h2>
+        <button id="prev-month">Предыдущий месяц</button>
+        <button id="next-month">Следующий месяц</button>
+        <div>
+          <span>Год:</span>
+          <input type="number" id="year-input" min="1900" max="2100" />
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Пн</th>
+            <th>Вт</th>
+            <th>Ср</th>
+            <th>Чт</th>
+            <th>Пт</th>
+            <th>Сб</th>
+            <th>Вс</th>
+          </tr>
+        </thead>
+        <tbody id="calendar-body"></tbody>
+      </table>
+    </div>
