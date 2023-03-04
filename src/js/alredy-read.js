@@ -1,3 +1,7 @@
+// const mainPage = document.getElementById('main-page');
+
+// mainPage.addEventListener('click', onReadCard);
+
 const arr = [];
 
 export function onReadCard(e) {
@@ -10,6 +14,7 @@ export function onReadCard(e) {
 
     if (card) {
       card.classList.add('reading_card');
+      
     }
 
     if (arr.includes(`${card.id}`)) {
