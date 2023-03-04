@@ -1,4 +1,5 @@
 import CalendarDates from "calendar-dates";
+import { createMainPage } from "./sendrequest";
 const calendarDates = new CalendarDates();
 
 const API_KEY = '0SWUSAFpResVVsgDj4WVB8nArvrOLEeJ';
@@ -103,32 +104,10 @@ generateCalendar(currentMonth, currentYear);
 
 function dateLogging(event) {
     if (event.target.nodeName === 'BUTTON') {
-        const filterDate = new Date(event.target.dataset.year, event.target.dataset.month, event.target.textContent)
-        console.log(filterDate.getFullYear(), )
+        const filterDate = `${event.target.dataset.year}-${Number(event.target.dataset.month) + 1}-${event.target.textContent}`
         console.log(`${event.target.textContent}-${Number(event.target.dataset.month) + 1}-${event.target.dataset.year}`)
+        createMainPage(0, filterDate)
     } else {
         return;
     }
-
 }
-
-console.log(new Date('2023-03-18'))
-
-
-
-
-async function fetchMostPopularNews() {
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date(2023-02-28)&api-key=${API_KEY}`;
-  try {
-      console.log(await fetch(url, {
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      }).then(resp => resp.json()));
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-
-fetchMostPopularNews()
