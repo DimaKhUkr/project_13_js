@@ -14,6 +14,8 @@ let totalItems = 0;
 let currentPage = 0;
 let url = '';
 let arr = [];
+let dateCal;
+let urlFetch = '';
 
 inputSearch.addEventListener('submit', e => {
   e.preventDefault();
@@ -25,10 +27,12 @@ inputSearch.addEventListener('submit', e => {
 });
 
 // Запрос на бекенд по полю поиска
-async function articleSearch(currentPage) {
-  //   e.preventDefault();
-  //   const query = e.value;
-  const urlFetch = url + `&page=${currentPage}`;
+async function articleSearch(currentPage, dateCal) {
+  if (!dateCal) {
+    urlFetch = url + `&page=${currentPage}`;
+  } else {
+    urlFetch = url + `&page=${currentPage}` + `&fq=pub_date:(${dateCal})`;
+  }
   console.log(urlFetch);
   try {
     return await fetch(urlFetch, {
@@ -99,11 +103,11 @@ export async function createPopularNews() {
 }
 
 // Рендеринг новостей по полю поиска
-export async function createMainPage(pageNumber) {
+export async function createMainPage(pageNumber, dateCal) {
   empty.setAttribute('hidden', '');
   // const query = e.target.elements.search.value.trim();
   // console.log(query);
-  const data = await articleSearch(pageNumber);
+  const data = await articleSearch(pageNumber, dateCal);
   console.dir(data.response);
   if (data.response.docs.length === 0) {
     // Очищаем страницу от предыдущих новостей если новых нет
