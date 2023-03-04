@@ -40,11 +40,11 @@ export function updatePagination(totalItems) {
   pagination.insertBefore(prevBtn, pagination.firstChild);
 
   let startPage = Math.max(1, currentPage);
-  let endPage = Math.min(totalPage - 1, currentPage + 2);
+  let endPage = Math.min(totalPage - 1, currentPage + 1);
 
   if (window.innerWidth > 767) {
-    startPage = Math.max(1, currentPage);
-    endPage = Math.min(totalPage - 1, currentPage + 3);
+    startPage = Math.max(1, currentPage - 1);
+    endPage = Math.min(totalPage - 1, currentPage + 2);
   }
 
   // Додаю першу кнопку "..."
