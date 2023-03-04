@@ -1,5 +1,6 @@
 import { startWeatherApp } from './weather';
 import { updatePagination } from './pagination';
+import { onReadCard } from './alredy-read';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
@@ -86,8 +87,8 @@ export async function createPopularNews() {
               <div class="news-card__date">${new Date(
                 published_date
               ).toLocaleDateString()}</div>
-              <button class="btn-read-more">
-              <a class="news-card__read-more" href="${url}" target="_blank">Read more</a>
+              <button class="btn-read-more news-card__read-more">
+              <a href="${url}" target="_blank">Read more</a>
               </button>
               </div>
             </div>
@@ -126,10 +127,10 @@ export async function createMainPage(pageNumber) {
       news.multimedia.length !== 0
         ? `https://static01.nyt.com/${news.multimedia[0].url}`
         : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
-    const { _id, section_name, abstract, pub_date, web_url, id } = news;
+    const { _id, section_name, abstract, pub_date, web_url } = news;
     const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
     return `
-          <div class="news-card" id="${id}">
+          <div class="news-card" id="${_id}">
             <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
               <div class="news-card__category">${section_name}</div>
@@ -148,8 +149,8 @@ export async function createMainPage(pageNumber) {
               <div class="news-card__date">${new Date(
                 pub_date
               ).toLocaleDateString()}</div>
-              <button class="btn-read-more">
-              <a class="news-card__read-more" href="${web_url}" target="_blank">Read more</a>
+              <button class="btn-read-more news-card__read-more">
+              <ahref="${web_url}" target="_blank">Read more</ahref=>
               </button>
               </div>
             </div>
@@ -187,3 +188,5 @@ mainPage.addEventListener('click', event => {
     toggleFavorite(event);
   }
 });
+
+mainPage.addEventListener('click', onReadCard);
