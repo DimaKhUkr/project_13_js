@@ -14,18 +14,19 @@ const main = async () => {
   }
 };
 
-main();
+// main();
 
  let currentMonth = new Date().getMonth();
   let currentYear = new Date().getFullYear();
-  const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+  const monthNames = ["January", "February", "March", "April", "May", "Juny", "July", "August", "September", "October", "November", "December"];
 
   const prevMonthBtn = document.getElementById("prev-month");
   const nextMonthBtn = document.getElementById("next-month");
   const prevYearBtn = document.getElementById("prev-year");
   const nextYearBtn = document.getElementById("next-year");
   const yearInput = document.getElementById("year-input");
-  const currentMonthText = document.getElementById("current-month");
+const currentMonthText = document.getElementById("current-month");
+    const currentYearText = document.getElementById("current-year");
     const calendarBody = document.getElementById("calendar-body");
 
   prevMonthBtn.addEventListener("click", () => {
@@ -67,7 +68,8 @@ main();
   function generateCalendar(month, year) {
     calendarBody.innerHTML = "";
 
-    currentMonthText.innerText = `${monthNames[month]} ${year}`;
+    currentMonthText.innerText = `${monthNames[month]}`;
+    currentYearText.innerText = `${year}`;
 
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const lastDayOfMonth = new Date(year, month + 1, 0).getDay();
@@ -83,17 +85,16 @@ main();
         } else if (date > lastDateOfMonth) {
           cell.classList.add("empty-cell");
         } else {
-            cell.innerHTML = `<button class='calendar-date', data-month=${month} data-year=${year}>${date}</button>`
+            cell.innerHTML = `<button class='calendar-date', data-month=${month} data-year=${year}>${String(date).padStart(2, '0')}</button>`
         //   cell.innerText = date;
-          if (date === new Date().getDate() && year === new Date().getFullYear() && month === new Date().getMonth()) {
-            cell.classList.add("today");
+            if (date === new Date().getDate() && year === new Date().getFullYear() && month === new Date().getMonth()) {
+            cell.firstChild.classList.add("today");
           }
           date++;
         }
         row.appendChild(cell);
       }
         calendarBody.appendChild(row);
-        calendarBody.addEventListener('click', dateLogging)
     }
   }
 
@@ -104,10 +105,27 @@ generateCalendar(currentMonth, currentYear);
 
 function dateLogging(event) {
     if (event.target.nodeName === 'BUTTON') {
-        const filterDate = `${event.target.dataset.year}-${Number(event.target.dataset.month) + 1}-${event.target.textContent}`
-        console.log(`${event.target.textContent}-${Number(event.target.dataset.month) + 1}-${event.target.dataset.year}`)
+        const filterDate = `${event.target.dataset.year}-${event.target.dataset.month}-${event.target.textContent}`
         createMainPage(0, filterDate)
     } else {
         return;
     }
+
+}
+
+
+const calendarBtnOpen = document.querySelector('.calendar-button')
+const calendarContainer = document.querySelector('.calendar-container')
+calendarBtnOpen.textContent = `${new Date().getDate()}/${monthNames[new Date().getMonth()]}/${new Date().getFullYear()}`
+calendarBtnOpen.addEventListener('click', calendarToggle)
+
+function calendarToggle() {
+    calendarContainer.classList.toggle('open')
+    if (calendarContainer.classList.contains('open')) {
+        calendarBody.addEventListener('click', dateLogging)
+    } else {
+        calendarBody.removeEventListener('click', dateLogging)
+    }
+    
+
 }

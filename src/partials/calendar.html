@@ -1,28 +1,42 @@
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+  </head>
 <div class="calendar-container">
-      <div class="calendar-header">
-        <button id="prev-year">Предыдущий год</button>
-        <button id="next-year">Следующий год</button>
-        <h2 id="current-month"></h2>
-        <button id="prev-month">Предыдущий месяц</button>
-        <button id="next-month">Следующий месяц</button>
-        <div>
-          <span>Год:</span>
-          <input type="number" id="year-input" min="1900" max="2100" />
+      <div class="calendar-container__body">
+        <div class="calendar-header">
+          <button id="prev-year"><</button>
+          <h2 id="current-year" class="calendar-header__text"></h2>
+          <button id="next-year">></button>
         </div>
+        <div class="calendar-header">
+          <button id="prev-month"><</button>
+          <h2 id="current-month" class="calendar-header__text"></h2>
+          <button id="next-month">></button>
+          <div>
+            <span>Год:</span>
+            <input type="number" id="year-input" min="1900" max="2100" />
+          </div>
+        </div>
+        <table class="calendar-table">
+          <thead>
+            <tr>
+              <th>Mo</th>
+              <th>Tu</th>
+              <th>We</th>
+              <th>Th</th>
+              <th>Fr</th>
+              <th>Sa</th>
+              <th>Su</th>
+            </tr>
+          </thead>
+          <tbody id="calendar-body"></tbody>
+        </table>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Пн</th>
-            <th>Вт</th>
-            <th>Ср</th>
-            <th>Чт</th>
-            <th>Пт</th>
-            <th>Сб</th>
-            <th>Вс</th>
-          </tr>
-        </thead>
-        <tbody id="calendar-body"></tbody>
-      </table>
-    </div>
+      </div>
+</div>
+
+  </body>
+</html>
 </div>
