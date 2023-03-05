@@ -1,65 +1,50 @@
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 const URL_SEARCH = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
 
-const placeForFavNews = document.getElementById('favorite-articles');
-// const ifNewsInFavorite = false;
+const readList = document.querySelector('.read');
 
-createFavoritePage();
+isReadEmpty();
+// getReadNews(100000008677561);
+createReadPage();
 
-placeForFavNews.addEventListener('click', event => {
-  const button = event.target.closest('.news-card__favorite-btn');
-  if (button !== null) {
-    removeFromFavorite(event);
-  }
-});
 
-function removeFromFavorite(event) {
-  const button = event.target;
-  const newsId = button.dataset.newsId;
+// Для порожньої сторінки
+function isReadEmpty() {
+    if (readList.children.length === 0) {
+        console.log('empty');
+        const markup = '<li class="read-item-empty"><h2>Nothing read yet</h2></li>';
+        readList.innerHTML = markup;
+    } console.log('Not empty');
+};
 
-  localStorage.removeItem(`favorite_${newsId}`);
-  createFavoritePage();
-}
-
-async function createFavoritePage() {
+// Формуємо сторінку
+async function createReadPage() {
   let markup = '';
-
-  placeForFavNews.innerHTML = '';
-
-  for (let i = 0; i < localStorage.length; i++) {
-    let storageKey = localStorage.key(i);
-
-    if (storageKey.includes('favorite')) {
-      let favoriteQuery = storageKey.slice(9, storageKey.length);
-      const data = await getFavoriteNews(favoriteQuery);
-      const news = data.response.docs;
-      markup = markup + createFavoriteNews(news[0]);
-    }
-  }
-
-  if (markup === '') markup = noNewsInFavorite();
-
-  placeForFavNews.insertAdjacentHTML('beforeend', markup);
+  readList.innerHTML = '';
+  //   for (let i = 0; i < localStorage.length; i++) {
+  //     let storageKey = localStorage.key(i);
+  let storageKey = "nyt://article/59fa3c31-ddd7-562c-ab32-e202a892d697";
+  const data = await getReadNews(storageKey);
+  const news = data.response.docs;
+  markup = markup + createReadNews(news[0]);
+// }
+  
+  readList.insertAdjacentHTML('beforeend', markup);
 }
 
-function noNewsInFavorite() {
-  return `
-  <div class="favorite-news__none">
-    <p class="favorite-news__none__title">We haven't found news on this page</p>
-  </div>`;
-}
-
-function createFavoriteNews(news) {
-
+// Формуємо картку новини
+function createReadNews(news) {
   const title = news.headline.main;
   const isFavorite = true;
 
   const photoUrl =
-    news.multimedia.length === 0
-      ? 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg'
-      : `https://static01.nyt.com/${news.multimedia[0].url}`;
+    news.multimedia !== 0
+      ? `https://static01.nyt.com/${news.multimedia[0].url}`
+      : 'https://via.placeholder.com/400';
 
   const { _id, section_name, abstract, pub_date, web_url } = news;
+
+
 
   return `
           <div class="news-card">
@@ -88,7 +73,9 @@ function createFavoriteNews(news) {
         `;
 }
 
-async function getFavoriteNews(query) {
+// Відправляємо запит
+
+async function getReadNews(query) {
   try {
     return await fetch(
       `${URL_SEARCH}?fq=_id:("${query}")&api-key=${API_KEY}`
@@ -97,3 +84,12 @@ async function getFavoriteNews(query) {
     console.error(error);
   }
 }
+
+
+// Перевірка наявності в локал сторідж ключів потрібного формата
+const keys = Object.keys(localStorage);
+
+keys.filter(key => /^\d{2}\/\d{2}\/\d{4}$/.test(key)).forEach(key => {
+  const value = localStorage.getItem(key);
+  console.log(`Значення для ключа ${key}: ${value}`);
+});

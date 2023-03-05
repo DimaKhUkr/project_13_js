@@ -1,3 +1,24 @@
+.favorite-container {
+  width: 100%;
+  max-width: 320px;
+  padding: 40px 16px 0 16px;
+  margin: 0 auto;
+
+  @include tablet {
+    max-width: 768px;
+    padding-top: 48px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  @include desktop {
+    max-width: 1280px;
+    padding-top: 60px;
+  }
+}
+
+// ----add/remove button
 .news-card__favorite-btn {
   display: flex;
   gap: 4px;
@@ -36,7 +57,7 @@
   content: '';
   width: 16px;
   height: 16px;
-  background-image: url("/src/images/heart-contur.png");
+  background-image: url('/src/images/heart-contur.png');
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -44,7 +65,55 @@
 .news-card__favorite-btn.active_btn {
   width: 168px;
 
-&::after {
-  background-image: url("/src/images/heart-filled.png");
+  &::after {
+    background-image: url('/src/images/heart-filled.png');
+  }
 }
+
+// ---------no favorites----------
+.favorite-news__none {
+  display: flex;
+  gap: 50px;
+  flex-direction: column;
+
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 22px;
+
+  @include tablet {
+    padding: 88px 110px;
+  }
+
+  @include desktop {
+    padding: 121px 366px;
+  }
+
+  &::after {
+    content: '';
+    width: 601px;
+    height: 468px;
+    background-image: url('/src/images/noNews-mob.png');
+    background-repeat: no-repeat;
+    background-position: center;
+
+    @include tablet {
+      background-image: url('/src/images/noNews-tab.png');
+    }
+
+    @include desktop {
+      background-image: url('/src/images/noNews-dtop.png');
+    }
+  }
+}
+
+.favorite-news__none__title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.35;
+
+  @include tablet {
+    font-size: 40px;
+  }
 }
