@@ -23,16 +23,16 @@ inputSearch.addEventListener('submit', e => {
   currentPage = 0;
   query = e.target.elements.search.value.trim();
   console.log(currentPage, query);
-  url = url + `&q=${query}`;
+  urlFetch = url + `&q=${query}`;
   createMainPage(currentPage);
 });
 
 // Запрос на бекенд по полю поиска
 async function articleSearch(currentPage, dateCal) {
   if (!dateCal) {
-    urlFetch = url + `&page=${currentPage}`;
+    urlFetch = urlFetch + `&page=${currentPage}`;
   } else {
-    urlFetch = url + `&page=${currentPage}` + `&fq=pub_date:(${dateCal})`;
+    urlFetch = urlFetch + `&page=${currentPage}` + `&fq=pub_date:(${dateCal})`;
   }
   console.log(urlFetch);
   try {
@@ -119,6 +119,7 @@ export async function createMainPage(pageNumber, dateCal) {
     empty.removeAttribute('hidden');
     weather.setAttribute('hidden', '');
     inputSearch.elements.search.value = '';
+    return;
   } else {
     // Очищаем страницу от предыдущих новостей оставляя блок с погодой
     Array.from(mainPage.children).forEach(child => {
@@ -168,7 +169,7 @@ export async function createMainPage(pageNumber, dateCal) {
   totalItems = data.response.meta.hits;
   console.log(totalItems);
   inputSearch.elements.search.value = '';
-  if (data.response.docs.length !== 0) updatePagination(totalItems);
+  if (totalItems !== 0) updatePagination(totalItems);
 }
 
 // Добавление/удаление новости из избранного
