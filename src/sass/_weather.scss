@@ -169,6 +169,12 @@ li {
     color: #FFFFFF;
     }
 
+.weatherForweek:hover{
+    background: rgba(254, 254, 255, 0.638);
+}
+
+
+
     /* 5 days weather forecast */
 
     .forecast__wrapper {
@@ -203,10 +209,12 @@ li {
         line-height: 19px;
         color: #FFFFFF;
     }
-
+    .backBtn:hover {
+    background: rgba(254, 254, 255, 0.638)
+    }
     // TABLET VERSION
 
-    @media screen and (min-width: 768px) {
+    @include tablet {
         .wraper__weather {
             grid-row: 1;
             grid-column: 2;
@@ -295,7 +303,7 @@ li {
     
     
 
-    @media screen and (min-width: 1200px) {
+    @include desktop {
         .wraper__weather {
             grid-row: 1;
             grid-column: 3;
