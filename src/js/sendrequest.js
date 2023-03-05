@@ -12,17 +12,18 @@ const inputSearch = document.getElementById('searchForm');
 let query = '';
 let totalItems = 0;
 let currentPage = 0;
-let url = '';
+// let url = '';
 let arr = [];
 let dateCal;
 let urlFetch = '';
+let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=${API_KEY}`;
 
 inputSearch.addEventListener('submit', e => {
   e.preventDefault();
   currentPage = 0;
   query = e.target.elements.search.value.trim();
   console.log(currentPage, query);
-  url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&api-key=${API_KEY}`;
+  url = url + `&q=${query}`;
   createMainPage(currentPage);
 });
 
