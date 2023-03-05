@@ -187,3 +187,60 @@ body.dark-theme .news-card__description {
 .news-card__actions button:hover {
   text-decoration: underline;
 }
+
+// ------------------empty-page
+
+.main-page__empty-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @include tablet {
+    margin-top: 40px;
+  }
+
+  @include desktop {
+    flex-direction: column;
+    margin-top: 61px;
+  }
+}
+
+.main-page__empty-header {
+  width: 276px;
+  height: 54px;
+
+  font-family: 'Manrope';
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.35;
+  text-align: center;
+  letter-spacing: -0.01em;
+
+  margin-bottom: 40px;
+
+  @include tablet {
+    width: 548px;
+    height: 110px;
+
+    font-size: 40px;
+    line-height: 1.38;
+  }
+
+  @include desktop {
+  }
+}
+
+.main-page__empty-img {
+  width: 248px;
+  height: 198px;
+
+  @include tablet {
+    width: 560px;
+    height: 444px;
+  }
+
+  @include desktop {
+    width: 601px;
+    height: 478px;
+  }
+}
