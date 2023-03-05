@@ -1,19 +1,21 @@
 .calendar-button__container {
   align-self: end;
   position: relative;
-  font-family: 'Manrope', sans-serif;
-  width: 150px;
-  padding: 3px 5px;
-  margin: 0 auto;
+
   border-radius: 10px;
   background-color: #f8f8f8;
 }
 
 .calendar-button {
+  font-family: 'Manrope', sans-serif;
+  //   align-self: flex-end;
+  //   width: 150px;
+  padding: 3px 5px;
+  //   margin-left: auto;
   overflow: hidden;
-  position: absolute;
-  display: block;
-  width: 100%;
+  position: relative;
+  justify-content: flex-end;
+  //   width: 100%;
 }
 
 .calendar-container__body {
