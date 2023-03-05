@@ -22,8 +22,7 @@ export function updatePagination(totalItems) {
   }
   firstBtn.addEventListener('click', () => {
     currentPage = 0;
-    createMainPage(currentPage);
-    updatePagination();
+    loader();
   });
   pagination.appendChild(firstBtn);
 
@@ -36,10 +35,10 @@ export function updatePagination(totalItems) {
   }
   prevBtn.addEventListener('click', () => {
     currentPage--;
-    createMainPage(currentPage);
-    updatePagination();
+    loader();
   });
   pagination.insertBefore(prevBtn, pagination.firstChild);
+
   let startPage = Math.max(1, currentPage);
   let endPage = Math.min(totalPage - 1, currentPage + 1);
 
@@ -47,10 +46,8 @@ export function updatePagination(totalItems) {
     startPage = Math.max(1, currentPage - 1);
     endPage = Math.min(totalPage - 1, currentPage + 2);
   }
-  // Додаю першу кнопку "..."
-  startPage = Math.max(1, currentPage - 1);
-  endPage = Math.min(totalPage - 1, currentPage + 2);
 
+  // Додаю першу кнопку "..."
   if (startPage > 1) {
     const dotsBtn = document.createElement('button');
     dotsBtn.textContent = '...';
@@ -58,6 +55,7 @@ export function updatePagination(totalItems) {
     dotsBtn.classList = 'dots';
     pagination.appendChild(dotsBtn);
   }
+
   // Додаю інші кнопки
   for (let i = startPage; i < endPage; i++) {
     const btn = document.createElement('button');
@@ -68,11 +66,11 @@ export function updatePagination(totalItems) {
     }
     btn.addEventListener('click', () => {
       currentPage = i;
-      createMainPage(currentPage);
-      updatePagination();
+      loader();
     });
     pagination.appendChild(btn);
   }
+
   // Додаю другу кнопку "..."
   if (endPage < totalPage - 1) {
     const dotsBtn = document.createElement('button');
@@ -92,8 +90,7 @@ export function updatePagination(totalItems) {
     }
     lastBtn.addEventListener('click', () => {
       currentPage = totalPage - 1;
-      createMainPage(currentPage);
-      updatePagination();
+      loader();
     });
     pagination.appendChild(lastBtn);
   }
@@ -107,8 +104,24 @@ export function updatePagination(totalItems) {
   }
   nextBtn.addEventListener('click', () => {
     currentPage++;
-    createMainPage(currentPage);
-    updatePagination();
+    loader();
   });
   pagination.appendChild(nextBtn);
+}
+
+function loaderOff() {
+  document.getElementById('loader-container').style.display = 'none';
+  document.getElementById('pagination').style.display = 'flex';
+}
+
+function loaderOn() {
+  document.getElementById('loader-container').style.display = 'flex';
+  document.getElementById('pagination').style.display = 'none';
+}
+
+function loader() {
+  loaderOn();
+  setTimeout(loaderOff, 1000);
+  createMainPage(currentPage);
+  updatePagination();
 }

@@ -1,0 +1,127 @@
+//  Стилі для пагінатора
+.pagination {
+  font-family: 'Manrope';
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 40px 16px 60px;
+  gap: 10px;
+
+  @include tablet {
+    padding: 48px 16px 100px;
+    gap: 8px;
+  }
+
+  @include desktop {
+    padding: 60px 16px 150px;
+    gap: 8px;
+  }
+}
+
+.dot {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.357;
+  text-align: center;
+  color: $text-color-light;
+  width: 28px;
+  height: 28px;
+  background: $bgn-color-light;
+  border: 1px solid $decoration-color;
+  border-radius: 2px;
+
+  @include tablet {
+    font-size: 16px;
+    line-height: 1.375;
+    width: 33px;
+    height: 31px;
+  }
+}
+
+.dot-active {
+  color: $bgn-color-light;
+  background: $decoration-color;
+  align-items: center;
+  justify-content: center;
+}
+
+.prev {
+  width: 72px;
+
+  @include tablet {
+    width: 82px;
+  }
+}
+
+.prev:disabled,
+.next:disabled {
+  background: #c2c2c4;
+}
+
+.next {
+  width: 72px;
+
+  @include tablet {
+    width: 78px;
+  }
+}
+
+.dots {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  line-height: 1.143;
+  color: $text-color-light;
+
+  @include tablet {
+    font-size: 16px;
+    line-height: 1.188;
+  }
+}
+
+.dark-theme .dots {
+  color: $bgn-color-light;
+}
+
+// Лоадер
+#loader-container {
+  display: none;
+  width: 100px;
+  height: 28px;
+  border-radius: 5px;
+  background: $bgn-color-light;
+  border: 1px solid $decoration-color;
+  margin: 40px auto 60px;
+  position: relative;
+
+  @include tablet {
+    margin: 48px auto 100px;
+    width: 150px;
+    height: 31px;
+  }
+
+  @include desktop {
+    margin: 60px auto 150px;
+  }
+}
+
+.loader {
+  width: 10px;
+  height: 100%;
+  background-color: $decoration-color;
+  animation: loader 1s infinite linear;
+  position: absolute;
+  left: 0;
+}
+
+@keyframes loader {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 0;
+  }
+}

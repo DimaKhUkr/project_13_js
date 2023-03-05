@@ -86,6 +86,10 @@
   }
 }
 
+body.dark-theme .news-card__title {
+  color: $text-color-dark;
+}
+
 .news-card__description {
   width: 288px;
   height: 57px;
@@ -110,6 +114,10 @@
   @include desktop {
     width: 394px;
   }
+}
+
+body.dark-theme .news-card__description {
+  color: $text-color-dark;
 }
 
 .news-card__date {
@@ -180,82 +188,53 @@
   text-decoration: underline;
 }
 
-//  Стилі для пагінатора
-.pagination {
+// ------------------empty-page
+
+
+.main-page__empty-header {
+  width: 276px;
+  height: 54px;
+
   font-family: 'Manrope';
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 40px 16px 60px;
-  gap: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.35;
+  text-align: center;
+  letter-spacing: -0.01em;
+
+  margin-bottom: 40px;
 
   @include tablet {
-    padding: 48px 16px 100px;
-    gap: 8px;
+    width: 548px;
+    height: 110px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    font-size: 40px;
+    line-height: 1.38;
   }
 
   @include desktop {
-    padding: 60px 16px 150px;
-    gap: 8px;
+    margin-top: 61px;
   }
 }
 
-.dot {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.357;
-  text-align: center;
-  color: $text-color-light;
-  width: 28px;
-  height: 28px;
-  background: $bgn-color-light;
-  border: 1px solid $decoration-color;
-  border-radius: 2px;
+.main-page__empty-img {
+  display: block;
+  margin: 0 auto;
+  width: 248px;
+  height: 198px;
 
   @include tablet {
-    font-size: 16px;
-    line-height: 1.375;
-    width: 33px;
-    height: 31px;
+    width: 560px;
+    height: 444px;
   }
-}
 
-.dot-active {
-  color: $bgn-color-light;
-  background: $decoration-color;
-  align-items: center;
-  justify-content: center;
-}
-
-.prev {
-  width: 72px;
-
-  @include tablet {
-    width: 82px;
-  }
-}
-
-.prev:disabled,
-.next:disabled {
-  background: #c2c2c4;
-}
-
-.next {
-  width: 72px;
-
-  @include tablet {
-    width: 78px;
-  }
-}
-
-.dots {
-  border: none;
-  font-size: 14px;
-  line-height: 1.143;
-  color: $text-color-light;
-
-  @include tablet {
-    font-size: 16px;
-    line-height: 1.188;
+  @include desktop {
+    width: 601px;
+    height: 478px;
   }
 }
