@@ -105,7 +105,7 @@ generateCalendar(currentMonth, currentYear);
 
 function dateLogging(event) {
     if (event.target.nodeName === 'BUTTON') {
-        const filterDate = `${event.target.dataset.year}-${event.target.dataset.month}-${event.target.textContent}`
+        const filterDate = `${event.target.dataset.year}-${Number(event.target.dataset.month) + 1}-${event.target.textContent}`
         createMainPage(0, filterDate)
     } else {
         return;
