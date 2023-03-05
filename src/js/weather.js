@@ -169,7 +169,7 @@ export function dataForWeek(data) {
     weather.appendChild(backBtn).classList.add("backBtn");
     backBtn.innerHTML = `Back`
     backBtn.addEventListener(`click`, () => {
-      window.location.reload();
+      startWeatherApp();
     });
 
     weatherData.forEach((day) => {
