@@ -125,3 +125,118 @@ function loader() {
   createMainPage(currentPage);
   updatePagination();
 }
+
+import { getNewsByCategory } from './categories';
+
+// let totalPages = 0;
+// let currentPageCategory = 0;
+
+// export function updatePaginationCategoties(totalResults) {
+//   const pagination = document.querySelector('.pagination');
+//   pagination.innerHTML = '';
+
+//   totalPages = Math.ceil(totalResults / itemsPerPage);
+
+//   // Додаю кнопку першої сторінки
+//   const firstBtn = document.createElement('button');
+//   firstBtn.textContent = '1';
+//   firstBtn.classList = 'dot';
+//   if (currentPageCategory === 0) {
+//     firstBtn.classList.add('dot-active');
+//   }
+//   firstBtn.addEventListener('click', () => {
+//     currentPageCategory = 0;
+//     loaderCategoties();
+//   });
+//   pagination.appendChild(firstBtn);
+
+//   // Додаю кнопку Prev
+//   const prevBtn = document.createElement('button');
+//   prevBtn.textContent = '< Prew';
+//   prevBtn.classList = 'prev dot';
+//   if (currentPageCategory === 0) {
+//     prevBtn.disabled = true;
+//   }
+//   prevBtn.addEventListener('click', () => {
+//     currentPageCategory--;
+//     loaderCategoties();
+//   });
+//   pagination.insertBefore(prevBtn, pagination.firstChild);
+
+//   let startPage = Math.max(1, currentPageCategory);
+//   let endPage = Math.min(totalPages - 1, currentPageCategory + 1);
+
+//   if (window.innerWidth > 767) {
+//     startPage = Math.max(1, currentPageCategory - 1);
+//     endPage = Math.min(totalPages - 1, currentPageCategory + 2);
+//   }
+
+//   // Додаю першу кнопку "..."
+//   if (startPage > 1) {
+//     const dotsBtn = document.createElement('button');
+//     dotsBtn.textContent = '...';
+//     dotsBtn.disabled = true;
+//     dotsBtn.classList = 'dots';
+//     pagination.appendChild(dotsBtn);
+//   }
+
+//   // Додаю інші кнопки
+//   for (let i = startPage; i < endPage; i++) {
+//     const btn = document.createElement('button');
+//     btn.textContent = i + 1;
+//     btn.classList = 'dot';
+//     if (i === currentPageCategory) {
+//       btn.classList.add('dot-active');
+//     }
+//     btn.addEventListener('click', () => {
+//       currentPageCategory = i;
+//       loaderCategoties();
+//     });
+//     pagination.appendChild(btn);
+//   }
+
+//   // Додаю другу кнопку "..."
+//   if (endPage < totalPages - 1) {
+//     const dotsBtn = document.createElement('button');
+//     dotsBtn.textContent = '...';
+//     dotsBtn.disabled = true;
+//     dotsBtn.classList = 'dots';
+//     pagination.appendChild(dotsBtn);
+//   }
+
+//   // Додаю кнопку останьої сторінки
+//   if (totalPages > 1) {
+//     const lastBtn = document.createElement('button');
+//     lastBtn.textContent = totalPages;
+//     lastBtn.classList = 'dot';
+//     if (currentPageCategory === totalPages - 1) {
+//       lastBtn.classList.add('dot-active');
+//     }
+//     lastBtn.addEventListener('click', () => {
+//       currentPageCategory = totalPages - 1;
+//       loaderCategoties();
+//     });
+//     pagination.appendChild(lastBtn);
+//   }
+
+//   // Додаю кнопку Next
+//   const nextBtn = document.createElement('button');
+//   nextBtn.textContent = 'Next >';
+//   nextBtn.classList = 'next dot';
+//   if (currentPageCategory === totalPages - 1) {
+//     nextBtn.disabled = true;
+//   }
+//   nextBtn.addEventListener('click', () => {
+//     currentPageCategory++;
+//     loaderCategoties();
+//   });
+//   pagination.appendChild(nextBtn);
+// }
+
+// function loaderCategoties() {
+//   loaderOn();
+//   setTimeout(loaderOff, 1000);
+//   console.log(currentPageCategory);
+//   getNewsByCategory(currentPageCategory);
+//   updatePaginationCategoties();
+// }
