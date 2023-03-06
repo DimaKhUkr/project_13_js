@@ -92,17 +92,21 @@
 
   &::after {
     content: '';
-    width: 601px;
-    height: 468px;
+    width: 248px;
+    height: 198px;
     background-image: url('/src/images/noNews-mob.png');
     background-repeat: no-repeat;
     background-position: center;
 
     @include tablet {
+      width: 560px;
+      height: 444px;
       background-image: url('/src/images/noNews-tab.png');
     }
 
     @include desktop {
+      width: 601px;
+      height: 478px;
       background-image: url('/src/images/noNews-dtop.png');
     }
   }
