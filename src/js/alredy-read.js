@@ -41,7 +41,7 @@ const readMoreEl = card.querySelector('a')
     //   arr.push(cardEl);
     // }
     arr.push(cardEl);
-    // console.log(arr.includes(`${cardEl}`))
+    // console.log(arr.includes(`${'cardEl'}`))
 
     //  console.log(arr)
     localStorage.setItem(`${now}`, JSON.stringify(arr));
