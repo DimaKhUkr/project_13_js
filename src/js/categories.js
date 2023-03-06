@@ -35,7 +35,7 @@ export async function getCategories() {
             'beforeend',
             `<div class="select">
             <div class="select_header">
-              <div class="select_current">Others</div>
+              <div class="select_current">Categories</div>
             </div>
             <div class="select_btn">
             </div>
@@ -152,11 +152,13 @@ export async function getCategories() {
           category.addEventListener('click', chooseCategory);
         });
         function chooseCategory(event) {
+          selectBtn.classList.remove('is-active');
           event.preventDefault();
           category = event.target.textContent.toLowerCase();
           // console.log(category);
           console.log('item');
-          getNewsByCategory(offsetPage, category);
+          getNewsByCategory(offsetPage, category);      
+          // console.log('item');
         }
 
         const selectBtn = document.querySelector('.select_btn');
@@ -250,29 +252,8 @@ function renderResult(news, totalResults) {
     })
     .join('');
   mainPage.insertAdjacentHTML('beforeend', markup);
+
   updatePaginationCategoties(category);
   // document.addEventListener('DOMContentLoaded', startWeatherApp);
+
 }
-
-// Добавление/удаление новости из избранного
-// function toggleFavorite(event) {
-//   const button = event.target;
-//   const newsId = button.dataset.newsId;
-
-//   if (localStorage.getItem(`favorite_${newsId}`) !== null) {
-//     localStorage.removeItem(`favorite_${newsId}`);
-//     button.textContent = 'Add to Favorite';
-//     button.classList.remove('active');
-//   } else {
-//     localStorage.setItem(`favorite_${newsId}`, true);
-//     button.textContent = 'Remove from Favorite';
-//     button.classList.add('active');
-//   }
-// }
-
-// mainPage.addEventListener('click', event => {
-//   const button = event.target.closest('.news-card__favorite-btn');
-//   if (button !== null) {
-//     toggleFavorite(event);
-//   }
-// });
