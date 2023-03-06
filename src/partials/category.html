@@ -1,3 +1,33 @@
 <div class="categories container" id="category-btn">
-  <button type="button" class="calendar-button category_btn"></button>
+  <div class="calendar-button__container">
+    <button type="button" class="calendar-button category_btn"></button>
+    <div class="calendar-container hidden">
+      <div class="calendar-container__body">
+        <div class="calendar-header">
+          <button id="prev-year"><</button>
+          <h2 id="current-year" class="calendar-header__text"></h2>
+          <button id="next-year">></button>
+        </div>
+        <div class="calendar-header">
+          <button id="prev-month"><</button>
+          <h2 id="current-month" class="calendar-header__text"></h2>
+          <button id="next-month">></button>
+        </div>
+        <table class="calendar-table">
+          <thead>
+            <tr>
+              <th>Mo</th>
+              <th>Tu</th>
+              <th>We</th>
+              <th>Th</th>
+              <th>Fr</th>
+              <th>Sa</th>
+              <th>Su</th>
+            </tr>
+          </thead>
+          <tbody id="calendar-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
