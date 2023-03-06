@@ -147,7 +147,7 @@ export async function getCategories() {
         });
 
         // Для селектора
-        selectHeader = document.querySelector('.select_header');
+        const selectHeader = document.querySelector('.select_header');
         const categoryFromSelect = document.querySelectorAll('.select_item');
         categoryFromSelect.forEach(category => {
           category.addEventListener('click', chooseCategory);
