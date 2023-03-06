@@ -8,6 +8,9 @@ const mainPage = document.getElementById('main-page');
 const weather = document.querySelector(`.wraper__weather`);
 const empty = document.getElementById('empty');
 // getCategories();
+let totalPages = 0;
+let offsetPage = 0;
+let category = '';
 
 export async function getCategories() {
   try {
@@ -136,9 +139,10 @@ export async function getCategories() {
         categoryBtns.forEach(btn => {
           btn.addEventListener('click', async event => {
             event.preventDefault();
-            const category = btn.textContent.toLowerCase();
-            console.log(category);
-            getNewsByCategory(category);
+            category = btn.textContent.toLowerCase();
+            // console.log(category);
+            // console.log(offsetPage);
+            getNewsByCategory(offsetPage, category);
           });
         });
 
@@ -150,10 +154,11 @@ export async function getCategories() {
         function chooseCategory(event) {
           selectBtn.classList.remove('is-active');
           event.preventDefault();
-          const category = event.target.textContent.toLowerCase();
-          console.log(category);
+          category = event.target.textContent.toLowerCase();
+          // console.log(category);
+          console.log('item');
+          getNewsByCategory(offsetPage, category);      
           // console.log('item');
-          getNewsByCategory(category);
         }
 
         const selectBtn = document.querySelector('.select_btn');
@@ -169,9 +174,12 @@ export async function getCategories() {
     console.error(error);
   }
 }
+import { updatePaginationCategoties } from './pagination';
 
-async function getNewsByCategory(category) {
-  const urlCategory = `https://api.nytimes.com/svc/news/v3/content/nyt/${category}.json?api-key=${API_KEY}`;
+export async function getNewsByCategory(offsetPage, category) {
+  // console.log("категория в начале функции", category);
+  const urlCategory = `https://api.nytimes.com/svc/news/v3/content/nyt/${category}.json?offset=${offsetPage}&api-key=${API_KEY}`;
+  // console.log(urlCategory);
   try {
     const response = await fetch(urlCategory, {
       headers: {
@@ -180,14 +188,16 @@ async function getNewsByCategory(category) {
     });
     const data = await response.json();
     const news = data.results;
+    // const totalResults = data.num_results;
     console.log(news);
-    renderResult(news);
+    // console.log(totalResults);
+    renderResult(news, totalResults);
   } catch (error) {
     console.error(error);
   }
 }
 
-function renderResult(news) {
+function renderResult(news, totalResults) {
   empty.setAttribute('hidden', '');
   // const data = await articleSearch(pageNumber);
   // console.dir(data.response);
@@ -196,7 +206,7 @@ function renderResult(news) {
     Array.from(mainPage.children).forEach(child => {
       if (child !== empty && child !== weather) child.remove();
     });
-    console.log(news.length);
+    // console.log(news.length);
     empty.removeAttribute('hidden');
     weather.setAttribute('hidden', '');
     // inputSearch.elements.search.value = '';
@@ -242,4 +252,8 @@ function renderResult(news) {
     })
     .join('');
   mainPage.insertAdjacentHTML('beforeend', markup);
+
+  updatePaginationCategoties(category);
+  // document.addEventListener('DOMContentLoaded', startWeatherApp);
+
 }
