@@ -17,7 +17,7 @@
               >
                 ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
               </button>
-              <h2 class="news-card__title">${title}</h2>
+              <h2 class="news-card__title">${article.title}</h2>
               <p class="news-card__description">
                 ${ abstract.length > 100 ? abstract.substring(0, 100) + '...' :
                 abstract }

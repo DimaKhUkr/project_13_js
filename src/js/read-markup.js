@@ -6,11 +6,10 @@ const readList = document.querySelector('.read');
 
 isReadEmpty();
 // getReadKeys();
-// testMarkup();
+testMarkup2();
 // testMarkupWithFilter();
-// getReadNews(100000008677561);
-createReadPage();
-// "nyt://article/59fa3c31-ddd7-562c-ab32-e202a892d697"
+// createReadPage();
+
 
 // Для порожньої сторінки
 function isReadEmpty() {
@@ -23,6 +22,54 @@ function isReadEmpty() {
   console.log('Not empty');
 }
 
+
+function testMarkup2() {
+
+  // отримуємо всі ключі з локального сховища
+  const keys = Object.keys(localStorage);
+
+  // створюємо об'єкт для зберігання списку статей за датами
+  const articlesByDate = {};
+
+  // перебираємо всі ключі з локального сховища
+  for (const key of keys) {
+    // перевіряємо, чи є ключ датою у форматі 02/03/2023
+    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (dateRegex.test(key)) {
+      // якщо ключ є датою, отримуємо список статей для цієї дати
+      const articles = JSON.parse(localStorage.getItem(key));
+      // додаємо цей список статей до списку за датою
+      articlesByDate[key] = articles;
+    }
+  }
+
+  // створюємо HTML-розмітку для списку статей за датами
+  let markup = '';
+  for (const key of Object.keys(articlesByDate)) {
+    // додаємо заголовок з датою
+    markup += `<li class="read-item">
+      <div class="read-title">
+        <h2 class="read-date">${key}</h2>
+        <div class="read-arrow"></div>
+      </div>
+      <ul class="read-gallery">
+    `;
+    // створюємо список статей
+    for (const article of articlesByDate[key]) {
+      // додаємо елемент списку з назвою статті
+       markup += `<li>${article.title}</li>`;
+    }
+    markup += '</ul>';
+  }
+
+  // вставляємо HTML-розмітку у елемент з ідентифікатором 'articles'
+  readList.innerHTML = markup;
+}
+
+
+
+
+
 function testMarkup() {
   // Отримуємо всі ключі з localStorage
   const keys = Object.keys(localStorage);
@@ -34,10 +81,10 @@ function testMarkup() {
   // Створюємо розмітку для кожного ключа та його значення
   const markup = filteredKeys
     .map(key => {
-      const queries = JSON.parse(localStorage.getItem(key));
-      console.log(queries);
+      const articles = JSON.parse(localStorage.getItem(key));
+      console.log(articles);
 
-      const paragraphs = queries.map(item => `<p>${item}</p>`).join('');
+      const paragraphs = articles.map(item => `<p>${item}</p>`).join('');
       return `<h2>${key}</h2>${paragraphs}`;
     })
     .join('');
@@ -65,15 +112,15 @@ async function createReadPage() {
 
       const values = JSON.parse(localStorage.getItem(storageKey));
       console.log(values);
-      for (let i = 0; i < values.length; i += 1) {
-        let query = values[i];
-        console.log(query);
-        const data = await getReadNews(query);
-        const news = data.response.docs;
-        // console.log(news);
-        markup = markup + createReadNews(news[0]);
+      // for (let i = 0; i < values.length; i += 1) {
+      //   let query = values[i];
+      //   console.log(query);
+      //   const data = await getReadNews(query);
+      //   const news = data.response.docs;
+      //   // console.log(news);
+      //   markup = markup + createReadNews(news[0]);
         
-      }
+      // }
       markupAll = markupList + markup
       // const readItem = document.querySelector('.read');
       // readItem.insertAdjacentHTML('beforeend', markup);
