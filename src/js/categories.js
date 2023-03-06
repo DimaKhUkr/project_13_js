@@ -157,7 +157,7 @@ export async function getCategories() {
           category = event.target.textContent.toLowerCase();
           // console.log(category);
           console.log('item');
-          getNewsByCategory(offsetPage, category);      
+          getNewsByCategory(offsetPage, category);
           // console.log('item');
         }
 
@@ -191,13 +191,13 @@ export async function getNewsByCategory(offsetPage, category) {
     // const totalResults = data.num_results;
     console.log(news);
     // console.log(totalResults);
-    renderResult(news, totalResults);
+    renderResult(news);
   } catch (error) {
     console.error(error);
   }
 }
 
-function renderResult(news, totalResults) {
+function renderResult(news) {
   empty.setAttribute('hidden', '');
   // const data = await articleSearch(pageNumber);
   // console.dir(data.response);
@@ -255,5 +255,4 @@ function renderResult(news, totalResults) {
 
   updatePaginationCategoties(category);
   // document.addEventListener('DOMContentLoaded', startWeatherApp);
-
 }
