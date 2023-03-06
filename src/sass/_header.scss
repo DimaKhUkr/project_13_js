@@ -235,9 +235,10 @@ body.dark-theme .page__header{
   border: none;
 }
 
+
 @include tablet {
   .search-form input {
-    width: 70%;
+    width: 60%;
     padding: 5px 0;
     font-size: 14px;
     line-height: 1.7;
@@ -527,3 +528,15 @@ body.dark-theme .theme-text {
 .dark-theme .theme-text.light {
   color: $alt-text-color;
 }
+
+
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 50 $bgn-color-light; /* цвет вашего фона */
+  -webkit-text-fill-color: $text-color-light; /* цвет текста */
+}
+
+body.dark-theme input:-webkit-autofill{
+  -webkit-box-shadow: inset 0 0 0 50 $bgn-color-dark; /* цвет вашего фона */
+  -webkit-text-fill-color:$alt-text-color-dark ; /* цвет текста */
+}
+
