@@ -15,6 +15,7 @@ let currentPage = 0;
 // let url = '';
 let arr = [];
 let dateCal;
+let urlQuery = '';
 let urlFetch = '';
 let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=${API_KEY}`;
 
@@ -23,16 +24,16 @@ inputSearch.addEventListener('submit', e => {
   currentPage = 0;
   query = e.target.elements.search.value.trim();
   console.log(currentPage, query);
-  urlFetch = url + `&q=${query}`;
+  urlQuery = url + `&q=${query}`;
   createMainPage(currentPage);
 });
 
 // Запрос на бекенд по полю поиска
 async function articleSearch(currentPage, dateCal) {
   if (!dateCal) {
-    urlFetch = url + `&page=${currentPage}`;
+    urlFetch = urlQuery + `&page=${currentPage}`;
   } else {
-    urlFetch = url + `&page=${currentPage}` + `&fq=pub_date:(${dateCal})`;
+    urlFetch = urlQuery + `&page=${currentPage}` + `&fq=pub_date:(${dateCal})`;
   }
   console.log(urlFetch);
   try {
@@ -106,6 +107,7 @@ export async function createPopularNews() {
 // Рендеринг новостей по полю поиска
 export async function createMainPage(pageNumber, dateCal) {
   empty.setAttribute('hidden', '');
+  mainPage.nextElementSibling.style.visibility = 'visible';
   // const query = e.target.elements.search.value.trim();
   // console.log(query);
   const data = await articleSearch(pageNumber, dateCal);
@@ -119,6 +121,7 @@ export async function createMainPage(pageNumber, dateCal) {
     empty.removeAttribute('hidden');
     weather.setAttribute('hidden', '');
     inputSearch.elements.search.value = '';
+    mainPage.nextElementSibling.style.visibility = 'hidden';
     return;
   } else {
     // Очищаем страницу от предыдущих новостей оставляя блок с погодой
@@ -168,8 +171,12 @@ export async function createMainPage(pageNumber, dateCal) {
   // e.target.reset();
   totalItems = data.response.meta.hits;
   console.log(totalItems);
-  inputSearch.elements.search.value = '';
-  if (totalItems !== 0) updatePagination(totalItems);
+  if (totalItems !== 0) {
+    inputSearch.elements.search.value = '';
+    updatePagination(totalItems);
+  } else {
+    return;
+  }
 }
 
 // Добавление/удаление новости из избранного
