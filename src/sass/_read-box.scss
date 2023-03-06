@@ -106,8 +106,8 @@
   opacity: 0;
   padding-top: 0;
 
-  transition-property: padding, opacity, visibility, height;
-  transition-duration: 700ms;
+  transition-property: padding, height, opacity, visibility;
+  transition-duration: 700ms, 700ms, 500ms, 500ms;
   transition-timing-function: ease;
 
   @include tablet {

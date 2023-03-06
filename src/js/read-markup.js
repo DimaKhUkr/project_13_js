@@ -56,7 +56,7 @@ function testMarkup2() {
     `;
     // створюємо список статей
     for (const article of articlesByDate[key]) {
-      // додаємо елемент списку з назвою статті
+      // додаємо картку статті
       markup += `<li>
           <div class="news-card">
             <img src=${article.img} alt="Article illustration" />
@@ -83,7 +83,7 @@ function testMarkup2() {
     markup += '</ul>';
   }
 
-  // вставляємо HTML-розмітку у елемент з ідентифікатором 'articles'
+  // вставляємо HTML-розмітку у елемент
   readList.innerHTML = markup;
 } 
 
