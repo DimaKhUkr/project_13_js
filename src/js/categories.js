@@ -8,6 +8,9 @@ const mainPage = document.getElementById('main-page');
 const weather = document.querySelector(`.wraper__weather`);
 const empty = document.getElementById('empty');
 // getCategories();
+let totalPages = 0;
+let offsetPage = 0;
+let category = '';
 
 export async function getCategories() {
   try {
@@ -30,7 +33,7 @@ export async function getCategories() {
         if (window.innerWidth < 768) {
           categoryBtn.insertAdjacentHTML(
             'beforeend',
-          `<div class="select">
+            `<div class="select">
             <div class="select_header">
               <div class="select_current">Others</div>
             </div>
@@ -41,19 +44,19 @@ export async function getCategories() {
           const selectBtn1 = document.querySelector('.select_btn');
           const selectHeader = document.querySelector('.select_header');
           // добавляем обработчик событий клика на элемент .select_header
-          selectHeader.addEventListener('click', function() {
-          if (selectHeader.classList.contains('is-active')) {
-            selectHeader.classList.remove('is-active');
-            selectBtn.classList.remove('is-active');
-          } else {
-            selectHeader.classList.add('is-active');
-            selectBtn.classList.add('is-active');
-          }
-        });
+          selectHeader.addEventListener('click', function () {
+            if (selectHeader.classList.contains('is-active')) {
+              selectHeader.classList.remove('is-active');
+              selectBtn.classList.remove('is-active');
+            } else {
+              selectHeader.classList.add('is-active');
+              selectBtn.classList.add('is-active');
+            }
+          });
           for (let i = 0; i < arrayOfCategories.length; i++) {
             selectBtn1.insertAdjacentHTML(
               'beforeend',
-            `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
+              `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
             );
           }
         }
@@ -66,7 +69,7 @@ export async function getCategories() {
           }
           categoryBtn.insertAdjacentHTML(
             'beforeend',
-          `<div class="select">
+            `<div class="select">
             <div class="select_header">
               <div class="select_current">Others</div>
             </div>
@@ -77,20 +80,20 @@ export async function getCategories() {
           const selectBtn2 = document.querySelector('.select_btn');
           const selectHeader = document.querySelector('.select_header');
           // добавляем обработчик событий клика на элемент .select_header
-          selectHeader.addEventListener('click', function() {
-          if (selectHeader.classList.contains('is-active')) {
-            selectHeader.classList.remove('is-active');
-            selectBtn.classList.remove('is-active');
-          } else {
-            selectHeader.classList.add('is-active');
-            selectBtn.classList.add('is-active');
-          }
-        });
+          selectHeader.addEventListener('click', function () {
+            if (selectHeader.classList.contains('is-active')) {
+              selectHeader.classList.remove('is-active');
+              selectBtn.classList.remove('is-active');
+            } else {
+              selectHeader.classList.add('is-active');
+              selectBtn.classList.add('is-active');
+            }
+          });
           for (let i = 4; i < arrayOfCategories.length; i++) {
             selectBtn2.insertAdjacentHTML(
               'beforeend',
-            `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
-          );
+              `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
+            );
           }
         }
         if (window.innerWidth >= 1280) {
@@ -102,7 +105,7 @@ export async function getCategories() {
           }
           categoryBtn.insertAdjacentHTML(
             'beforeend',
-          `<div class="select">
+            `<div class="select">
             <div class="select_header">
               <div class="select_current">Others</div>
             </div>
@@ -113,20 +116,20 @@ export async function getCategories() {
           const selectBtn3 = document.querySelector('.select_btn');
           const selectHeader = document.querySelector('.select_header');
           // добавляем обработчик событий клика на элемент .select_header
-        selectHeader.addEventListener('click', function() {
-          if (selectHeader.classList.contains('is-active')) {
-            selectHeader.classList.remove('is-active');
-            selectBtn.classList.remove('is-active');
-          } else {
-            selectHeader.classList.add('is-active');
-            selectBtn.classList.add('is-active');
-          }
-        });
+          selectHeader.addEventListener('click', function () {
+            if (selectHeader.classList.contains('is-active')) {
+              selectHeader.classList.remove('is-active');
+              selectBtn.classList.remove('is-active');
+            } else {
+              selectHeader.classList.add('is-active');
+              selectBtn.classList.add('is-active');
+            }
+          });
           for (let i = 6; i < arrayOfCategories.length; i++) {
             selectBtn3.insertAdjacentHTML(
               'beforeend',
-            `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
-          );
+              `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
+            );
           }
         }
 
@@ -136,25 +139,25 @@ export async function getCategories() {
         categoryBtns.forEach(btn => {
           btn.addEventListener('click', async event => {
             event.preventDefault();
-            const category = btn.textContent.toLowerCase();
+            category = btn.textContent.toLowerCase();
             console.log(category);
-            getNewsByCategory(category);
+            console.log(offsetPage);
+            getNewsByCategory(offsetPage, category);
           });
         });
 
         // Для селектора
         const categoryFromSelect = document.querySelectorAll('.select_item');
-        categoryFromSelect.forEach((category) => {
+        categoryFromSelect.forEach(category => {
           category.addEventListener('click', chooseCategory);
         });
         function chooseCategory(event) {
           event.preventDefault();
-          const category = event.target.textContent.toLowerCase();
+          category = event.target.textContent.toLowerCase();
           console.log(category);
           console.log('item');
-          getNewsByCategory(category);
+          getNewsByCategory(offsetPage, category);
         }
-
 
         const selectBtn = document.querySelector('.select_btn');
         // selectBtn.addEventListener('change', async event => {
@@ -169,9 +172,12 @@ export async function getCategories() {
     console.error(error);
   }
 }
+import { updatePaginationCategoties } from './pagination';
 
-async function getNewsByCategory(category) {
-  const urlCategory = `https://api.nytimes.com/svc/news/v3/content/nyt/${category}.json?api-key=${API_KEY}`;
+export async function getNewsByCategory(offsetPage, category) {
+  // console.log("категория в начале функции", category);
+  const urlCategory = `https://api.nytimes.com/svc/news/v3/content/nyt/${category}.json?offset=${offsetPage}&api-key=${API_KEY}`;
+  // console.log(urlCategory);
   try {
     const response = await fetch(urlCategory, {
       headers: {
@@ -180,14 +186,16 @@ async function getNewsByCategory(category) {
     });
     const data = await response.json();
     const news = data.results;
+    // const totalResults = data.num_results;
     console.log(news);
-    renderResult(news);
+    // console.log(totalResults);
+    renderResult(news, totalResults);
   } catch (error) {
     console.error(error);
   }
 }
 
-function renderResult(news) {
+function renderResult(news, totalResults) {
   empty.setAttribute('hidden', '');
   // const data = await articleSearch(pageNumber);
   // console.dir(data.response);
@@ -196,7 +204,7 @@ function renderResult(news) {
     Array.from(mainPage.children).forEach(child => {
       if (child !== empty && child !== weather) child.remove();
     });
-    console.log(news.length);
+    // console.log(news.length);
     empty.removeAttribute('hidden');
     weather.setAttribute('hidden', '');
     // inputSearch.elements.search.value = '';
@@ -242,6 +250,7 @@ function renderResult(news) {
     })
     .join('');
   mainPage.insertAdjacentHTML('beforeend', markup);
+  updatePaginationCategoties(category);
   // document.addEventListener('DOMContentLoaded', startWeatherApp);
 }
 
