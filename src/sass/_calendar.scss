@@ -80,6 +80,10 @@
   margin: 0px;
 }
 
+body.dark .calendar-header__text{
+  color: $text-color-light;
+}
+
 .calendar-header button:hover {
   background-color: #008cff;
 }
