@@ -1,6 +1,6 @@
 // import { startWeatherApp } from './weather';
 
-const API_KEY = 't8X9JXlP7JTQb4JOFaZ7soveQbwr46sH';
+const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 const URL = 'https://api.nytimes.com/svc/news/v3/content/section-list.json';
 
 const categoryBtn = document.getElementById('category-btn');
