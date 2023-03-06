@@ -83,7 +83,7 @@ function testMarkup2() {
     markup += '</ul>';
   }
 
-  // вставляємо HTML-розмітку у елемент з ідентифікатором 'articles'
+  // вставляємо HTML-розмітку у елемент
   readList.innerHTML = markup;
 } 
 
