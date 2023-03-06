@@ -88,9 +88,6 @@ function testMarkup2() {
 } 
 
 
-//       <button
-        //        >
-        //  ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
-        //  </button>
+
 
 
