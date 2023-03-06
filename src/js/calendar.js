@@ -16,6 +16,9 @@ const main = async () => {
 
 // main();
 
+
+const calendarBtnOpen = document.querySelector('.calendar-button')
+const calendarContainer = document.querySelector('.calendar-container')
  let currentMonth = new Date().getMonth();
   let currentYear = new Date().getFullYear();
   const monthNames = ["January", "February", "March", "April", "May", "Juny", "July", "August", "September", "October", "November", "December"];
@@ -24,7 +27,6 @@ const main = async () => {
   const nextMonthBtn = document.getElementById("next-month");
   const prevYearBtn = document.getElementById("prev-year");
   const nextYearBtn = document.getElementById("next-year");
-  const yearInput = document.getElementById("year-input");
 const currentMonthText = document.getElementById("current-month");
     const currentYearText = document.getElementById("current-year");
     const calendarBody = document.getElementById("calendar-body");
@@ -57,13 +59,6 @@ const currentMonthText = document.getElementById("current-month");
     generateCalendar(currentMonth, currentYear);
   });
 
-  yearInput.addEventListener("input", () => {
-    const year = parseInt(yearInput.value);
-    if (year >= 1900 && year <= 2100) {
-      currentYear = year;
-      generateCalendar(currentMonth, currentYear);
-    }
-  });
 
   function generateCalendar(month, year) {
     calendarBody.innerHTML = "";
@@ -104,9 +99,11 @@ generateCalendar(currentMonth, currentYear);
 
 
 function dateLogging(event) {
-    if (event.target.nodeName === 'BUTTON') {
-        const filterDate = `${event.target.dataset.year}-${Number(event.target.dataset.month) + 1}-${event.target.textContent}`
-        createMainPage(0, filterDate)
+  if (event.target.nodeName === 'BUTTON') {
+    calendarContainer.classList.add('hidden')
+    calendarBtnOpen.textContent = `${event.target.textContent}/${String(Number(event.target.dataset.month) + 1).padStart(2, 0)}/${event.target.dataset.year}`
+      const filterDate = `${event.target.dataset.year}-${Number(event.target.dataset.month) + 1}-${event.target.textContent}`
+      createMainPage(0, filterDate)
     } else {
         return;
     }
@@ -114,14 +111,13 @@ function dateLogging(event) {
 }
 
 
-const calendarBtnOpen = document.querySelector('.calendar-button')
-const calendarContainer = document.querySelector('.calendar-container')
-calendarBtnOpen.textContent = `${new Date().getDate()}/${monthNames[new Date().getMonth()]}/${new Date().getFullYear()}`
+
+calendarBtnOpen.textContent = `${String(new Date().getDate()).padStart(2, 0)}/${String(Number(new Date().getMonth()) + 1).padStart(2, 0)}/${new Date().getFullYear()}`
 calendarBtnOpen.addEventListener('click', calendarToggle)
 
 function calendarToggle() {
-    calendarContainer.classList.toggle('open')
-    if (calendarContainer.classList.contains('open')) {
+    calendarContainer.classList.toggle('hidden')
+    if (!calendarContainer.classList.contains('hidden')) {
         calendarBody.addEventListener('click', dateLogging)
     } else {
         calendarBody.removeEventListener('click', dateLogging)
