@@ -30,9 +30,9 @@ export async function getCategories() {
         if (window.innerWidth < 768) {
           categoryBtn.insertAdjacentHTML(
             'beforeend',
-          `<div class="select">
+            `<div class="select">
             <div class="select_header">
-              <div class="select_current">Others</div>
+              <div class="select_current">Categories</div>
             </div>
             <div class="select_btn">
             </div>
@@ -41,19 +41,19 @@ export async function getCategories() {
           const selectBtn1 = document.querySelector('.select_btn');
           const selectHeader = document.querySelector('.select_header');
           // добавляем обработчик событий клика на элемент .select_header
-          selectHeader.addEventListener('click', function() {
-          if (selectHeader.classList.contains('is-active')) {
-            selectHeader.classList.remove('is-active');
-            selectBtn.classList.remove('is-active');
-          } else {
-            selectHeader.classList.add('is-active');
-            selectBtn.classList.add('is-active');
-          }
-        });
+          selectHeader.addEventListener('click', function () {
+            if (selectHeader.classList.contains('is-active')) {
+              selectHeader.classList.remove('is-active');
+              selectBtn.classList.remove('is-active');
+            } else {
+              selectHeader.classList.add('is-active');
+              selectBtn.classList.add('is-active');
+            }
+          });
           for (let i = 0; i < arrayOfCategories.length; i++) {
             selectBtn1.insertAdjacentHTML(
               'beforeend',
-            `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
+              `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
             );
           }
         }
@@ -66,7 +66,7 @@ export async function getCategories() {
           }
           categoryBtn.insertAdjacentHTML(
             'beforeend',
-          `<div class="select">
+            `<div class="select">
             <div class="select_header">
               <div class="select_current">Others</div>
             </div>
@@ -77,20 +77,20 @@ export async function getCategories() {
           const selectBtn2 = document.querySelector('.select_btn');
           const selectHeader = document.querySelector('.select_header');
           // добавляем обработчик событий клика на элемент .select_header
-          selectHeader.addEventListener('click', function() {
-          if (selectHeader.classList.contains('is-active')) {
-            selectHeader.classList.remove('is-active');
-            selectBtn.classList.remove('is-active');
-          } else {
-            selectHeader.classList.add('is-active');
-            selectBtn.classList.add('is-active');
-          }
-        });
+          selectHeader.addEventListener('click', function () {
+            if (selectHeader.classList.contains('is-active')) {
+              selectHeader.classList.remove('is-active');
+              selectBtn.classList.remove('is-active');
+            } else {
+              selectHeader.classList.add('is-active');
+              selectBtn.classList.add('is-active');
+            }
+          });
           for (let i = 4; i < arrayOfCategories.length; i++) {
             selectBtn2.insertAdjacentHTML(
               'beforeend',
-            `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
-          );
+              `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
+            );
           }
         }
         if (window.innerWidth >= 1280) {
@@ -102,7 +102,7 @@ export async function getCategories() {
           }
           categoryBtn.insertAdjacentHTML(
             'beforeend',
-          `<div class="select">
+            `<div class="select">
             <div class="select_header">
               <div class="select_current">Others</div>
             </div>
@@ -113,20 +113,20 @@ export async function getCategories() {
           const selectBtn3 = document.querySelector('.select_btn');
           const selectHeader = document.querySelector('.select_header');
           // добавляем обработчик событий клика на элемент .select_header
-        selectHeader.addEventListener('click', function() {
-          if (selectHeader.classList.contains('is-active')) {
-            selectHeader.classList.remove('is-active');
-            selectBtn.classList.remove('is-active');
-          } else {
-            selectHeader.classList.add('is-active');
-            selectBtn.classList.add('is-active');
-          }
-        });
+          selectHeader.addEventListener('click', function () {
+            if (selectHeader.classList.contains('is-active')) {
+              selectHeader.classList.remove('is-active');
+              selectBtn.classList.remove('is-active');
+            } else {
+              selectHeader.classList.add('is-active');
+              selectBtn.classList.add('is-active');
+            }
+          });
           for (let i = 6; i < arrayOfCategories.length; i++) {
             selectBtn3.insertAdjacentHTML(
               'beforeend',
-            `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
-          );
+              `<div class="select_item" value="${arrayOfCategories[i]}">${arrayOfCategories[i]}</div>`
+            );
           }
         }
 
@@ -144,17 +144,17 @@ export async function getCategories() {
 
         // Для селектора
         const categoryFromSelect = document.querySelectorAll('.select_item');
-        categoryFromSelect.forEach((category) => {
+        categoryFromSelect.forEach(category => {
           category.addEventListener('click', chooseCategory);
         });
         function chooseCategory(event) {
+          selectBtn.classList.remove('is-active');
           event.preventDefault();
           const category = event.target.textContent.toLowerCase();
           console.log(category);
-          console.log('item');
+          // console.log('item');
           getNewsByCategory(category);
         }
-
 
         const selectBtn = document.querySelector('.select_btn');
         // selectBtn.addEventListener('change', async event => {
@@ -242,28 +242,4 @@ function renderResult(news) {
     })
     .join('');
   mainPage.insertAdjacentHTML('beforeend', markup);
-  // document.addEventListener('DOMContentLoaded', startWeatherApp);
 }
-
-// Добавление/удаление новости из избранного
-// function toggleFavorite(event) {
-//   const button = event.target;
-//   const newsId = button.dataset.newsId;
-
-//   if (localStorage.getItem(`favorite_${newsId}`) !== null) {
-//     localStorage.removeItem(`favorite_${newsId}`);
-//     button.textContent = 'Add to Favorite';
-//     button.classList.remove('active');
-//   } else {
-//     localStorage.setItem(`favorite_${newsId}`, true);
-//     button.textContent = 'Remove from Favorite';
-//     button.classList.add('active');
-//   }
-// }
-
-// mainPage.addEventListener('click', event => {
-//   const button = event.target.closest('.news-card__favorite-btn');
-//   if (button !== null) {
-//     toggleFavorite(event);
-//   }
-// });
