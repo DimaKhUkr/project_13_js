@@ -148,6 +148,7 @@ export async function getCategories() {
 
         // Для селектора
         selectHeader = document.querySelector('.select_header');
+        selectBtn = document.querySelector('.select_btn');
         const categoryFromSelect = document.querySelectorAll('.select_item');
         categoryFromSelect.forEach(category => {
           category.addEventListener('click', chooseCategory);
@@ -166,7 +167,6 @@ export async function getCategories() {
           // console.log('item');
         }
 
-        const selectBtn = document.querySelector('.select_btn');
         // selectBtn.addEventListener('change', async event => {
         //   const category = event.currentTarget.value.toLowerCase();
         //   event.preventDefault();
