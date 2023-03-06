@@ -147,16 +147,21 @@ export async function getCategories() {
         });
 
         // Для селектора
+        selectHeader = document.querySelector('.select_header');
         const categoryFromSelect = document.querySelectorAll('.select_item');
         categoryFromSelect.forEach(category => {
           category.addEventListener('click', chooseCategory);
         });
         function chooseCategory(event) {
           selectBtn.classList.remove('is-active');
+          selectHeader.classList.remove('is-active');
           event.preventDefault();
           category = event.target.textContent.toLowerCase();
-          // console.log(category);
-          console.log('item');
+          console.log(category);
+          // console.log('item');
+          category = category.replace('/', '%2F');
+          category = category.replace('&', '%26');
+          // category = category.replace(' ', '%20');
           getNewsByCategory(offsetPage, category);
           // console.log('item');
         }
