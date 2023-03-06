@@ -30,9 +30,9 @@ inputSearch.addEventListener('submit', e => {
 // Запрос на бекенд по полю поиска
 async function articleSearch(currentPage, dateCal) {
   if (!dateCal) {
-    urlFetch = urlFetch + `&page=${currentPage}`;
+    urlFetch = url + `&page=${currentPage}`;
   } else {
-    urlFetch = urlFetch + `&page=${currentPage}` + `&fq=pub_date:(${dateCal})`;
+    urlFetch = url + `&page=${currentPage}` + `&fq=pub_date:(${dateCal})`;
   }
   console.log(urlFetch);
   try {
@@ -59,7 +59,7 @@ async function fetchMostPopularNews() {
     console.error(error);
   }
 }
-
+// --------------------------------------------------------------------------------------
 // Рендеринг новостей по популярным новостям при первой загрузке страницы
 export async function createPopularNews() {
   weather.removeAttribute('hidden');
@@ -102,7 +102,7 @@ export async function createPopularNews() {
   mainPage.insertAdjacentHTML('beforeend', newsCards.join(''));
   document.addEventListener('DOMContentLoaded', startWeatherApp);
 }
-
+// ---------------------------------------------------------------------------
 // Рендеринг новостей по полю поиска
 export async function createMainPage(pageNumber, dateCal) {
   empty.setAttribute('hidden', '');
