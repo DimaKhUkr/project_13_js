@@ -159,7 +159,7 @@ export async function createMainPage(pageNumber, dateCal) {
                 pub_date
               ).toLocaleDateString()}</div>
               <button class="btn-read-more news-card__read-more">
-              <ahref="${web_url}" target="_blank">Read more</ahref=>
+              <a href="${web_url}" target="_blank">Read more</a>
               </button>
               </div>
             </div>
