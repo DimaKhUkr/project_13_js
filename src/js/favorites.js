@@ -1,47 +1,36 @@
-const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
-const URL_SEARCH = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+import { loadFromStorage, toggleFavoriteNews } from './local-storage';
+
+const STOR_KEY_FAV = 'favorites';
 
 const placeForFavNews = document.getElementById('favorite-articles');
-// const ifNewsInFavorite = false;
 
 createFavoritePage();
 
 placeForFavNews.addEventListener('click', event => {
   const button = event.target.closest('.news-card__favorite-btn');
   if (button !== null) {
-    removeFromFavorite(event);
+    toggleFavoriteNews(event);
+    createFavoritePage();
   }
 });
 
-function removeFromFavorite(event) {
-  const button = event.target;
-  const newsId = button.dataset.newsId;
-
-  localStorage.removeItem(`favorite_${newsId}`);
-  createFavoritePage();
-}
-
-async function createFavoritePage() {
+// ----- функція створення сторінки обраних новин
+function createFavoritePage() {
   let markup = '';
 
   placeForFavNews.innerHTML = '';
 
-  for (let i = 0; i < localStorage.length; i++) {
-    let storageKey = localStorage.key(i);
-
-    if (storageKey.includes('favorite')) {
-      let favoriteQuery = storageKey.slice(9, storageKey.length);
-      const data = await getFavoriteNews(favoriteQuery);
-      const news = data.response.docs;
-      markup = markup + createFavoriteNews(news[0]);
-    }
+  const currentData = loadFromStorage(STOR_KEY_FAV);
+  if (currentData !== undefined) { 
+  currentData.forEach(news => (markup = markup + createFavoriteNewsCard(news)));
   }
-
-  if (markup === '') markup = noNewsInFavorite();
+  
+  if (markup === '' || currentData === undefined) markup = noNewsInFavorite();
 
   placeForFavNews.insertAdjacentHTML('beforeend', markup);
 }
 
+// ----- функція картинки коли нема вибраних новин
 function noNewsInFavorite() {
   return `
   <div class="favorite-news__none">
@@ -49,51 +38,36 @@ function noNewsInFavorite() {
   </div>`;
 }
 
-function createFavoriteNews(news) {
+// ----- функція створення картки новини
+function createFavoriteNewsCard(news) {
 
-  const title = news.headline.main;
-  const isFavorite = true;
-
-  const photoUrl =
-    news.multimedia.length === 0
-      ? 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg'
-      : `https://static01.nyt.com/${news.multimedia[0].url}`;
-
-  const { _id, section_name, abstract, pub_date, web_url } = news;
-
+  const { _id, section_name, abstract, pub_date, web_url, photoUrl, title } =
+    news;
   return `
-          <div class="news-card">
-            <img src="${photoUrl}" alt="заглушка" />
-            <div class="news-card__info">
-              <div class="news-card__category">${section_name}</div>
-              <button class="news-card__favorite-btn ${
-                isFavorite ? 'active_btn' : ''
-              }" data-news-id="${_id}">
-                ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
-              </button>
-              <h2 class="news-card__title">${title}</h2>
-              <p class="news-card__description">${
-                abstract.length > 100
-                  ? abstract.substring(0, 100) + '...'
-                  : abstract
-              }</p>
-              <div class="news-card__date-div">
-              <div class="news-card__date">${new Date(
-                pub_date
-              ).toLocaleDateString()}</div>
-              <a class="news-card__read-more" href="${web_url}" target="_blank">Read more</a>
+            <div class="news-card">
+              <img src="${photoUrl}" alt="заглушка" />
+              <div class="news-card__info">
+                <div class="news-card__category">${section_name}</div>
+                <button class="news-card__favorite-btn active_btn"
+                data-news-id="${_id}">
+                  'Remove from Favorite'
+                </button>
+                <h2 class="news-card__title">${title}</h2>
+                <p class="news-card__description">${
+                  abstract.length > 100
+                    ? abstract.substring(0, 100) + '...'
+                    : abstract
+                }</p>
+                <div class="news-card__date-div">
+                <div class="news-card__date">${new Date(
+                  pub_date
+                ).toLocaleDateString()}</div>
+                <button class="btn-read-more news-card__read-more">
+                <ahref="${web_url}" target="_blank">Read more</ahref=>
+                </button>
+                </div>
               </div>
             </div>
-          </div>
-        `;
+          `;
 }
 
-async function getFavoriteNews(query) {
-  try {
-    return await fetch(
-      `${URL_SEARCH}?fq=_id:("${query}")&api-key=${API_KEY}`
-    ).then(resp => resp.json());
-  } catch (error) {
-    console.error(error);
-  }
-}
