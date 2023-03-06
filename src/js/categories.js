@@ -147,14 +147,11 @@ export async function getCategories() {
         });
 
         // Для селектора
-        selectHeader = document.querySelector('.select_header');
         const categoryFromSelect = document.querySelectorAll('.select_item');
         categoryFromSelect.forEach(category => {
           category.addEventListener('click', chooseCategory);
         });
         function chooseCategory(event) {
-          selectBtn.classList.remove('is-active');
-          selectHeader.classList.remove('is-active');
           event.preventDefault();
           category = event.target.textContent.toLowerCase();
           console.log(category);
@@ -164,6 +161,13 @@ export async function getCategories() {
           // category = category.replace(' ', '%20');
           getNewsByCategory(offsetPage, category);
           // console.log('item');
+
+          // ------   Скрываем форму категорий убрав IS-ACTIVE --------- //
+          const selectHeader = document.querySelector('.select_header');
+          const selectBtn = document.querySelector('.select_btn');
+          selectBtn.classList.remove('is-active');
+          selectHeader.classList.remove('is-active');
+
         }
 
         const selectBtn = document.querySelector('.select_btn');
