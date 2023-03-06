@@ -18,6 +18,27 @@
   }
 }
 
+.read-item-empty {
+  @include tablet {
+    padding-top: 40px;
+  }
+
+  @include desktop {
+    padding-top: 60px;
+  }
+}
+
+.read-item-empty > h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.read-item-empty > div {
+  width: 600px;
+  height: 478px;
+  margin: 0 auto;
+  background-image: url('../images/empty-page.jpg');
+}
+
 .dark-theme .read,
 .dark-theme .read-date,
 .dark-theme .read-arrow {
@@ -54,7 +75,6 @@
   margin-right: 10px;
 }
 
-
 .read-arrow {
   height: 12px;
   width: 12px;
@@ -62,13 +82,13 @@
   border-color: $text-color-light;
   border-width: 2px 2px 0 0;
   transform: rotate(135deg);
-  transform: translate(0, 0);
-  transition: transform 500ms ease, transform 500ms ease;
+  // transform: translate(0, 0);
+  transition: transform 500ms ease;
 }
 
 .read-active .read-arrow {
   transform: rotate(-45deg);
-  transform: translate(50%, 50%);
+  // transform: translate(50%, 50%);
 }
 
 .dark-theme .read-arrow {
