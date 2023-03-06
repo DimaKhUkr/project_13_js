@@ -102,7 +102,11 @@ async function getFavoriteNews(query) {
 // функція перевірки у вибраному при відмальовці картки новини
 function isNewsInFavorites(newsId) {
   const currentData = loadFromStorage(STOR_KEY);
-  const isFavorit = currentData.some(news => news._id === newsId);
+  let isFavorit = false;
+  if (currentData !== undefined) {
+      isFavorit = currentData.some(news => news._id === newsId);
+  };
+  console.log("isFavorit=", isFavorit);
   return isFavorit;
 }
 
