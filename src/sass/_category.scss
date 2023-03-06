@@ -34,21 +34,101 @@
   cursor: pointer;
 }
 
-.select_btn {
-  font-family: 'Manrope', sans-serif;
+// .select_btn {
+//   font-family: 'Manrope', sans-serif;
+//   font-weight: 400;
+//   font-size: 12px;
+//   line-height: 1.33;
+//   text-align: center;
+//   color: #4b48db;
+//   padding: 8px 21px;
+//   min-width: 112px;
+//   height: 31px;
+//   border-radius: 20px;
+//   border: 1px solid #4440f7;
+//   cursor: pointer;
+
+//   @include tablet {
+//     width: 112px;
+//   }
+// }
+
+
+  /* ----- Custom selector ------- */
+
+/* Поле кнопки АЗЕРС */
+.select_header {
+  position: relative;
+  background: #F8F8F8;
+  padding: 8px 21px;
+  gap: 10px;
+  width: 96px;
+  height: 31px;
+  border: 1px solid #4440F7;
+  border-radius: 20px;
+}
+
+/* Наполнение кнопки АЗЕРС */
+.select_current {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 1.33;
+  line-height: 16px;
   text-align: center;
-  color: #4b48db;
-  padding: 8px 21px;
-  min-width: 112px;
-  height: 31px;
+  color: #4440F7;
   border-radius: 20px;
-  border: 1px solid #4440f7;
-  cursor: pointer;
-
-  @include tablet {
-    width: 112px;
-  }
+  transition: background-color 0.3s ease;
 }
+
+.select_current:hover {
+  background-color: #4440F7;
+  color: #F8F8F8;
+}
+
+/* Видимость нашего выпада */
+.select_btn.is-active {
+  display: block;
+}
+
+
+/* Наше поле куда ставим категории */
+.select_btn {
+  position: absolute;
+  z-index: 100000;
+  width: 168px;
+  height: auto;
+  padding: 14px 24px;
+  background: #F8F8F8;
+  border-radius: 20px;
+  filter: drop-shadow(0px 10px 60px rgba(0, 0, 0, 0.1));
+  display: none;
+}
+
+
+
+/* Наши категории */
+.select_item {
+  cursor: pointer;
+  /* margin-bottom: 12px; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 2.5;
+  letter-spacing: 0.01em;
+  color: #4440F7;
+  transition: all 0.3s ease;
+}
+
+.select_item:hover {
+  border-bottom: 1px solid #4440F7;
+}
+
