@@ -1,0 +1,2 @@
+!function(){var e;document.querySelectorAll(".read-title").forEach((function(t){return t.addEventListener("click",(function(){parent=t.parentNode;var r=(e=t.nextElementSibling).scrollHeight;parent.classList.contains("read-active")?(parent.classList.remove("read-active"),e.style.height="0px"):(document.querySelectorAll(".read-item").forEach((function(e){return e.classList.remove("read-active")})),parent.classList.toggle("read-active"),e.style.height=r+"px")}))}))}();
+//# sourceMappingURL=read.5d4cf44c.js.map
