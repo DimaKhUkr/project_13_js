@@ -1,6 +1,7 @@
 import { startWeatherApp } from './weather';
 import { updatePagination } from './pagination';
 import { onReadCard } from './alredy-read';
+import { toggleFavoriteNews, isNewsInFavorites } from './local-storage';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
@@ -73,7 +74,8 @@ export async function createPopularNews() {
         ? news.media[0]['media-metadata'][2].url
         : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { id, title, abstract, published_date, url, section, uri } = news;
-    const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
+    const isFavorite = isNewsInFavorites(uri);
+    // const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
     return `<div class="news-card" id="${id}">
             <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
@@ -137,7 +139,8 @@ export async function createMainPage(pageNumber, dateCal) {
         ? `https://static01.nyt.com/${news.multimedia[0].url}`
         : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { _id, section_name, abstract, pub_date, web_url } = news;
-    const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
+    const isFavorite = isNewsInFavorites(_id);
+    // const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
     return `
           <div class="news-card" id="${_id}">
             <img src="${photoUrl}" alt="заглушка" />
@@ -180,25 +183,26 @@ export async function createMainPage(pageNumber, dateCal) {
 }
 
 // Добавление/удаление новости из избранного
-function toggleFavorite(event) {
-  const button = event.target;
-  const newsId = button.dataset.newsId;
+// function toggleFavorite(event) {
+//   const button = event.target;
+//   const newsId = button.dataset.newsId;
 
-  if (localStorage.getItem(`favorite_${newsId}`) !== null) {
-    localStorage.removeItem(`favorite_${newsId}`);
-    button.textContent = 'Add to Favorite';
-    button.classList.remove('active_btn');
-  } else {
-    localStorage.setItem(`favorite_${newsId}`, true);
-    button.textContent = 'Remove from Favorite';
-    button.classList.add('active_btn');
-  }
-}
+//   if (localStorage.getItem(`favorite_${newsId}`) !== null) {
+//     localStorage.removeItem(`favorite_${newsId}`);
+//     button.textContent = 'Add to Favorite';
+//     button.classList.remove('active_btn');
+//   } else {
+//     localStorage.setItem(`favorite_${newsId}`, true);
+//     button.textContent = 'Remove from Favorite';
+//     button.classList.add('active_btn');
+//   }
+// }
 
 mainPage.addEventListener('click', event => {
   const button = event.target.closest('.news-card__favorite-btn');
   if (button !== null) {
-    toggleFavorite(event);
+    toggleFavoriteNews(event);
+    // toggleFavorite(event);
   }
 });
 
