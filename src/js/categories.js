@@ -140,8 +140,8 @@ export async function getCategories() {
           btn.addEventListener('click', async event => {
             event.preventDefault();
             category = btn.textContent.toLowerCase();
-            console.log(category);
-            console.log(offsetPage);
+            // console.log(category);
+            // console.log(offsetPage);
             getNewsByCategory(offsetPage, category);
           });
         });
@@ -154,7 +154,7 @@ export async function getCategories() {
         function chooseCategory(event) {
           event.preventDefault();
           category = event.target.textContent.toLowerCase();
-          console.log(category);
+          // console.log(category);
           console.log('item');
           getNewsByCategory(offsetPage, category);
         }
