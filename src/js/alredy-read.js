@@ -11,8 +11,9 @@ export function onReadCard(e) {
 
     if (card) {
       card.classList.add('reading_card');
-      card.insertAdjacentHTML('afterbegin', '<p class="text-alredy-read">Already read <svg class="svg-checkmark" width="18" height="18"><use href="./src/svg/checkmark.svg#icon-checkmark"></use></svg></p>');
+      card.insertAdjacentHTML('afterbegin', '<p class="text-alredy-read">Already read</p>');
       // console.log(card)
+      // <svg class="svg-checkmark" width="18" height="18"><use href="./src/svg/checkmark.svg#icon-checkmark"></use></svg>
     }
 
 const categoryEl = card.querySelector('.news-card__category');
