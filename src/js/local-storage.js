@@ -11,7 +11,7 @@ function toggleFavoriteNews(event) {
     button.classList.add('active_btn');
     addNewsToLocalStorage(newsId);
   } else {
-    console.log('delete from fav');
+    // console.log('delete from fav');
     button.textContent = 'Add to Favorite';
     button.classList.remove('active_btn');
     deleteNewsFromLocalStorage(newsId);
@@ -63,7 +63,6 @@ async function addNewsToLocalStorage(newsId) {
 function deleteNewsFromLocalStorage(newsId) {
   const currentData = loadFromStorage(STOR_KEY);
   const newsIndex = currentData.findIndex(news => news._id === newsId);
-  console.log("newsIndex=", newsIndex);
   if (newsIndex >= 0) currentData.splice(newsIndex, 1);
   saveToStorage(STOR_KEY, currentData);
 }
