@@ -9,6 +9,17 @@ ol {
   padding-left: 0;
   list-style: none;
 }
+
+body{
+  transition: all 0.6s ease;
+}
+
+body.dark-theme {
+  background: $bgn-color-dark;
+  color: #f4f4f4;
+}
+
+
 .container {
   width: 100%;
   margin: 0 auto;
@@ -27,6 +38,7 @@ ol {
 .page__header {
   background-color: #f2f2f2;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  //  transition: all 0.6s ease;
 }
 
 body.dark-theme .page__header{
@@ -238,7 +250,7 @@ body.dark-theme .page__header{
 
 @include tablet {
   .search-form input {
-    width: 60%;
+    width: 90%;
     padding: 5px 0;
     font-size: 14px;
     line-height: 1.7;
@@ -507,10 +519,7 @@ svg {
   left: 10px;
 }
 
-body.dark-theme {
-  background: $bgn-color-dark;
-  // color: #f4f4f4;
-}
+
 
 body.dark-theme header {
   background: $bgn-color-dark;
@@ -531,12 +540,16 @@ body.dark-theme .theme-text {
 
 
 input:-webkit-autofill {
-  -webkit-box-shadow: inset 0 0 0 50 $bgn-color-light; /* цвет вашего фона */
-  -webkit-text-fill-color: $text-color-light; /* цвет текста */
+  -webkit-box-shadow: inset 0 0 0 50 $bgn-color-light; 
+  -webkit-text-fill-color: $text-color-light; 
+    border-top-right-radius :20px;
+  border-bottom-right-radius:20px;
 }
 
 body.dark-theme input:-webkit-autofill{
-  -webkit-box-shadow: inset 0 0 0 50 $bgn-color-dark; /* цвет вашего фона */
-  -webkit-text-fill-color:$alt-text-color-dark ; /* цвет текста */
+  -webkit-box-shadow: inset 0 0 0 50 $bgn-color-dark;
+  -webkit-text-fill-color:$alt-text-color-dark ; 
+    border-top-right-radius :20px;
+  border-bottom-right-radius:20px;
 }
 
