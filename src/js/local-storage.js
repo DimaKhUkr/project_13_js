@@ -106,7 +106,6 @@ function isNewsInFavorites(newsId) {
   if (currentData !== undefined) {
       isFavorit = currentData.some(news => news._id === newsId);
   };
-  console.log("isFavorit=", isFavorit);
   return isFavorit;
 }
 
