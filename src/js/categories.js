@@ -1,4 +1,5 @@
 // import { startWeatherApp } from './weather';
+import {isNewsInFavorites } from './local-storage';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 const URL = 'https://api.nytimes.com/svc/news/v3/content/section-list.json';
@@ -235,7 +236,8 @@ function renderResult(news) {
           : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
       const { section, abstract, title, url, uri, published_date } =
         resultSearch;
-      const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
+        const isFavorite = isNewsInFavorites(uri);
+      // const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
       return `<div class ="news-card">
         <img src="${photo}" alt="photo"/>
         <div class="news-card__info">
