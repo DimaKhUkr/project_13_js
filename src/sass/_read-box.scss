@@ -28,15 +28,37 @@
   }
 }
 
-.read-item-empty > h2 {
+.read-item-empty > p {
   text-align: center;
   margin-bottom: 40px;
+  // font-family: 'Manrope';
+  // font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.35;
+
+  letter-spacing: -0.01em;
+  @include tablet {
+    font-size: 40px;
+    line-height: 1.38;
+  }
 }
 .read-item-empty > div {
-  width: 600px;
-  height: 478px;
+  width: 248px;
+  height: 198px;
   margin: 0 auto;
-  background-image: url('../images/empty-page.jpg');
+  background-image: url('../images/noNews-mob.png');
+  @include tablet {
+    width: 560px;
+    height: 444px;
+    background-image: url('../images/noNews-tab.png');
+  }
+
+  @include desktop {
+    width: 600px;
+    height: 478px;
+    background-image: url('../images/noNews-dtop.png');
+  }
 }
 
 .dark-theme .read,

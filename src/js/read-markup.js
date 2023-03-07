@@ -1,30 +1,60 @@
-const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
-const URL_SEARCH = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+// Для кнопок read more та favorite
+import { toggleFavoriteNews, isNewsInFavorites } from './local-storage';
+const readMain = document.querySelector('.read');
+
+readMain.addEventListener('click', event => {
+  console.log('click');
+  const button = event.target.closest('.news-card__favorite-btn');
+  if (button !== null) {
+    toggleFavoriteNews(event);
+  }
+});
+
+// const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
+// const URL_SEARCH = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
 
 const readList = document.querySelector('.read');
 
-
-isReadEmpty();
+// document.querySelector('body').style.minHeight = window.innerHeight + 'px';
+// isReadEmpty();
 // getReadKeys();
-testMarkup2();
+
+// readMarkup();
 // testMarkupWithFilter();
 // createReadPage();
 
+// Задаємо мінімальну висоту сторінки
+const windowHeight = window.innerHeight;
+const headerHeight = document.querySelector('header').offsetHeight;
+const footerHeight = document.querySelector('footer').offsetHeight;
+const mainHeight = document.querySelector('.read-container').offsetHeight;
 
-// Для порожньої сторінки
-function isReadEmpty() {
-  if (readList.children.length === 0) {
-    console.log('empty');
-    const markup =
-      '<li class="read-item-empty"><h2>Nothing read yet</h2><div class="read-empty"></div></li > ';
-    readList.innerHTML = markup;
-  }
-  console.log('Not empty');
+const main = document.querySelector('.read-container');
+
+const totalHeight = headerHeight + mainHeight + footerHeight;
+
+if (totalHeight < windowHeight) {
+  // розраховуємо різницю між висотою вьюпорта і висотою сторінки
+  const diff = windowHeight - totalHeight;
+  // робимо мінімальну висоту сторінки рівною висоті вьюпорта
+  main.style.minHeight = main.offsetHeight + diff + 'px';
 }
 
+isReadArticles();
 
-function testMarkup2() {
+function isReadArticles() {
+  // регулярний вираз для перевірки формату ключа
+  const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+  // перевіряємо наявність ключа з потрібним форматом
+  const key = Object.keys(localStorage).find(k => regex.test(k));
+  if (key) {
+    // якщо ключ знайдено, викликаємо функцію
+    readMarkup();
+  }
+}
 
+// Розмітка для сторінки, якщо є записи в локальному сховищі
+function readMarkup() {
   // отримуємо всі ключі з локального сховища
   const keys = Object.keys(localStorage);
 
@@ -34,15 +64,14 @@ function testMarkup2() {
   // перебираємо всі ключі з локального сховища
   for (const key of keys) {
     // перевіряємо, чи є ключ датою у форматі 02/03/2023
-    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-    if (dateRegex.test(key)) {
+    const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (regex.test(key)) {
       // якщо ключ є датою, отримуємо список статей для цієї дати
       const articles = JSON.parse(localStorage.getItem(key));
       // додаємо цей список статей до списку за датою
       articlesByDate[key] = articles;
     }
   }
-
   // створюємо HTML-розмітку для списку статей за датами
   let markup = '';
   for (const key of Object.keys(articlesByDate)) {
@@ -57,12 +86,17 @@ function testMarkup2() {
     // створюємо список статей
     for (const article of articlesByDate[key]) {
       // додаємо картку статті
+      const isFavorite = isNewsInFavorites(article.favoritId);
       markup += `<li>
           <div class="news-card">
             <img src=${article.img} alt="Article illustration" />
             <div class="news-card__info">
               <div class="news-card__category">${article.category}</div>
-        
+              <button class="news-card__favorite-btn ${
+                isFavorite ? 'active_btn' : ''
+              }" data-news-id="${article.favoritId}">
+                ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
+              </button>
          <h2 class="news-card__title">${article.title}</h2>
          <p class="news-card__description">
         ${article.description}
@@ -77,17 +111,10 @@ function testMarkup2() {
          </div>
         </div>
         </div>
-        </li>`  
-        ;
+        </li>`;
     }
     markup += '</ul>';
   }
-
-  // вставляємо HTML-розмітку у елемент
+  // вставляємо HTML-розмітку в елемент
   readList.innerHTML = markup;
-} 
-
-
-
-
-
+}
