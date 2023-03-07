@@ -4,19 +4,23 @@
   // height: 31px;
 
   position: relative;
-
+  top: 82px;
   gap: 16px;
   padding-top: 24px;
   padding-bottom: 40px;
-
+  // flex-wrap: wrap;
   @include tablet {
     padding-top: 28px;
     padding-bottom: 48px;
+    top: 106px;
+    // flex-wrap: nowrap;
   }
   @include desktop {
     padding-top: 28px;
     padding-bottom: 60px;
+    
     // justify-content: flex-start;
+    top: 114px;
   }
 }
 
