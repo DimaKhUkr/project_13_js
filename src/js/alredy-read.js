@@ -32,6 +32,7 @@ const readMoreEl = card.querySelector('a')
       description:`${descriptionEl.textContent}`,
       dataNewsId: `${dataNewsIdEl.textContent}`,
       readMore: `${readMoreEl.href}`,
+      favoritId: `${dataNewsIdEl.dataset.newsId}`,
     }
     
 
@@ -41,6 +42,7 @@ const readMoreEl = card.querySelector('a')
     // } else {
     //   arr.push(cardEl);
     // }
+
     arr.push(cardEl);
     // console.log(arr.includes(`${'cardEl'}`))
 
