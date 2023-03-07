@@ -146,7 +146,7 @@ body.dark-theme .news-card__description {
 
 .news-card__read-more {
   position: absolute;
-  left: 214px;
+  left: 205px;
   right: 1px;
   top: 611px;
 
@@ -165,6 +165,12 @@ body.dark-theme .news-card__description {
   @include desktop {
     left: 290px;
   }
+
+  @include mobile{
+    font-size: 14px;
+  }
+ 
+
 }
 
 .news-card__actions {

@@ -3,22 +3,53 @@
     opacity: 0.4;
 }
 
-.text-alredy-read{
+.text-alredy-read {
     position: absolute;
-    left: 267px;
-top: 20px;
+  
     font-family: 'Manrope';
 font-style: normal;
 font-weight: 700;
 font-size: 14px;
-line-height: 19px;
+line-height: 1.36;
 
 color: #00DD73;
+
+@include mobile {
+        left: 167px;
+        top: 14px;
+     }
+@include tablet {
+        left: 225px;
+        top: 20px;
+  }
+@include desktop{
+        left: 267px;
+        top: 20px;
+  }
 }
 
-.svg-checkmark{
+.text-alredy-read::after {
+    display: inline-block;
     position: absolute;
-    left: 356px;
-top: 20px;
-fill: #00DD73;
+    left: 90px;
+    top: 1px;
+
+    content: '';
+    width: 18px;
+    height: 18px;
+    background-image: url('/src/images/checkmark.png');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+// .svg-checkmark{
+//     position: absolute;
+//     left: 356px;
+// top: 20px;
+// fill: #00DD73;
+// }
+
+.btn-read-more{
+    background-color: transparent;
+    border: transparent;
 }
