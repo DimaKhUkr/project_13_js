@@ -10,19 +10,6 @@ readMain.addEventListener('click', event => {
   }
 });
 
-// const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
-// const URL_SEARCH = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
-
-const readList = document.querySelector('.read');
-
-// document.querySelector('body').style.minHeight = window.innerHeight + 'px';
-// isReadEmpty();
-// getReadKeys();
-
-// readMarkup();
-// testMarkupWithFilter();
-// createReadPage();
-
 // Задаємо мінімальну висоту сторінки
 const windowHeight = window.innerHeight;
 const headerHeight = document.querySelector('header').offsetHeight;
@@ -116,5 +103,5 @@ function readMarkup() {
     markup += '</ul>';
   }
   // вставляємо HTML-розмітку в елемент
-  readList.innerHTML = markup;
+  readMain.innerHTML = markup;
 }
