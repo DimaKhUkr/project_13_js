@@ -63,7 +63,8 @@ async function addNewsToLocalStorage(newsId) {
 function deleteNewsFromLocalStorage(newsId) {
   const currentData = loadFromStorage(STOR_KEY);
   const newsIndex = currentData.findIndex(news => news._id === newsId);
-  currentData.splice(newsIndex, 1);
+  console.log("newsIndex=", newsIndex);
+  if (newsIndex >= 0) currentData.splice(newsIndex, 1);
   saveToStorage(STOR_KEY, currentData);
 }
 
