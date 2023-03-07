@@ -37,12 +37,17 @@
   transition: background-color 0.3s ease;
 }
 
-// body.dark-theme .calendar-button.category_btn{
-//   background: $bgn-color-dark;
-//   border: 1px solid $alt-text-color-dark;
-//   color: $alt-text-color-dark;
-// }
+body.dark-theme .calendar-button.category_btn{
+  background: $bgn-color-dark;
+  border: 1px solid $alt-text-color-dark;
+  color: $alt-text-color-dark;
+}
 
+body.dark-theme .category_btn:hover,
+body.dark-theme .category_btn:focus{
+  background: #4440f6;
+  color: #ffffff;
+}
 .category_btn:hover,
 .category_btn:focus {
   background: #4440f6;
