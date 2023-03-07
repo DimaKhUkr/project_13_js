@@ -1,22 +1,10 @@
 .footer{
     height: 120px;
     background-color: $footer-rect;
-    //  position: fixed;
-    //  bottom: 0;
-     width: 100%;
+    width: 100%;
    
     @include tablet {
             height: 148px;
         }
-
 }
 
-// body {
-//     display: flex;
-//     flex-direction: column;
-//     min-height: 100vh;
-// }
-
-// main {
-//     flex-grow: 1;
-// }
