@@ -15,7 +15,7 @@
 
   &__text {
     font-size: 10px;
-    color: $text-color-light;
+    color: $text-color-dark;
     padding: 0 5px;
     text-align: center;
 
@@ -38,7 +38,7 @@
   &__content {
     display: none;
     width: 100%;
-    color: $text-color-light;
+    color: $text-color-dark;
     margin: 0 auto;
     font-size: 12px;
 
@@ -99,7 +99,6 @@
     grid-template-columns: 1fr;
     gap: 5px;
     align-items: center;
-    width: 480px;
     padding: 15px;
     margin: 0 auto;
 
