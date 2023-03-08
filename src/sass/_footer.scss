@@ -1,10 +1,113 @@
-.footer{
-    height: 120px;
-    background-color: $footer-rect;
+.footer {
+  height: 120px;
+  background-color: $footer-rect;
+  width: 100%;
+
+  @include tablet {
+    height: 148px;
+  }
+
+  &__logo-wraper {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  &__text {
+    font-size: 10px;
+    color: $text-color-light;
+    padding: 0 5px;
+    text-align: center;
+  }
+
+  &__logo-link {
+    display: block;
+  }
+
+  &__logo-link:hover,
+  &__logo-link:focus {
+    scale: 0.9;
+    border: 3px solid $decoration-color;
+    border-radius: 3px;
+  }
+
+  &__content {
+    display: none;
     width: 100%;
-   
+    color: $text-color-light;
+    margin: 0 auto;
+    font-size: 12px;
+
     @include tablet {
-            height: 148px;
-        }
+      display: flex;
+      flex-direction: column;
+    }
+
+    @include desktop {
+      grid-column: 2/4;
+    }
+  }
+
+  &__title {
+    font-weight: 900;
+    color: $decoration-color;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-columns: minmax(120px, auto);
+    gap: 5px;
+
+    > :first-child {
+      grid-column: 1/4;
+      margin: 0 auto;
+    }
+  }
+
+  &__list-link {
+    text-align: center;
+  }
+
+  &__list-link:hover,
+  &__list-link:focus {
+    color: $decoration-color;
+    scale: 1.1;
+  }
+
+  &__wraper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    align-items: center;
+    width: 480px;
+    padding: 15px;
+    margin: 0 auto;
+
+    @include tablet {
+      width: 768px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include desktop {
+      width: 1280px;
+      padding-left: 30px;
+      padding-right: 30px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 }
 
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.copy {
+  @include tablet {
+    margin-top: -20px;
+  }
+}
