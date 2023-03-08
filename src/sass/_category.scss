@@ -1,8 +1,5 @@
 .categories {
   display: flex;
-
-  // height: 31px;
-
   position: relative;
   top: 82px;
   gap: 16px;
@@ -18,7 +15,7 @@
   @include desktop {
     padding-top: 28px;
     padding-bottom: 60px;
-    
+
     // justify-content: flex-start;
     top: 114px;
   }
@@ -41,41 +38,22 @@
   transition: background-color 0.3s ease;
 }
 
-body.dark-theme .calendar-button.category_btn{
+body.dark-theme .calendar-button.category_btn {
   background: $bgn-color-dark;
   border: 1px solid $alt-text-color-dark;
   color: $alt-text-color-dark;
 }
 
 body.dark-theme .category_btn:hover,
-body.dark-theme .category_btn:focus{
-  background: #4440f6;
+body.dark-theme .category_btn:focus {
+  background: $decoration-color;
   color: #ffffff;
 }
 .category_btn:hover,
 .category_btn:focus {
-  background: #4440f6;
+  background: $decoration-color;
   color: #ffffff;
 }
-
-// .select_btn {
-//   font-family: 'Manrope', sans-serif;
-//   font-weight: 400;
-//   font-size: 12px;
-//   line-height: 1.33;
-//   text-align: center;
-//   color: #4b48db;
-//   padding: 8px 21px;
-//   min-width: 112px;
-//   height: 31px;
-//   border-radius: 20px;
-//   border: 1px solid #4440f7;
-//   cursor: pointer;
-
-//   @include tablet {
-//     width: 112px;
-//   }
-// }
 
 /* ----- Custom selector ------- */
 
@@ -83,9 +61,9 @@ body.dark-theme .category_btn:focus{
 .select_header {
   position: relative;
   background: #f8f8f8;
-  padding: 8px 21px;
+  // padding: 8px 21px;
   gap: 10px;
-  width: 96px;
+  width: 116px;
   height: 31px;
   border: 1px solid #4440f7;
   border-radius: 20px;
@@ -113,7 +91,7 @@ body.dark-theme .category_btn:focus{
 }
 
 .select_current:hover {
-  background-color: #4440f7;
+  background-color: $alt-decoration-color;
   color: #ffffff;
 }
 
@@ -125,7 +103,7 @@ body.dark-theme .category_btn:focus{
 /* Наше поле куда ставим категории */
 .select_btn {
   position: absolute;
-  z-index: 100000;
+  z-index: 99;
   width: 168px;
   max-height: 380px;
   padding: 14px 24px;
@@ -143,14 +121,18 @@ body.dark-theme .category_btn:focus{
 /* Наши категории */
 .select_item {
   cursor: pointer;
-  /* margin-bottom: 12px; */
+  margin-bottom: 12px;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 2.5;
+  line-height: 1.33;
   letter-spacing: 0.01em;
-  color: #4440f7;
+  color: $alt-decoration-color;
   transition: all 0.3s ease;
+}
+
+.select_item:last-child {
+  margin-bottom: 0px;
 }
 
 .select_item:hover {
