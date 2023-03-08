@@ -1,7 +1,11 @@
 import { startWeatherApp } from './weather';
 import { updatePagination } from './pagination';
 import { onReadCard } from './alredy-read';
-import { toggleFavoriteNews, isNewsInFavorites } from './local-storage';
+import {
+  toggleFavoriteNews,
+  isNewsInFavorites,
+  isNewsInRead,
+} from './local-storage';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 
@@ -75,8 +79,12 @@ export async function createPopularNews() {
         : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { id, title, abstract, published_date, url, section, uri } = news;
     const isFavorite = isNewsInFavorites(uri);
+    const isRead = isNewsInRead(uri);
     // const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
-    return `<div class="news-card" id="${id}">
+    return `<div class="news-card
+    ${isRead ? 'reading_card' : ''}
+          " id="${id}">
+          ${isRead ? '<p class="text-alredy-read">Already read</p>' : ''}
             <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
               <div class="news-card__category">${section}</div>
@@ -140,9 +148,13 @@ export async function createMainPage(pageNumber, dateCal) {
         : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
     const { _id, section_name, abstract, pub_date, web_url } = news;
     const isFavorite = isNewsInFavorites(_id);
+    const isRead = isNewsInRead(_id);
     // const isFavorite = localStorage.getItem(`favorite_${_id}`) !== null;
     return `
-          <div class="news-card" id="${_id}">
+          <div class="news-card
+          ${isRead ? 'reading_card' : ''}
+          " id="${_id}">
+          ${isRead ? '<p class="text-alredy-read">Already read</p>' : ''}
             <img src="${photoUrl}" alt="заглушка" />
             <div class="news-card__info">
               <div class="news-card__category">${section_name}</div>

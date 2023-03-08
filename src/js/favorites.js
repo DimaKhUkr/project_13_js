@@ -47,11 +47,13 @@ function createFavoriteNewsCard(news) {
   const { _id, section_name, abstract, pub_date, web_url, photoUrl, title } =
     news;
     const isRead = isNewsInRead(_id);
-    console.log("isRead=", isRead);
   return `
             <div class="news-card
             ${isRead ? 'reading_card' : ''}
             " id="${_id}">
+              ${isRead ?
+              '<p class="text-alredy-read">Already read</p>'
+              : ''}
               <img src="${photoUrl}" alt="заглушка" />
               <div class="news-card__info">
                 <div class="news-card__category">${section_name}</div>
