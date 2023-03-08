@@ -1,12 +1,10 @@
-
 export function onReadCard(e) {
   let card = null;
 
   const today = new Date();
   const now = today.toLocaleDateString('en-GB');
-  const STORAGE_KEY = `read_news_${now}`;
-  console.log(STORAGE_KEY)
-
+  const STORAGE_KEY = 'read_news';
+ 
 
   if (e.target.closest('.news-card__read-more')) {
     card = e.target.closest('.news-card');
@@ -22,19 +20,22 @@ const descriptionEl = card.querySelector('.news-card__description')
 const dataNewsIdEl = card.querySelector('.news-card__favorite-btn')
 const imgEl = card.querySelector('img')
 const readMoreEl = card.querySelector('a')
+const publishDateEl = card.querySelector('.news-card__date')
+
 
     const cardEl = {
-      dateRead: `${now}`,
+      dateRead: `${Date.now()}`,
       id: `${card.id}`,
       img: `${imgEl.src}`,
       category: `${categoryEl.textContent}`,
       title: `${titleEl.textContent}`,
       description:`${descriptionEl.textContent}`,
       dataNewsId: `${dataNewsIdEl.textContent}`,
+      publishDate: `${publishDateEl.textContent}`,
       readMore: `${readMoreEl.href}`,
       favoritId: `${dataNewsIdEl.dataset.newsId}`,
     }
-  
+
  
       const currentData = loadFromStorage(STORAGE_KEY);
       if (currentData === undefined) {
@@ -44,21 +45,7 @@ const readMoreEl = card.querySelector('a')
         saveToStorage(STORAGE_KEY, currentData);
       }
     
-<<<<<<< Updated upstream
 
-
-    // if (arr.includes({cardEl})) {
-    //   return;
-    // } else {
-    //   arr.push(cardEl);
-    // }
-
-    arr.push(cardEl);
-    // console.log(arr.includes(`${'cardEl'}`))
-
-    //  console.log(arr)
-    localStorage.setItem(`${now}`, JSON.stringify(arr));
-=======
     function saveToStorage(key, value) {
       try {
         const data = JSON.stringify(value);
@@ -76,8 +63,5 @@ const readMoreEl = card.querySelector('a')
         console.error(error);
       }
     }
->>>>>>> Stashed changes
   }
 }
-
-
