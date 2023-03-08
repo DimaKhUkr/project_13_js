@@ -1,6 +1,11 @@
 .reading_card {
+  background-color: $text-color-dark;
+  opacity: 0.4;
+}
+
+.dark-theme .reading_card {
   background-color: rgba(244, 244, 244, 0.4);
-  // opacity: 0.7;
+  opacity: 1;
 }
 
 .text-alredy-read {
