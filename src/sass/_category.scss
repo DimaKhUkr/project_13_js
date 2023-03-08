@@ -121,6 +121,8 @@ body.dark-theme .category_btn:focus {
 /* Наши категории */
 .select_item {
   cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
   margin-bottom: 12px;
   font-style: normal;
   font-weight: 400;
@@ -136,6 +138,7 @@ body.dark-theme .category_btn:focus {
 }
 
 .select_item:hover {
+  border-radius: 10px;
   border-bottom: 1px solid #4440f7;
   background-color: #f5eeee;
 }
