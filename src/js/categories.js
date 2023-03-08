@@ -1,4 +1,4 @@
-import { isNewsInFavorites } from './local-storage';
+import { isNewsInFavorites, isNewsInRead } from './local-storage';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 const URL = 'https://api.nytimes.com/svc/news/v3/content/section-list.json';
@@ -254,8 +254,12 @@ function renderResult(news) {
       const { section, abstract, title, url, uri, published_date } =
         resultSearch;
       const isFavorite = isNewsInFavorites(uri);
+      const isRead = isNewsInRead(uri);
       // const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
-      return `<div class ="news-card">
+      return `<div class ="news-card
+      ${isRead ? 'reading_card' : ''}
+      ">
+      ${isRead ? '<p class="text-alredy-read">Already read</p>' : ''}
         <img src="${photo}" alt="photo"/>
         <div class="news-card__info">
         <div class="news-card__category">${section}</div>
