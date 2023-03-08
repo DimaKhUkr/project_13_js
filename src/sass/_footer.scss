@@ -18,6 +18,10 @@
     color: $text-color-light;
     padding: 0 5px;
     text-align: center;
+
+    @include desktop {
+      font-size: 14px;
+    }
   }
 
   &__logo-link {
