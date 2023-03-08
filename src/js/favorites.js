@@ -51,7 +51,7 @@ function createFavoriteNewsCard(news) {
                 <div class="news-card__category">${section_name}</div>
                 <button class="news-card__favorite-btn active_btn"
                 data-news-id="${_id}">
-                  'Remove from Favorite'
+                  Remove from Favorite
                 </button>
                 <h2 class="news-card__title">${title}</h2>
                 <p class="news-card__description">${

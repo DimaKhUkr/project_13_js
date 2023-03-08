@@ -1,4 +1,7 @@
 .favorite-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
   width: 100%;
   max-width: 320px;
   padding: 40px 16px;
@@ -10,9 +13,6 @@
     max-width: 768px;
     padding-top: 48px;
     padding-bottom: 100px;
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
     margin-top: 106px;
   }
 
