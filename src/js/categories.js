@@ -1,4 +1,5 @@
-import { isNewsInFavorites } from './local-storage';
+// import { startWeatherApp } from './weather';
+import {isNewsInFavorites } from './local-storage';
 
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 const URL = 'https://api.nytimes.com/svc/news/v3/content/section-list.json';
@@ -12,7 +13,6 @@ let totalPages = 0;
 let offsetPage = 0;
 let category = '';
 
-// --------Запрос на бекенд для получения списка категорий и прорисовка кнопок
 export async function getCategories() {
   try {
     return await fetch(`${URL}?api-key=${API_KEY}`, {
@@ -134,17 +134,12 @@ export async function getCategories() {
           }
         }
 
-        // -----------------Для кнопок
-        const selectHeader = document.querySelector('.select_header');
+        // Для кнопок
+
         const categoryBtns = document.querySelectorAll('.category_btn');
         categoryBtns.forEach(btn => {
           btn.addEventListener('click', async event => {
             event.preventDefault();
-            if (selectHeader.classList.contains('is-active')) {
-              selectHeader.classList.remove('is-active');
-              selectBtn.classList.remove('is-active');
-            }
-
             category = btn.textContent.toLowerCase();
             // console.log(category);
             // console.log(offsetPage);
@@ -152,7 +147,7 @@ export async function getCategories() {
           });
         });
 
-        // -------------------Для селектора
+        // Для селектора
 
         const categoryFromSelect = document.querySelectorAll('.select_item');
         categoryFromSelect.forEach(category => {
@@ -163,12 +158,9 @@ export async function getCategories() {
           category = event.target.textContent.toLowerCase();
           console.log(category);
           // console.log('item');
-          const selectCurrentName = document.querySelector('.select_current');
-          selectCurrentName.textContent = event.target.textContent;
-          //---------- Заменяем знаки для правильного http запроса
           category = category.replace('/', '%2F');
           category = category.replace('&', '%26');
-          category = category.replace(/ /g, '%20');
+          // category = category.replace(' ', '%20');
           getNewsByCategory(offsetPage, category);
           // console.log('item');
 
@@ -177,17 +169,23 @@ export async function getCategories() {
           const selectBtn = document.querySelector('.select_btn');
           selectBtn.classList.remove('is-active');
           selectHeader.classList.remove('is-active');
+
         }
 
         const selectBtn = document.querySelector('.select_btn');
+        // selectBtn.addEventListener('change', async event => {
+        //   const category = event.currentTarget.value.toLowerCase();
+        //   event.preventDefault();
+        //   console.log(category);
+        //   console.log('btn')
+        //   getNewsByCategory(category);
+        // });
       });
   } catch (error) {
     console.error(error);
   }
 }
 import { updatePaginationCategoties } from './pagination';
-
-// ---------------Запрос на бекенд для получения опреденной категории
 
 export async function getNewsByCategory(offsetPage, category) {
   // console.log("категория в начале функции", category);
@@ -202,18 +200,18 @@ export async function getNewsByCategory(offsetPage, category) {
     const data = await response.json();
     const news = data.results;
     // const totalResults = data.num_results;
-    // console.log(news);
+    console.log(news);
     // console.log(totalResults);
     renderResult(news);
   } catch (error) {
     console.error(error);
   }
 }
-// ----------Рендеринг страницы после получения запроса по определенной категории
 
 function renderResult(news) {
   empty.setAttribute('hidden', '');
-
+  // const data = await articleSearch(pageNumber);
+  // console.dir(data.response);
   if (news.length === 0) {
     // Очищаем страницу от предыдущих новостей если новых нет
     Array.from(mainPage.children).forEach(child => {
@@ -222,6 +220,7 @@ function renderResult(news) {
     // console.log(news.length);
     empty.removeAttribute('hidden');
     weather.setAttribute('hidden', '');
+    // inputSearch.elements.search.value = '';
   } else {
     // Очищаем страницу от предыдущих новостей оставляя блок с погодой
     Array.from(mainPage.children).forEach(child => {
@@ -231,29 +230,13 @@ function renderResult(news) {
   }
   const markup = news
     .map(resultSearch => {
-      // -------------Проверка на наличие фото в массиве
-      let photo;
-      if (
-        resultSearch.multimedia !== null &&
-        resultSearch.multimedia.length >= 3 &&
-        resultSearch.multimedia[2].url !== undefined
-      ) {
-        photo = resultSearch.multimedia[2].url;
-      } else if (
-        resultSearch.multimedia !== null &&
-        resultSearch.multimedia.length >= 2 &&
-        resultSearch.multimedia[1].url !== undefined
-      ) {
-        photo = resultSearch.multimedia[1].url;
-      } else {
-        photo =
-          'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
-      }
-      // ----------Деструктуризация и прорисовка карточки новостей
-
+      const photo =
+        resultSearch.multimedia !== null
+          ? resultSearch.multimedia[2].url
+          : 'https://user-images.githubusercontent.com/110947394/222411348-dc3ba506-91e5-4318-9a9e-89fcf1a764a8.jpg';
       const { section, abstract, title, url, uri, published_date } =
         resultSearch;
-      const isFavorite = isNewsInFavorites(uri);
+        const isFavorite = isNewsInFavorites(uri);
       // const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
       return `<div class ="news-card">
         <img src="${photo}" alt="photo"/>
@@ -283,4 +266,5 @@ function renderResult(news) {
   mainPage.insertAdjacentHTML('beforeend', markup);
 
   updatePaginationCategoties(category);
+  // document.addEventListener('DOMContentLoaded', startWeatherApp);
 }
