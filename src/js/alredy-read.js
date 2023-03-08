@@ -1,9 +1,11 @@
-const arr = [];
 
 export function onReadCard(e) {
   let card = null;
+
   const today = new Date();
   const now = today.toLocaleDateString('en-GB');
+  const STORAGE_KEY = `read_news_${now}`;
+  console.log(STORAGE_KEY)
 
 
   if (e.target.closest('.news-card__read-more')) {
@@ -12,8 +14,6 @@ export function onReadCard(e) {
     if (card) {
       card.classList.add('reading_card');
       card.insertAdjacentHTML('afterbegin', '<p class="text-alredy-read">Already read</p>');
-      // console.log(card)
-      // <svg class="svg-checkmark" width="18" height="18"><use href="./src/svg/checkmark.svg#icon-checkmark"></use></svg>
     }
 
 const categoryEl = card.querySelector('.news-card__category');
@@ -33,7 +33,17 @@ const readMoreEl = card.querySelector('a')
       dataNewsId: `${dataNewsIdEl.textContent}`,
       readMore: `${readMoreEl.href}`,
     }
+  
+ 
+      const currentData = loadFromStorage(STORAGE_KEY);
+      if (currentData === undefined) {
+        saveToStorage(STORAGE_KEY, [cardEl]);
+      } else {
+        currentData.push(cardEl);
+        saveToStorage(STORAGE_KEY, currentData);
+      }
     
+<<<<<<< Updated upstream
 
 
     // if (arr.includes({cardEl})) {
@@ -46,6 +56,25 @@ const readMoreEl = card.querySelector('a')
 
     //  console.log(arr)
     localStorage.setItem(`${now}`, JSON.stringify(arr));
+=======
+    function saveToStorage(key, value) {
+      try {
+        const data = JSON.stringify(value);
+        localStorage.setItem(key, data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
+    function loadFromStorage(key) {
+      try {
+        const localData = localStorage.getItem(key);
+        return localData === null ? undefined : JSON.parse(localData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+>>>>>>> Stashed changes
   }
 }
 
