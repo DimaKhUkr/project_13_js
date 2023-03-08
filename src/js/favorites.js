@@ -1,7 +1,9 @@
-import { loadFromStorage, toggleFavoriteNews } from './local-storage';
+import { loadFromStorage, toggleFavoriteNews, isNewsInRead } from './local-storage';
 import {onReadCard} from './alredy-read';
 
 const STOR_KEY_FAV = 'favorites';
+const STOR_KEY_READ = 'read_news';
+
 
 const placeForFavNews = document.getElementById('favorite-articles');
 
@@ -44,8 +46,12 @@ function createFavoriteNewsCard(news) {
 
   const { _id, section_name, abstract, pub_date, web_url, photoUrl, title } =
     news;
+    const isRead = isNewsInRead(_id);
+    console.log("isRead=", isRead);
   return `
-            <div class="news-card" id="${_id}">
+            <div class="news-card
+            ${isRead ? 'reading_card' : ''}
+            " id="${_id}">
               <img src="${photoUrl}" alt="заглушка" />
               <div class="news-card__info">
                 <div class="news-card__category">${section_name}</div>

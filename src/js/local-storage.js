@@ -1,6 +1,9 @@
 const API_KEY = 'u59IF6VhLyuj5qt5wMVcLGGSUKapZTsn';
 const URL_SEARCH = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
-const STOR_KEY = 'favorites';
+
+const STOR_KEY_FAV = 'favorites';
+const STOR_KEY_READ = 'read_news';
+
 
 function toggleFavoriteNews(event) {
   const button = event.target;
@@ -50,21 +53,21 @@ async function addNewsToLocalStorage(newsId) {
     title,
   };
 
-  const currentData = loadFromStorage(STOR_KEY);
+  const currentData = loadFromStorage(STOR_KEY_FAV);
   if (currentData === undefined) {
-    saveToStorage(STOR_KEY, [newsObject]);
+    saveToStorage(STOR_KEY_FAV, [newsObject]);
   } else {
     currentData.push(newsObject);
-    saveToStorage(STOR_KEY, currentData);
+    saveToStorage(STOR_KEY_FAV, currentData);
   }
 }
 
 // ----- функція видалення новини з ЛС
 function deleteNewsFromLocalStorage(newsId) {
-  const currentData = loadFromStorage(STOR_KEY);
+  const currentData = loadFromStorage(STOR_KEY_FAV);
   const newsIndex = currentData.findIndex(news => news._id === newsId);
   if (newsIndex >= 0) currentData.splice(newsIndex, 1);
-  saveToStorage(STOR_KEY, currentData);
+  saveToStorage(STOR_KEY_FAV, currentData);
 }
 
 // ----- функція запису даних в ЛС, пара ключ/значення
@@ -101,7 +104,7 @@ async function getFavoriteNews(query) {
 
 // функція перевірки у вибраному при відмальовці картки новини
 function isNewsInFavorites(newsId) {
-  const currentData = loadFromStorage(STOR_KEY);
+  const currentData = loadFromStorage(STOR_KEY_FAV);
   let isFavorit = false;
   if (currentData !== undefined) {
       isFavorit = currentData.some(news => news._id === newsId);
@@ -109,4 +112,13 @@ function isNewsInFavorites(newsId) {
   return isFavorit;
 }
 
-export { loadFromStorage, toggleFavoriteNews, isNewsInFavorites };
+// функція перевірки у прочитаному при відмальовці картки новини
+function isNewsInRead(newsId) {
+  const currentData = loadFromStorage(STOR_KEY_READ);
+  let isRead = false;
+  if (currentData !== undefined) {
+      isRead = currentData.some(news => news.favoritId === newsId);
+  };
+  return isRead;
+}
+export { loadFromStorage, toggleFavoriteNews, isNewsInFavorites, isNewsInRead };
