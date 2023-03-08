@@ -18,6 +18,10 @@
   @include tablet {
     bottom: 95px;
   }
+
+  @include desktop {
+    bottom: 20px;
+  }
 }
 
 #myBtn:hover {
