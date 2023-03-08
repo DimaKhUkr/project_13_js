@@ -1,4 +1,3 @@
-
 export function onReadCard(e) {
   let card = null;
 
@@ -32,7 +31,6 @@ const readMoreEl = card.querySelector('a')
       description:`${descriptionEl.textContent}`,
       dataNewsId: `${dataNewsIdEl.textContent}`,
       readMore: `${readMoreEl.href}`,
-      favoritId: `${dataNewsIdEl.dataset.newsId}`,
     }
   
  
@@ -44,21 +42,7 @@ const readMoreEl = card.querySelector('a')
         saveToStorage(STORAGE_KEY, currentData);
       }
     
-<<<<<<< Updated upstream
 
-
-    // if (arr.includes({cardEl})) {
-    //   return;
-    // } else {
-    //   arr.push(cardEl);
-    // }
-
-    arr.push(cardEl);
-    // console.log(arr.includes(`${'cardEl'}`))
-
-    //  console.log(arr)
-    localStorage.setItem(`${now}`, JSON.stringify(arr));
-=======
     function saveToStorage(key, value) {
       try {
         const data = JSON.stringify(value);
@@ -76,8 +60,5 @@ const readMoreEl = card.querySelector('a')
         console.error(error);
       }
     }
->>>>>>> Stashed changes
   }
 }
-
-
