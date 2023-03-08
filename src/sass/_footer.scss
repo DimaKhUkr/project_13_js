@@ -53,6 +53,10 @@
     color: $decoration-color;
     margin: 0 auto;
     margin-bottom: 10px;
+
+    @include desktop {
+      font-size: 18px;
+    }
   }
 
   &__list {
@@ -64,6 +68,15 @@
     > :first-child {
       grid-column: 1/4;
       margin: 0 auto;
+
+      @include desktop {
+        grid-column: 1/5;
+      }
+    }
+
+    @include desktop {
+      font-size: 14px;
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
