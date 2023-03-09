@@ -68,6 +68,5 @@ const publishDateEl = card.querySelector('.news-card__date')
         console.error(error);
       }
     }
-    
   }
 }
