@@ -5,8 +5,7 @@ export function onReadCard(e) {
   const now = today.toLocaleDateString('en-GB');
   const STORAGE_KEY = 'read_news';
  
-
-  if (e.target.closest('.news-card__read-more')) {
+   if (e.target.closest('.news-card__read-more')) {
     card = e.target.closest('.news-card');
 
     if (card) {
@@ -22,7 +21,6 @@ const imgEl = card.querySelector('img')
 const readMoreEl = card.querySelector('a')
 const publishDateEl = card.querySelector('.news-card__date')
 
-
     const cardEl = {
       dateRead: `${Date.now()}`,
       id: `${card.id}`,
@@ -35,17 +33,24 @@ const publishDateEl = card.querySelector('.news-card__date')
       readMore: `${readMoreEl.href}`,
       favoritId: `${dataNewsIdEl.dataset.newsId}`,
     }
-
  
+    const newsReadId = cardEl.id
+
       const currentData = loadFromStorage(STORAGE_KEY);
       if (currentData === undefined) {
         saveToStorage(STORAGE_KEY, [cardEl]);
       } else {
+        const currentData = loadFromStorage(STORAGE_KEY);
+        const newsIndex = currentData.findIndex(card => card.id === newsReadId);
+          if (newsIndex >= 0){
+             currentData.splice(newsIndex, 1);
+              saveToStorage(STORAGE_KEY, currentData)
+               }
+        
         currentData.push(cardEl);
         saveToStorage(STORAGE_KEY, currentData);
-      }
+         }
     
-
     function saveToStorage(key, value) {
       try {
         const data = JSON.stringify(value);
@@ -63,5 +68,6 @@ const publishDateEl = card.querySelector('.news-card__date')
         console.error(error);
       }
     }
+    
   }
 }
