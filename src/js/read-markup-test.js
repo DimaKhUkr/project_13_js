@@ -1,14 +1,5 @@
 //===============Для кнопок read more та favorite================
 import { toggleFavoriteNews, isNewsInFavorites } from './local-storage';
-const readMain = document.querySelector('.read');
-
-// readMain.addEventListener('click', event => {
-//   console.log('click');
-//   const button = event.target.closest('.news-card__favorite-btn');
-//   if (button !== null) {
-//     toggleFavoriteNews(event);
-//   }
-// });
 
 //======================= Задаємо мінімальну висоту сторінки =============
 const windowHeight = window.innerHeight;
@@ -28,6 +19,16 @@ if (totalHeight < windowHeight) {
 }
 
 isReadArticles();
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// якщо щось ламається при більше ніж 1 дні новин в стораджі, 
+// то фіксити наступні 6 строк
+main.addEventListener('click', event => {
+    const button = event.target.closest('.news-card__favorite-btn');
+    if (button !== null) {
+      toggleFavoriteNews(event);
+    }
+  });
 
 function isReadArticles() {
   if (localStorage.getItem('read_news')) {
@@ -85,7 +86,6 @@ function isReadArticles() {
 //     readMain.appendChild(articleDiv);
 //   });
 // }
-
 
 // // =============== вар 2 ===========================
 // const readNews = JSON.parse(localStorage.getItem('read_news'));
@@ -162,7 +162,6 @@ function isReadArticles() {
 // // Додаємо список на сторінку
 // readMain.appendChild(ul);
 
-
 // // ============ вар 4 ==============================
 // const readNews = JSON.parse(localStorage.getItem('read_news'));
 
@@ -216,7 +215,6 @@ function isReadArticles() {
 
 // readMain.insertAdjacentElement
 
-
 // // ================== вар 5 ========================
 // const readNews = JSON.parse(localStorage.getItem('read_news'));
 
@@ -264,15 +262,15 @@ function isReadArticles() {
 // news.forEach(article => {
 //   const date = new Date(Number(article.dateRead));
 //   const formattedDate = `${('0' + date.getDate()).slice(-2)}/${('0' + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`;
-  
+
 //   // створюємо масив статей для даної дати, якщо його ще немає
 //   if (!articlesByDate[formattedDate]) {
 //     articlesByDate[formattedDate] = [];
 //   }
-  
+
 //   // перевіряємо, чи є стаття з таким заголовком вже доданою раніше
 //   const existingArticle = articlesByDate[formattedDate].find(a => a.title === article.title);
-  
+
 //   if (!existingArticle) {
 //     // якщо статті з таким заголовком ще не було, додаємо її до масиву статей даної дати
 //     articlesByDate[formattedDate].unshift(article);
@@ -294,7 +292,7 @@ function isReadArticles() {
 // sortedDates.forEach(date => {
 //   const listItem = document.createElement("li");
 //   listItem.textContent = date;
-  
+
 //   const articlesList = document.createElement("ul");
 //   articlesByDate[date].sort((a, b) => new Date(b.dateRead) - new Date(a.dateRead)).forEach(article => {
 //     const articleListItem = document.createElement("li");
@@ -304,7 +302,7 @@ function isReadArticles() {
 //     articleListItem.appendChild(articleLink);
 //     articlesList.appendChild(articleListItem);
 //   });
-  
+
 //   listItem.appendChild(articlesList);
 //   list.appendChild(listItem);
 // });
@@ -355,7 +353,7 @@ function isReadArticles() {
 //             <img src=${article.img} alt="Article illustration" />
 //             <div class="news-card__info">
 //               <div class="news-card__category">${article.category}</div>
-          
+
 //          <h2 class="news-card__title">${article.title}</h2>
 //          <p class="news-card__description">
 //         ${article.description}
@@ -371,7 +369,7 @@ function isReadArticles() {
 //         </div>
 //         </div>
 //         </li>` ).join('');
-    
+
 // /* <button class="news-card__favorite-btn ${
 //                 isFavorite ? 'active_btn' : ''
 //               }" data-news-id="${article.favoritId}">
@@ -392,53 +390,67 @@ function isReadArticles() {
 
 // ====================var8====================
 function readMarkup() {
-main.innerHTML = '';
-const news = JSON.parse(localStorage.getItem("read_news"));
+  main.innerHTML = '';
+  const news = JSON.parse(localStorage.getItem('read_news'));
 
-// створюємо об'єкт, де властивості - це дата, а значення - це масив статей
-const articlesByDate = {};
-news.forEach(article => {
-const date = new Date(Number(article.dateRead));
-const formattedDate = `${('0' + date.getDate()).slice(-2)}/${('0' + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`;
+  // створюємо об'єкт, де властивості - це дата, а значення - це масив статей
+  const articlesByDate = {};
+  news.forEach(article => {
+    const date = new Date(Number(article.dateRead));
+    const formattedDate = `${('0' + date.getDate()).slice(-2)}/${(
+      '0' +
+      (date.getMonth() + 1)
+    ).slice(-2)}/${date.getFullYear()}`;
 
-// створюємо масив статей для даної дати, якщо його ще немає
-if (!articlesByDate[formattedDate]) {
-articlesByDate[formattedDate] = [];
-}
+    // створюємо масив статей для даної дати, якщо його ще немає
+    if (!articlesByDate[formattedDate]) {
+      articlesByDate[formattedDate] = [];
+    }
 
-// перевіряємо, чи є стаття з таким заголовком вже доданою раніше
-const existingArticle = articlesByDate[formattedDate].find(a => a.title === article.title);
+    // перевіряємо, чи є стаття з таким заголовком вже доданою раніше
+    const existingArticle = articlesByDate[formattedDate].find(
+      a => a.title === article.title
+    );
 
-if (!existingArticle) {
-// якщо статті з таким заголовком ще не було, додаємо її до масиву статей даної дати
-articlesByDate[formattedDate].unshift(article);
-} else {
-// якщо стаття з таким заголовком вже є, то порівнюємо дати і залишаємо тільки більш пізню
-const existingArticleDate = new Date(Number(existingArticle.dateRead));
-if (date > existingArticleDate) {
-articlesByDate[formattedDate] = articlesByDate[formattedDate].filter(a => a.title !== article.title);
-articlesByDate[formattedDate].unshift(article);
-}
-}
-});
+    if (!existingArticle) {
+      // якщо статті з таким заголовком ще не було, додаємо її до масиву статей даної дати
+      articlesByDate[formattedDate].unshift(article);
+    } else {
+      // якщо стаття з таким заголовком вже є, то порівнюємо дати і залишаємо тільки більш пізню
+      const existingArticleDate = new Date(Number(existingArticle.dateRead));
+      if (date > existingArticleDate) {
+        articlesByDate[formattedDate] = articlesByDate[formattedDate].filter(
+          a => a.title !== article.title
+        );
+        articlesByDate[formattedDate].unshift(article);
+      }
+    }
+  });
 
-// сортуємо об'єкт за датою в зворотньому порядку
-const sortedDates = Object.keys(articlesByDate).sort((a, b) => new Date(b) - new Date(a));
+  // сортуємо об'єкт за датою в зворотньому порядку
+  const sortedDates = Object.keys(articlesByDate).sort(
+    (a, b) => new Date(b) - new Date(a)
+  );
 
-// створюємо елементи списку і додаємо їх до сторінки
-const list = document.createElement("ul");
-list.classList.add("read");
-// const isFavorite = isNewsInFavorites(article.favoritId);
-sortedDates.forEach(date => {
-const articlesList = articlesByDate[date]
-.sort((a, b) => new Date(b.dateRead) - new Date(a.dateRead))
-.map(article => `<li>
+  // створюємо елементи списку і додаємо їх до сторінки
+  const list = document.createElement('ul');
+  list.classList.add('read');
+  sortedDates.forEach(date => {
+    const articlesList = articlesByDate[date]
+      .sort((a, b) => new Date(b.dateRead) - new Date(a.dateRead))
+      .map(article => {
+        const isFavorite = isNewsInFavorites(article.favoritId);
+        return `<li>
           <div class="news-card">
             <img src=${article.img} alt="Article illustration" />
             <div class="news-card__info">
               <div class="news-card__category">${article.category}</div>
-          
-         <h2 class="news-card__title">${article.title}</h2>
+              <button class="news-card__favorite-btn ${
+                isFavorite ? 'active_btn' : ''
+              }" data-news-id="${article.favoritId}">
+                ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
+              </button>
+                   <h2 class="news-card__title">${article.title}</h2>
          <p class="news-card__description">
         ${article.description}
         </p>
@@ -446,29 +458,27 @@ const articlesList = articlesByDate[date]
           <div class="news-card__date">
           ${article.publishDate}
        </div>
-         <a class="news-card__read-more" href="${article.readMore}" target="blank"
+         <a class="news-card__read-more" href="${
+           article.readMore
+         }" target="blank"
          >Read more</a
         >
          </div>
         </div>
         </div>
-        </li>` ).join('');
-    
-/* <button class="news-card__favorite-btn ${
-                isFavorite ? 'active_btn' : ''
-              }" data-news-id="${article.favoritId}">
-                ${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
-              </button>         */
+        </li>`;
+      })
+      .join('');
 
-const listItem = `<li class="read-item">
+    const listItem = `<li class="read-item">
  <div class="read-title">
 <h2 class="read-date">${date}</h2>
 <div class="read-arrow"></div>
 </div>
-<ul class="read-gallery">${articlesList}</ul> </li> ` ;
+<ul class="read-gallery">${articlesList}</ul> </li> `;
 
-list.insertAdjacentHTML('beforeend', listItem);
-});
+    list.insertAdjacentHTML('beforeend', listItem);
+  });
 
   main.appendChild(list);
-};
+}
