@@ -258,7 +258,7 @@ function renderResult(news) {
       // const isFavorite = localStorage.getItem(`favorite_${uri}`) !== null;
       return `<div class ="news-card
       ${isRead ? 'reading_card' : ''}
-      ">
+      " id="${uri}">
       ${isRead ? '<p class="text-alredy-read">Already read</p>' : ''}
         <img src="${photo}" alt="photo"/>
         <div class="news-card__info">
@@ -278,7 +278,9 @@ function renderResult(news) {
               <div class="news-card__date">${new Date(
                 published_date
               ).toLocaleDateString()}</div>
-              <a class="news-card__read-more" href="${url}" target="_blank">Read more</a>
+              <button class="btn-read-more news-card__read-more">
+              <a href="${url}" target="_blank">Read more</a>
+              </button>
             </div>
           </div>
           </div>`;
